@@ -220,6 +220,32 @@
                     </div>
                 </div>
 
+                <!-- Content Selector: choose which set of cards to study -->
+                <div class="text-left">
+                    <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">Pilih Materi:</div>
+                    <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-2xl">
+                        <button id="fc-content-all" onclick="setFlashcardContentMode('all')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
+                            📖<br><span class="text-[10px] font-semibold">Semua Kosakata</span>
+                        </button>
+                        <button id="fc-content-kanji" onclick="setFlashcardContentMode('kanji')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
+                            ㊙️<br><span class="text-[10px] font-semibold">Fokus Kanji</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mode Selector: choose which language is the question -->
+                <div class="text-left">
+                    <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">Pilih Mode Tebakan:</div>
+                    <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-2xl">
+                        <button id="fc-mode-jp-to-id" onclick="setFlashcardMode('jp-to-id')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
+                            🇯🇵➔🇮🇩<br><span class="text-[10px] font-semibold">Tebak Arti Indo</span>
+                        </button>
+                        <button id="fc-mode-id-to-jp" onclick="setFlashcardMode('id-to-jp')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
+                            🇮🇩➔🇯🇵<br><span class="text-[10px] font-semibold">Tebak Kata Jepang</span>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="pt-2 space-y-2">
                     <button onclick="startFlashcards()" class="w-full bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl hover:bg-rose-700 shadow-lg shadow-rose-200 transition-all active:scale-[0.98]">
                         Mulai Sesi Hafalan
@@ -241,6 +267,9 @@
                         Sisa Queue: <span id="fc-queue-count" class="text-rose-600">0</span>
                     </div>
                 </div>
+                <div id="fc-content-badge" class="hidden text-center">
+                    <span class="bg-indigo-50 text-indigo-600 border border-indigo-200 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">㊙️ Mode Fokus Kanji</span>
+                </div>
 
                 <!-- 3D Flip Card Container -->
                 <div class="perspective-1000 w-full min-h-[360px] cursor-pointer" onclick="flipFlashcard()">
@@ -250,14 +279,14 @@
                         <div class="backface-hidden absolute inset-0 bg-white border-2 border-slate-200 rounded-3xl p-6 flex flex-col justify-between items-center text-center shadow-lg">
                             <div class="w-full flex justify-between items-center">
                                 <span id="fc-front-category" class="bg-rose-50 text-rose-600 border border-rose-200 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Kategori</span>
-                                <button onclick="event.stopPropagation(); playCurrentCardAudio()" title="Dengar Suara" class="w-9 h-9 bg-rose-100 hover:bg-rose-200 text-rose-600 rounded-full flex items-center justify-center text-base transition-transform active:scale-95">
+                                <button id="fc-front-audio-btn" onclick="event.stopPropagation(); playCurrentCardAudio()" title="Dengar Suara" class="w-9 h-9 bg-rose-100 hover:bg-rose-200 text-rose-600 rounded-full flex items-center justify-center text-base transition-transform active:scale-95">
                                     🔊
                                 </button>
                             </div>
 
-                            <div class="my-auto space-y-2">
-                                <h3 id="fc-front-word" class="jp-font text-5xl font-black text-slate-800 leading-tight">字</h3>
-                                <p id="fc-front-kana" class="jp-font text-xl text-rose-500 font-bold">じ</p>
+                            <div class="my-auto space-y-2 w-full px-1">
+                                <h3 id="fc-front-word" class="jp-font text-5xl font-black text-slate-800 leading-tight break-words">字</h3>
+                                <p id="fc-front-kana" class="jp-font text-xl text-rose-500 font-bold break-words">じ</p>
                             </div>
 
                             <div class="text-slate-400 text-xs font-semibold bg-slate-100 px-3 py-1 rounded-full animate-pulse">
@@ -275,9 +304,9 @@
                             </div>
 
                             <div class="my-auto space-y-3 px-2">
-                                <div class="text-xs text-rose-300 font-semibold uppercase tracking-widest">Arti Kata</div>
-                                <h3 id="fc-back-meaning" class="text-2xl font-black leading-snug">Arti dalam Bahasa</h3>
-                                <p id="fc-back-romaji" class="text-sm text-slate-300 italic font-medium">Romaji</p>
+                                <div id="fc-back-label" class="text-xs text-rose-300 font-semibold uppercase tracking-widest">Arti Kata</div>
+                                <h3 id="fc-back-meaning" class="text-2xl font-black leading-snug break-words">Arti dalam Bahasa</h3>
+                                <p id="fc-back-romaji" class="text-sm text-slate-300 italic font-medium break-words">Romaji</p>
 
                                 <!-- Context Sentence (If available) -->
                                 <div id="fc-back-sentence-box" class="hidden bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-left text-xs space-y-1">
@@ -401,13 +430,15 @@
                     <!-- Dynamic Options -->
                 </div>
 
-                <!-- Feedback & Next Button -->
-                <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-center font-bold text-sm">
-                    <!-- Feedback text -->
+                <!-- Feedback & Next Button: sticky so it's always reachable without scrolling -->
+                <div id="quiz-action-bar" class="sticky bottom-20 z-20 space-y-2 pt-1">
+                    <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-center font-bold text-sm shadow-lg">
+                        <!-- Feedback text -->
+                    </div>
+                    <button id="quiz-next-btn" onclick="nextQuizStep()" class="hidden w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 shadow-lg transition-all active:scale-[0.98]">
+                        Lanjut Soal Berikutnya ➔
+                    </button>
                 </div>
-                <button id="quiz-next-btn" onclick="nextQuizStep()" class="hidden w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 shadow-lg transition-all">
-                    Lanjut Soal Berikutnya ➔
-                </button>
             </div>
 
             <!-- Quiz Result Screen -->
@@ -438,42 +469,45 @@
                 </div>
 
                 <!-- Target Translation -->
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-1">
+                <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-100 space-y-1.5">
                     <span class="text-[10px] text-indigo-600 font-bold uppercase tracking-wider">Terjemahkan ke Bahasa Jepang:</span>
-                    <div id="sent-target-id" class="text-base font-extrabold text-slate-800">Arti Kalimat</div>
+                    <div id="sent-target-id" class="text-lg font-black text-slate-800 leading-snug">Arti Kalimat</div>
                 </div>
 
                 <!-- User Sentence Drop Zone -->
-                <div class="space-y-1">
-                    <div class="text-xs font-bold text-slate-500">Jawaban Anda:</div>
-                    <div id="sent-drop-zone" class="min-h-[80px] p-3 bg-slate-100 rounded-2xl border-2 border-dashed border-slate-300 flex flex-wrap gap-2 items-center">
+                <div class="space-y-1.5">
+                    <div class="text-xs font-bold text-slate-500 px-1">Jawaban Anda:</div>
+                    <div id="sent-drop-zone" class="min-h-[92px] p-3 bg-slate-50 rounded-2xl border-2 border-dashed border-slate-300 flex flex-wrap gap-2 items-center content-start">
+                        <span id="sent-drop-placeholder" class="text-xs text-slate-400 font-medium italic px-1">👆 Ketuk kata di bawah untuk mulai menyusun kalimat...</span>
                         <!-- Selected word chips -->
                     </div>
                 </div>
 
                 <!-- Available Word Pool -->
-                <div class="space-y-1">
-                    <div class="text-xs font-bold text-slate-500">Pilihan Kata:</div>
-                    <div id="sent-word-pool" class="flex flex-wrap gap-2 p-2">
+                <div class="space-y-1.5">
+                    <div class="text-xs font-bold text-slate-500 px-1">Pilihan Kata (acak):</div>
+                    <div id="sent-word-pool" class="flex flex-wrap gap-2.5 p-3 bg-white rounded-2xl border border-slate-200">
                         <!-- Choice word chips -->
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="pt-2 flex gap-2">
-                    <button onclick="resetSentenceBuild()" class="px-4 py-3 bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs hover:bg-slate-300">
-                        Reset
+                    <button onclick="resetSentenceBuild()" title="Acak ulang & mulai dari awal" class="px-5 py-3.5 bg-slate-200 text-slate-700 font-bold rounded-2xl text-sm hover:bg-slate-300 active:scale-[0.98] transition-all">
+                        ↺ Reset
                     </button>
-                    <button onclick="checkSentenceBuild()" class="flex-1 bg-indigo-600 text-white font-extrabold py-3 rounded-2xl text-xs hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all">
-                        Periksa Jawaban
+                    <button onclick="checkSentenceBuild()" class="flex-1 bg-indigo-600 text-white font-extrabold py-3.5 rounded-2xl text-sm hover:bg-indigo-700 shadow-md shadow-indigo-100 transition-all active:scale-[0.98]">
+                        ✓ Periksa Jawaban
                     </button>
                 </div>
 
-                <!-- Feedback & Next Button -->
-                <div id="sent-feedback" class="hidden p-3 rounded-xl text-center text-xs font-bold"></div>
-                <button id="sent-next-btn" onclick="nextSentenceProblem()" class="hidden w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 transition-all">
-                    Kalimat Berikutnya ➔
-                </button>
+                <!-- Feedback & Next Button: sticky so it's always reachable without scrolling -->
+                <div id="sent-action-bar" class="sticky bottom-20 z-20 space-y-2 pt-1">
+                    <div id="sent-feedback" class="hidden p-3.5 rounded-2xl text-center text-sm font-bold leading-snug shadow-lg"></div>
+                    <button id="sent-next-btn" onclick="nextSentenceProblem()" class="hidden w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 active:scale-[0.98] transition-all text-sm shadow-lg">
+                        Kalimat Berikutnya ➔
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -511,9 +545,10 @@
                 <!-- Target Card -->
                 <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 text-center space-y-1.5">
                     <div id="speak-target-word" class="text-3xl font-black text-slate-800 jp-font break-words">...</div>
-                    <div id="speak-target-kana" class="text-sm text-slate-500 jp-font">...</div>
+                    <div id="speak-target-kana" class="text-xl font-bold jp-font break-words">...</div>
                     <div id="speak-target-romaji" class="text-xs text-slate-400 italic">...</div>
                     <div id="speak-target-meaning" class="text-xs font-bold text-teal-600 pt-1">...</div>
+                    <p id="speak-track-hint" class="hidden text-[10px] text-blue-500 font-bold pt-1">🔵 Bagian yang sudah terucap benar akan berubah biru</p>
                 </div>
 
                 <button onclick="playSpeakingReference()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs flex items-center justify-center gap-1.5 transition-colors">
@@ -536,13 +571,15 @@
                     </div>
                     <div id="speak-feedback-box" class="p-3 rounded-2xl text-center text-xs font-extrabold">-</div>
                 </div>
+            </div>
 
-                <!-- Actions -->
-                <div class="flex gap-2 pt-1">
+            <!-- Actions: sticky so Next is always reachable without scrolling -->
+            <div id="speak-action-bar" class="sticky bottom-20 z-20 pt-1">
+                <div class="flex gap-2 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-lg">
                     <button onclick="renderSpeakingItem()" class="px-4 py-3 bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs hover:bg-slate-300">
                         🔁 Ulangi
                     </button>
-                    <button onclick="nextSpeakingItem()" class="flex-1 bg-slate-800 text-white font-extrabold py-3 rounded-2xl text-xs hover:bg-slate-900 transition-all">
+                    <button id="speak-next-btn" onclick="nextSpeakingItem()" class="flex-1 bg-slate-800 text-white font-extrabold py-3 rounded-2xl text-xs hover:bg-slate-900 transition-all">
                         Berikutnya ➔
                     </button>
                 </div>
@@ -786,6 +823,10 @@
             "wrongAnswers": {}
           }
         };
+        // Bootstraps the default Kanji deck from whichever default vocabulary words
+        // already contain Kanji characters. Uses the same field names as vocabulary
+        // (word, kana, romaji, meaning, type, category, id) — see deriveKanjiFromVocabulary().
+        DEFAULT_DATA.kanji = deriveKanjiFromVocabulary(DEFAULT_DATA.vocabulary);
 
         const STORAGE_KEY = 'nihongo_master_pro_v3_data';
         let appData = {};
@@ -796,6 +837,11 @@
         let fcDeck = [];
         let fcCurrentIndex = 0;
         let isFcCardFlipped = false;
+        // 'jp-to-id' = kartu depan Bahasa Jepang, tebak artinya (Indonesia)
+        // 'id-to-jp' = kartu depan Bahasa Indonesia, tebak kata Jepang-nya
+        let fcMode = 'jp-to-id';
+        // 'all' = seluruh kosakata, 'kanji' = hanya kata yang mengandung huruf Kanji
+        let fcContentMode = 'all';
 
         /* Quiz State */
         let quizQuestions = [];
@@ -815,6 +861,8 @@
         let speakingIndex = 0;
         let speechRecognizer = null;
         let isSpeakingListening = false;
+        let speakingFinalTranscript = ''; // accumulated confirmed transcript for the current attempt
+        let speakingSuccessAchieved = false; // true once the live tracker turns fully blue
 
         function initApp() {
             loadStorageData();
@@ -835,6 +883,11 @@
                     // Ensure structural integrity
                     if (!appData.vocabulary) appData.vocabulary = [...DEFAULT_DATA.vocabulary];
                     if (!appData.sentences) appData.sentences = [...DEFAULT_DATA.sentences];
+                    // Kanji dataset: if the saved data doesn't have its own explicit "kanji"
+                    // array yet (older save), verify/derive it from the current vocabulary.
+                    if (!appData.kanji || !Array.isArray(appData.kanji)) {
+                        appData.kanji = deriveKanjiFromVocabulary(appData.vocabulary);
+                    }
                     if (!appData.stats) appData.stats = { wrongAnswers: {} };
                     if (!appData.stats.wrongAnswers) appData.stats.wrongAnswers = {};
                 } catch(e) {
@@ -847,6 +900,9 @@
             // Standardize item properties
             appData.vocabulary.forEach(v => {
                 if (typeof v.mastered === 'undefined') v.mastered = false;
+            });
+            appData.kanji.forEach(k => {
+                if (typeof k.mastered === 'undefined') k.mastered = false;
             });
 
             saveStorageData();
@@ -976,23 +1032,137 @@
         }
 
         function setupFlashcardPrep() {
-            const pending = appData.vocabulary.filter(v => !v.mastered);
-            
+            const sourceList = getFlashcardSourceVocab();
+            const pending = sourceList.filter(v => !v.mastered);
+
             document.getElementById('fc-pending-count').innerText = pending.length;
-            const total = appData.vocabulary.length;
+            const total = sourceList.length;
             const perc = total > 0 ? ((total - pending.length) / total) * 100 : 0;
             document.getElementById('fc-pending-bar').style.width = `${perc}%`;
 
             document.getElementById('fc-setup-panel').classList.remove('hidden');
             document.getElementById('fc-active-panel').classList.add('hidden');
             document.getElementById('fc-done-panel').classList.add('hidden');
+
+            // Sync the mode toggle buttons with whichever mode is currently active
+            setFlashcardMode(fcMode);
+
+            // Sync content-mode buttons without re-triggering setupFlashcardPrep (avoid recursion)
+            const allBtn = document.getElementById('fc-content-all');
+            const kanjiBtn = document.getElementById('fc-content-kanji');
+            if (allBtn && kanjiBtn) {
+                const activeClasses = ['bg-white', 'text-indigo-600', 'shadow-sm'];
+                const inactiveClasses = ['text-slate-500'];
+                allBtn.classList.remove(...activeClasses, ...inactiveClasses);
+                kanjiBtn.classList.remove(...activeClasses, ...inactiveClasses);
+                if (fcContentMode === 'kanji') {
+                    kanjiBtn.classList.add(...activeClasses);
+                    allBtn.classList.add(...inactiveClasses);
+                } else {
+                    allBtn.classList.add(...activeClasses);
+                    kanjiBtn.classList.add(...inactiveClasses);
+                }
+            }
+        }
+
+        // Returns true if a word string contains at least one Kanji (CJK ideograph) character
+        function containsKanji(str) {
+            return !!(str && /[\u4e00-\u9faf]/.test(str));
+        }
+
+        // Builds a Kanji-only deck from a vocabulary list, by keeping only entries
+        // whose "word" contains real Kanji characters. Used both to bootstrap the
+        // default data and as a fallback whenever an imported backup doesn't ship
+        // its own explicit "kanji" array.
+        function deriveKanjiFromVocabulary(vocabList) {
+            return (vocabList || [])
+                .filter(v => containsKanji(v.word))
+                .map(v => ({
+                    word: v.word,
+                    kana: v.kana,
+                    romaji: v.romaji,
+                    meaning: v.meaning,
+                    type: v.type,
+                    category: v.category,
+                    id: v.id,
+                    mastered: false
+                }));
+        }
+
+        // Returns the vocabulary list to study, filtered by the currently selected content mode.
+        // Kanji mode reads from the dedicated appData.kanji dataset (its own explicit JSON
+        // format — see importJSONFile), NOT re-derived from vocabulary on every call.
+        function getFlashcardSourceVocab() {
+            if (fcContentMode === 'kanji') {
+                return appData.kanji || [];
+            }
+            return appData.vocabulary || [];
+        }
+
+        // Switches which set of cards (all vocabulary vs. kanji-only) is studied.
+        // Safe to call at any time — it only updates button styling + the fcContentMode flag,
+        // then refreshes the pending-count preview on the setup screen.
+        function setFlashcardContentMode(mode) {
+            if (mode !== 'all' && mode !== 'kanji') mode = 'all';
+            fcContentMode = mode;
+
+            const allBtn = document.getElementById('fc-content-all');
+            const kanjiBtn = document.getElementById('fc-content-kanji');
+            if (!allBtn || !kanjiBtn) return;
+
+            const activeClasses = ['bg-white', 'text-indigo-600', 'shadow-sm'];
+            const inactiveClasses = ['text-slate-500'];
+
+            if (mode === 'kanji') {
+                kanjiBtn.classList.add(...activeClasses);
+                kanjiBtn.classList.remove(...inactiveClasses);
+                allBtn.classList.remove(...activeClasses);
+                allBtn.classList.add(...inactiveClasses);
+            } else {
+                allBtn.classList.add(...activeClasses);
+                allBtn.classList.remove(...inactiveClasses);
+                kanjiBtn.classList.remove(...activeClasses);
+                kanjiBtn.classList.add(...inactiveClasses);
+            }
+
+            setupFlashcardPrep();
+        }
+
+        // Switches which side of the flashcard is the "question" vs the "answer".
+        // Safe to call at any time (setup screen or mid-session) — it never
+        // touches fcDeck, it only updates button styling + the fcMode flag.
+        function setFlashcardMode(mode) {
+            if (mode !== 'jp-to-id' && mode !== 'id-to-jp') mode = 'jp-to-id'; // guard against bad input
+            fcMode = mode;
+
+            const jpBtn = document.getElementById('fc-mode-jp-to-id');
+            const idBtn = document.getElementById('fc-mode-id-to-jp');
+            if (!jpBtn || !idBtn) return; // elements not on screen yet — nothing to sync
+
+            const activeClasses = ['bg-white', 'text-rose-600', 'shadow-sm'];
+            const inactiveClasses = ['text-slate-500'];
+
+            if (mode === 'jp-to-id') {
+                jpBtn.classList.add(...activeClasses);
+                jpBtn.classList.remove(...inactiveClasses);
+                idBtn.classList.remove(...activeClasses);
+                idBtn.classList.add(...inactiveClasses);
+            } else {
+                idBtn.classList.add(...activeClasses);
+                idBtn.classList.remove(...inactiveClasses);
+                jpBtn.classList.remove(...activeClasses);
+                jpBtn.classList.add(...inactiveClasses);
+            }
         }
 
         function startFlashcards() {
-            // Deck priority: unmastered items + items in wrong bank
-            fcDeck = appData.vocabulary.filter(v => !v.mastered);
+            // Deck priority: unmastered items + items in wrong bank, from the selected content set
+            fcDeck = getFlashcardSourceVocab().filter(v => !v.mastered);
             if (fcDeck.length === 0) {
-                showToast("Semua kata sudah Anda hafal! 🎉", "🌟");
+                const msg = fcContentMode === 'kanji'
+                    ? "Semua Kanji sudah Anda hafal! 🎉"
+                    : "Semua kata sudah Anda hafal! 🎉";
+                showToast(msg, "🌟");
                 return;
             }
 
@@ -1002,6 +1172,9 @@
 
             document.getElementById('fc-setup-panel').classList.add('hidden');
             document.getElementById('fc-active-panel').classList.remove('hidden');
+
+            const badge = document.getElementById('fc-content-badge');
+            if (badge) badge.classList.toggle('hidden', fcContentMode !== 'kanji');
 
             renderFlashcardCard();
         }
@@ -1018,12 +1191,50 @@
             document.getElementById('fc-queue-count').innerText = fcDeck.length;
 
             document.getElementById('fc-front-category').innerText = item.category || 'Kosakata';
-            document.getElementById('fc-front-word').innerText = item.word || item.kana;
-            document.getElementById('fc-front-kana').innerText = item.kana !== item.word ? item.kana : '';
-
             document.getElementById('fc-back-type').innerText = item.type || 'Kata';
-            document.getElementById('fc-back-meaning').innerText = item.meaning;
-            document.getElementById('fc-back-romaji').innerText = item.romaji || '';
+
+            const frontWordEl = document.getElementById('fc-front-word');
+            const frontKanaEl = document.getElementById('fc-front-kana');
+            const frontAudioBtn = document.getElementById('fc-front-audio-btn');
+            const backLabelEl = document.getElementById('fc-back-label');
+            const backMeaningEl = document.getElementById('fc-back-meaning');
+            const backRomajiEl = document.getElementById('fc-back-romaji');
+
+            if (fcMode === 'id-to-jp') {
+                // QUESTION (front) = Bahasa Indonesia, ANSWER (back) = Bahasa Jepang
+                frontWordEl.classList.remove('jp-font', 'text-5xl');
+                frontWordEl.classList.add('text-3xl');
+                frontWordEl.innerText = item.meaning || '(tidak ada arti)';
+
+                frontKanaEl.classList.remove('jp-font');
+                frontKanaEl.innerText = item.type ? `(${item.type})` : '';
+
+                // Hide the audio button on the front so it doesn't give away the
+                // Japanese pronunciation before the user has guessed.
+                if (frontAudioBtn) frontAudioBtn.classList.add('hidden');
+
+                backLabelEl.innerText = 'Bahasa Jepang';
+                backMeaningEl.classList.add('jp-font');
+                backMeaningEl.innerText = item.word || item.kana;
+
+                const kanaHint = (item.kana && item.kana !== item.word) ? item.kana : '';
+                backRomajiEl.innerText = [kanaHint, item.romaji || ''].filter(Boolean).join(' • ');
+            } else {
+                // Default: QUESTION (front) = Bahasa Jepang, ANSWER (back) = Bahasa Indonesia
+                frontWordEl.classList.add('jp-font', 'text-5xl');
+                frontWordEl.classList.remove('text-3xl');
+                frontWordEl.innerText = item.word || item.kana;
+
+                frontKanaEl.classList.add('jp-font');
+                frontKanaEl.innerText = item.kana !== item.word ? item.kana : '';
+
+                if (frontAudioBtn) frontAudioBtn.classList.remove('hidden');
+
+                backLabelEl.innerText = 'Arti Kata';
+                backMeaningEl.classList.remove('jp-font');
+                backMeaningEl.innerText = item.meaning;
+                backRomajiEl.innerText = item.romaji || '';
+            }
 
             // Sentence Context Lookup
             const sentenceObj = appData.sentences.find(s => s.keyword === item.word || s.keyword === item.kana);
@@ -1099,8 +1310,9 @@
         }
 
         function resetAllMasteryProgress() {
-            if (confirm("Reset status hafalan semua kosakata? Anda akan menghafal kembali dari awal.")) {
-                appData.vocabulary.forEach(v => v.mastered = false);
+            const label = fcContentMode === 'kanji' ? 'Kanji' : 'kosakata';
+            if (confirm(`Reset status hafalan semua ${label}? Anda akan menghafal kembali dari awal.`)) {
+                getFlashcardSourceVocab().forEach(v => v.mastered = false);
                 saveStorageData();
                 setupFlashcardPrep();
                 showToast("Progres hafalan berhasil di-reset ke 0", "🔄");
@@ -1244,6 +1456,7 @@
             }
 
             document.getElementById('quiz-next-btn').classList.remove('hidden');
+            document.getElementById('quiz-action-bar').scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
 
         function nextQuizStep() {
@@ -1353,11 +1566,22 @@
             dropZone.innerHTML = '';
             poolZone.innerHTML = '';
 
-            // Selected Chips (in the order the user picked them)
+            // Show a friendly placeholder while no words have been picked yet
+            if (sentUserSelection.length === 0) {
+                const placeholder = document.createElement('span');
+                placeholder.id = 'sent-drop-placeholder';
+                placeholder.className = "text-xs text-slate-400 font-medium italic px-1";
+                placeholder.innerText = "👆 Ketuk kata di bawah untuk mulai menyusun kalimat...";
+                dropZone.appendChild(placeholder);
+            }
+
+            // Selected Chips (in the order the user picked them) — numbered so the
+            // intended word order is always clear at a glance
             sentUserSelection.forEach((chunkIdx, selPos) => {
                 const chip = document.createElement('button');
-                chip.className = "px-3 py-1.5 bg-indigo-600 text-white font-bold rounded-xl text-xs jp-font shadow-sm active:scale-95";
-                chip.innerText = sentPoolChunks[chunkIdx];
+                chip.className = "flex items-center gap-1.5 px-4 py-2.5 bg-indigo-600 text-white font-bold rounded-xl text-lg jp-font shadow-sm hover:bg-indigo-700 active:scale-95 transition-all";
+                chip.innerHTML = `<span class="text-[10px] font-black bg-white/25 rounded-full w-4 h-4 flex items-center justify-center leading-none">${selPos + 1}</span><span>${sentPoolChunks[chunkIdx]}</span>`;
+                chip.title = "Ketuk untuk mengembalikan ke pilihan kata";
                 chip.onclick = () => {
                     sentUserSelection.splice(selPos, 1);
                     renderSentenceChips();
@@ -1369,7 +1593,7 @@
             sentPoolChunks.forEach((word, idx) => {
                 if (sentUserSelection.includes(idx)) return;
                 const chip = document.createElement('button');
-                chip.className = "px-3 py-1.5 bg-white border border-slate-300 text-slate-800 font-bold rounded-xl text-xs jp-font shadow-sm hover:border-indigo-400 active:scale-95";
+                chip.className = "px-4 py-2.5 bg-white border-2 border-slate-300 text-slate-800 font-bold rounded-xl text-lg jp-font shadow-sm hover:border-indigo-400 hover:bg-indigo-50 active:scale-95 transition-all";
                 chip.innerText = word;
                 chip.onclick = () => {
                     sentUserSelection.push(idx);
@@ -1377,6 +1601,13 @@
                 };
                 poolZone.appendChild(chip);
             });
+
+            if (poolZone.children.length === 0) {
+                const doneMsg = document.createElement('span');
+                doneMsg.className = "text-xs text-slate-400 font-medium italic px-1";
+                doneMsg.innerText = "Semua kata sudah dipakai. Periksa jawabanmu ➔";
+                poolZone.appendChild(doneMsg);
+            }
         }
 
         function resetSentenceBuild() {
@@ -1391,14 +1622,15 @@
             feedback.classList.remove('hidden');
 
             if (userString === targetString) {
-                feedback.className = "p-3 rounded-2xl bg-emerald-100 text-emerald-800 font-extrabold text-center text-xs";
+                feedback.className = "p-3.5 rounded-2xl bg-emerald-100 text-emerald-800 font-extrabold text-center text-sm leading-snug";
                 feedback.innerText = "🎉 Luar Biasa! Susunan Kalimat Benar!";
                 playTTS(sentTargetItem.sentence);
                 document.getElementById('sent-next-btn').classList.remove('hidden');
             } else {
-                feedback.className = "p-3 rounded-2xl bg-rose-100 text-rose-800 font-extrabold text-center text-xs";
+                feedback.className = "p-3.5 rounded-2xl bg-rose-100 text-rose-800 font-extrabold text-center text-sm leading-snug jp-font";
                 feedback.innerText = `❌ Belum Pas. Kalimat Benar: "${sentTargetItem.sentence}"`;
             }
+            document.getElementById('sent-action-bar').scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
 
         function nextSentenceProblem() {
@@ -1472,31 +1704,102 @@
 
             document.getElementById('speak-result-box').classList.add('hidden');
             document.getElementById('speak-transcript-text').innerText = '-';
+            speakingSuccessAchieved = false;
+            speakingFinalTranscript = '';
+            resetSpeakingNextButton();
+
+            const wordEl = document.getElementById('speak-target-word');
+            const kanaEl = document.getElementById('speak-target-kana');
+            const hint = document.getElementById('speak-track-hint');
 
             if (speakingPool.length === 0) {
-                document.getElementById('speak-target-word').innerText = '—';
-                document.getElementById('speak-target-kana').innerText = '';
+                wordEl.innerText = '—';
+                kanaEl.innerText = '';
                 document.getElementById('speak-target-romaji').innerText = '';
                 document.getElementById('speak-target-meaning').innerText = speakingMode === 'sentence' ? 'Belum ada data kalimat.' : 'Belum ada data kosakata.';
                 document.getElementById('speak-progress-text').innerText = 'Item 0 dari 0';
+                hint.classList.add('hidden');
                 return;
             }
 
             const item = speakingPool[speakingIndex % speakingPool.length];
 
+            // The "trackable" reading (always Kana, since that's what speech recognition
+            // actually returns) is what gets colored blue as the user speaks correctly.
             if (speakingMode === 'sentence') {
-                document.getElementById('speak-target-word').innerText = item.sentence;
-                document.getElementById('speak-target-kana').innerText = '';
+                wordEl.className = "text-3xl font-black text-slate-800 jp-font break-words";
+                wordEl.innerText = item.sentence;
+                kanaEl.innerText = '';
                 document.getElementById('speak-target-romaji').innerText = '';
                 document.getElementById('speak-target-meaning').innerText = item.meaning;
             } else {
-                document.getElementById('speak-target-word').innerText = item.word || item.kana;
-                document.getElementById('speak-target-kana').innerText = (item.word && item.word !== item.kana) ? item.kana : '';
+                wordEl.className = "text-3xl font-black text-slate-800 jp-font break-words";
+                wordEl.innerText = item.word || item.kana;
+                kanaEl.className = "text-xl font-bold jp-font break-words text-teal-700";
+                kanaEl.innerText = item.kana || item.word || '';
                 document.getElementById('speak-target-romaji').innerText = item.romaji || '';
                 document.getElementById('speak-target-meaning').innerText = item.meaning;
             }
 
+            hint.classList.toggle('hidden', !(isMicCapableContext() && isSpeechRecognitionSupported()));
             document.getElementById('speak-progress-text').innerText = `Item ${(speakingIndex % speakingPool.length) + 1} dari ${speakingPool.length}`;
+        }
+
+        // Returns which DOM element currently displays the phonetic target text, and
+        // its raw (uncolored) string — this is the element that gets live-highlighted
+        // blue as the user's speech matches it, character by character.
+        function getSpeakingTrackInfo() {
+            if (speakingPool.length === 0) return null;
+            const item = speakingPool[speakingIndex % speakingPool.length];
+            if (speakingMode === 'sentence') {
+                return { el: document.getElementById('speak-target-word'), rawText: item.sentence || '' };
+            }
+            return { el: document.getElementById('speak-target-kana'), rawText: item.kana || item.word || '' };
+        }
+
+        // Re-renders rawText inside el as individual <span>s, coloring the first
+        // matchedNormCount non-punctuation characters blue (correctly pronounced so far).
+        function renderTrackHighlight(el, rawText, matchedNormCount) {
+            if (!el) return;
+            const punctRegex = /[\s、。,.!?！？「」『』]/;
+            let normIdx = 0;
+            let html = '';
+            for (const ch of rawText) {
+                if (punctRegex.test(ch)) {
+                    html += `<span class="text-slate-300">${ch}</span>`;
+                } else {
+                    const matched = normIdx < matchedNormCount;
+                    html += `<span class="${matched ? 'text-blue-600' : ''}">${ch}</span>`;
+                    normIdx++;
+                }
+            }
+            el.innerHTML = html;
+        }
+
+        // Greedy left-to-right sequential match: counts how many characters of
+        // targetNorm have been "heard" in order somewhere within transcriptNorm.
+        // Forgiving of extra noise/filler in the transcript, strict about order.
+        function computeSequentialMatch(targetNorm, transcriptNorm) {
+            let ti = 0;
+            for (let i = 0; i < transcriptNorm.length && ti < targetNorm.length; i++) {
+                if (transcriptNorm[i] === targetNorm[ti]) ti++;
+            }
+            return ti;
+        }
+
+        function resetSpeakingNextButton() {
+            const btn = document.getElementById('speak-next-btn');
+            if (!btn) return;
+            btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'glow-active');
+            btn.classList.add('bg-slate-800', 'hover:bg-slate-900');
+        }
+
+        function emphasizeSpeakingNextButton() {
+            const btn = document.getElementById('speak-next-btn');
+            if (!btn) return;
+            btn.classList.remove('bg-slate-800', 'hover:bg-slate-900');
+            btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'glow-active');
+            btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function playSpeakingReference() {
@@ -1569,12 +1872,19 @@
             const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
             speechRecognizer = new SpeechRecognitionAPI();
             speechRecognizer.lang = 'ja-JP';
-            speechRecognizer.continuous = false;
-            speechRecognizer.interimResults = false;
-            speechRecognizer.maxAlternatives = 3;
+            // continuous + interimResults on so we get live updates while the user is
+            // still talking, which is what powers the real-time blue highlighting.
+            speechRecognizer.continuous = true;
+            speechRecognizer.interimResults = true;
+            speechRecognizer.maxAlternatives = 1;
 
             const micBtn = document.getElementById('speak-mic-btn');
             const micLabel = document.getElementById('speak-mic-label');
+            const trackInfo = getSpeakingTrackInfo();
+
+            speakingFinalTranscript = '';
+            speakingSuccessAchieved = false;
+            if (trackInfo) renderTrackHighlight(trackInfo.el, trackInfo.rawText, 0);
 
             speechRecognizer.onstart = () => {
                 isSpeakingListening = true;
@@ -1585,11 +1895,31 @@
             };
 
             speechRecognizer.onresult = (event) => {
-                const alternatives = [];
-                for (let i = 0; i < event.results[0].length; i++) {
-                    alternatives.push(event.results[0][i].transcript);
+                if (!trackInfo) return;
+
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const piece = event.results[i][0].transcript;
+                    if (event.results[i].isFinal) {
+                        speakingFinalTranscript += piece;
+                    } else {
+                        interimTranscript += piece;
+                    }
                 }
-                evaluateSpeakingAttempt(alternatives);
+
+                const combined = speakingFinalTranscript + interimTranscript;
+                const targetNorm = normalizeJapaneseText(trackInfo.rawText);
+                const matched = computeSequentialMatch(targetNorm, normalizeJapaneseText(combined));
+
+                renderTrackHighlight(trackInfo.el, trackInfo.rawText, matched);
+
+                document.getElementById('speak-result-box').classList.remove('hidden');
+                document.getElementById('speak-transcript-text').innerText = combined || '-';
+
+                // All characters turned blue in order — pronunciation matched fully.
+                if (targetNorm.length > 0 && matched >= targetNorm.length && !speakingSuccessAchieved) {
+                    finalizeSpeakingSuccess();
+                }
             };
 
             speechRecognizer.onerror = (event) => {
@@ -1598,7 +1928,7 @@
                 else if (event.error === 'not-allowed' || event.error === 'service-not-allowed') msg = 'Izin mikrofon ditolak. Aktifkan izin mikrofon di pengaturan browser.';
                 else if (event.error === 'audio-capture') msg = 'Mikrofon tidak ditemukan di perangkat ini.';
                 else if (event.error === 'network') msg = 'Masalah jaringan saat mengenali suara.';
-                showToast(msg, "⚠️");
+                if (event.error !== 'no-speech' && event.error !== 'aborted') showToast(msg, "⚠️");
             };
 
             speechRecognizer.onend = () => {
@@ -1607,6 +1937,8 @@
                 micBtn.classList.add('bg-teal-600', 'hover:bg-teal-700');
                 micBtn.innerText = '🎙️';
                 micLabel.innerText = 'Tekan lalu ucapkan';
+
+                if (!speakingSuccessAchieved) evaluateFallbackAttempt();
             };
 
             try {
@@ -1623,37 +1955,39 @@
             }
         }
 
-        function evaluateSpeakingAttempt(alternatives) {
+        // Called the moment the live tracker turns fully blue — pronunciation matched.
+        function finalizeSpeakingSuccess() {
+            speakingSuccessAchieved = true;
+            const feedbackBox = document.getElementById('speak-feedback-box');
+            feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-emerald-100 text-emerald-800";
+            feedbackBox.innerText = "🎉 Sempurna! Semua bagian sudah biru — pelafalanmu tepat.";
+            emphasizeSpeakingNextButton();
+            stopSpeakingRecognition();
+        }
+
+        // Fallback scoring shown when the mic stops (silence timeout / manual stop)
+        // without the tracker having gone fully blue — gives a rough % so the user
+        // still knows how close they got, without blocking progress.
+        function evaluateFallbackAttempt() {
+            if (speakingSuccessAchieved || !speakingFinalTranscript) return;
+
             const item = speakingPool[speakingIndex % speakingPool.length];
+            if (!item) return;
             const candidates = speakingMode === 'sentence'
                 ? [item.sentence]
                 : [item.word, item.kana].filter(Boolean);
 
-            // Compare every heard alternative against every valid target form, keep the best match
             let bestScore = 0;
-            let bestTranscript = alternatives[0] || '';
-            alternatives.forEach(alt => {
-                candidates.forEach(target => {
-                    const score = textSimilarity(normalizeJapaneseText(alt), normalizeJapaneseText(target));
-                    if (score > bestScore) {
-                        bestScore = score;
-                        bestTranscript = alt;
-                    }
-                });
+            candidates.forEach(target => {
+                const score = textSimilarity(normalizeJapaneseText(speakingFinalTranscript), normalizeJapaneseText(target));
+                if (score > bestScore) bestScore = score;
             });
 
-            const resultBox = document.getElementById('speak-result-box');
             const feedbackBox = document.getElementById('speak-feedback-box');
-            resultBox.classList.remove('hidden');
-            document.getElementById('speak-transcript-text').innerText = bestTranscript || '(tidak terdengar)';
-
             const percent = Math.round(bestScore * 100);
-            if (bestScore >= 0.8) {
-                feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-emerald-100 text-emerald-800";
-                feedbackBox.innerText = `🎉 Sempurna! Kecocokan ${percent}%`;
-            } else if (bestScore >= 0.5) {
+            if (bestScore >= 0.5) {
                 feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-amber-100 text-amber-800";
-                feedbackBox.innerText = `👍 Lumayan (${percent}%). Coba ucapkan lebih jelas.`;
+                feedbackBox.innerText = `👍 Lumayan (${percent}%). Perhatikan bagian yang belum biru, lalu tekan mic dan coba lagi.`;
             } else {
                 feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-rose-100 text-rose-800";
                 feedbackBox.innerText = `❌ Belum tepat (${percent}%). Dengar lagi lalu ulangi.`;
@@ -1772,6 +2106,25 @@
                             appData.sentences = imported.sentences;
                         }
 
+                        // Kanji dataset: follow the imported JSON's own "kanji" format if it's
+                        // there (this is the source of truth — not re-derived from vocabulary).
+                        // If the import doesn't ship a "kanji" array at all, verify by scanning
+                        // the imported vocabulary for Kanji-containing words as a fallback —
+                        // if it genuinely finds none, appData.kanji correctly ends up empty.
+                        let kanjiNote = '';
+                        if (imported.kanji && Array.isArray(imported.kanji)) {
+                            appData.kanji = imported.kanji.map(k => ({
+                                ...k,
+                                mastered: typeof k.mastered !== 'undefined' ? k.mastered : false
+                            }));
+                            kanjiNote = `, ${appData.kanji.length} Kanji (dari format bawaan)`;
+                        } else {
+                            appData.kanji = deriveKanjiFromVocabulary(appData.vocabulary);
+                            kanjiNote = appData.kanji.length > 0
+                                ? `, ${appData.kanji.length} Kanji (dideteksi dari kosakata)`
+                                : ', tidak ada data Kanji terverifikasi';
+                        }
+
                         if (imported.stats) {
                             appData.stats = imported.stats;
                         }
@@ -1779,7 +2132,7 @@
                         saveStorageData();
                         renderDictionary();
                         updateDashboardStats();
-                        showToast(`Berhasil mengimpor ${appData.vocabulary.length} kosakata!`, "📂");
+                        showToast(`Berhasil mengimpor ${appData.vocabulary.length} kosakata${kanjiNote}!`, "📂");
                     } else {
                         showToast("Format file JSON tidak sesuai.", "⚠️");
                     }
