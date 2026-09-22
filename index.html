@@ -144,17 +144,30 @@
             <div class="space-y-2.5">
                 <h3 class="font-extrabold text-slate-800 text-sm tracking-wide uppercase px-1">Mode Latihan Efektif</h3>
 
-                <button onclick="switchTab('flashcard')" class="w-full bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 hover:border-rose-300 hover:shadow-md transition-all flex items-center justify-between group active:scale-[0.99]">
+                <button onclick="switchTab('flashcard', 'all')" class="w-full bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 hover:border-rose-300 hover:shadow-md transition-all flex items-center justify-between group active:scale-[0.99]">
                     <div class="flex items-center gap-3.5">
                         <div class="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl group-hover:bg-rose-500 group-hover:text-white transition-colors">
-                            🧠
+                            📖
                         </div>
                         <div class="text-left">
-                            <div class="font-extrabold text-slate-800 text-base">Flashcard Spaced Repetition</div>
-                            <div class="text-xs text-slate-500 font-medium">Latih ingatan aktif (Active Recall) dengan suara</div>
+                            <div class="font-extrabold text-slate-800 text-base">Flashcard Kosakata</div>
+                            <div class="text-xs text-slate-500 font-medium">Active Recall untuk seluruh kosakata</div>
                         </div>
                     </div>
                     <span class="text-slate-300 group-hover:text-rose-500 font-bold transition-colors">➔</span>
+                </button>
+
+                <button onclick="switchTab('flashcard', 'kanji')" class="w-full bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 hover:border-indigo-300 hover:shadow-md transition-all flex items-center justify-between group active:scale-[0.99]">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl group-hover:bg-indigo-500 group-hover:text-white transition-colors">
+                            ㊙️
+                        </div>
+                        <div class="text-left">
+                            <div class="font-extrabold text-slate-800 text-base">Flashcard Kanji</div>
+                            <div class="text-xs text-slate-500 font-medium">Fokus latihan khusus huruf Kanji</div>
+                        </div>
+                    </div>
+                    <span class="text-slate-300 group-hover:text-indigo-500 font-bold transition-colors">➔</span>
                 </button>
 
                 <button onclick="switchTab('quiz')" class="w-full bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 hover:border-amber-300 hover:shadow-md transition-all flex items-center justify-between group active:scale-[0.99]">
@@ -206,30 +219,24 @@
                     🃏
                 </div>
                 <div>
-                    <h2 class="text-xl font-extrabold text-slate-800">Sesi Flashcard Cerdas</h2>
+                    <h2 id="fc-setup-title" class="text-xl font-extrabold text-slate-800">Sesi Flashcard Cerdas</h2>
                     <p class="text-xs text-slate-500 mt-1 font-medium">Sistem akan memprioritaskan kata yang belum dihafal & sering salah.</p>
+                </div>
+
+                <!-- Active deck badge: flashcard Kosakata and Kanji are now two fully separate
+                     modes reached from their own Beranda button, so this just confirms which
+                     one you're in — it's no longer a switch. Go back to Beranda to change it. -->
+                <div id="fc-setup-mode-badge" class="inline-flex mx-auto items-center gap-1.5 bg-indigo-50 text-indigo-600 border border-indigo-200 text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                    📖 Mode: Kosakata
                 </div>
 
                 <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 text-left space-y-2">
                     <div class="flex justify-between text-xs font-bold text-slate-600">
-                        <span>Sisa Kata Perlu Dihafal:</span>
+                        <span id="fc-pending-label">Sisa Kata Perlu Dihafal:</span>
                         <span id="fc-pending-count" class="text-rose-600 font-black">0</span>
                     </div>
                     <div class="w-full bg-slate-200 rounded-full h-2">
                         <div id="fc-pending-bar" class="bg-rose-500 h-2 rounded-full" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- Content Selector: choose which set of cards to study -->
-                <div class="text-left">
-                    <div class="text-[11px] font-bold text-slate-500 mb-1.5 px-1">Pilih Materi:</div>
-                    <div class="grid grid-cols-2 gap-2 bg-slate-100 p-1 rounded-2xl">
-                        <button id="fc-content-all" onclick="setFlashcardContentMode('all')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
-                            📖<br><span class="text-[10px] font-semibold">Semua Kosakata</span>
-                        </button>
-                        <button id="fc-content-kanji" onclick="setFlashcardContentMode('kanji')" class="py-2.5 rounded-xl text-xs font-bold transition-all leading-tight">
-                            ㊙️<br><span class="text-[10px] font-semibold">Fokus Kanji</span>
-                        </button>
                     </div>
                 </div>
 
@@ -973,12 +980,19 @@
             window.speechSynthesis.speak(utterance);
         }
 
-        function switchTab(tabId) {
+        function switchTab(tabId, flashcardContent) {
             const tabs = ['home', 'flashcard', 'quiz', 'sentence', 'speaking', 'list', 'data'];
 
             // Stop any active mic recording when leaving the speaking tab
             if (currentTab === 'speaking' && tabId !== 'speaking' && isSpeakingListening) {
                 stopSpeakingRecognition();
+            }
+
+            // Flashcard Kosakata and Flashcard Kanji are two separate Beranda buttons now
+            // (not a toggle inside one shared mode), so the entry point itself decides
+            // which deck loads.
+            if (tabId === 'flashcard' && (flashcardContent === 'all' || flashcardContent === 'kanji')) {
+                fcContentMode = flashcardContent;
             }
 
             tabs.forEach(id => {
@@ -1047,22 +1061,30 @@
             // Sync the mode toggle buttons with whichever mode is currently active
             setFlashcardMode(fcMode);
 
-            // Sync content-mode buttons without re-triggering setupFlashcardPrep (avoid recursion)
-            const allBtn = document.getElementById('fc-content-all');
-            const kanjiBtn = document.getElementById('fc-content-kanji');
-            if (allBtn && kanjiBtn) {
-                const activeClasses = ['bg-white', 'text-indigo-600', 'shadow-sm'];
-                const inactiveClasses = ['text-slate-500'];
-                allBtn.classList.remove(...activeClasses, ...inactiveClasses);
-                kanjiBtn.classList.remove(...activeClasses, ...inactiveClasses);
-                if (fcContentMode === 'kanji') {
-                    kanjiBtn.classList.add(...activeClasses);
-                    allBtn.classList.add(...inactiveClasses);
-                } else {
-                    allBtn.classList.add(...activeClasses);
-                    kanjiBtn.classList.add(...inactiveClasses);
+            // Reflect the fixed deck (Kosakata vs Kanji) in the setup panel's title,
+            // badge, and pending-count label — this is no longer a switch, just a label.
+            const titleEl = document.getElementById('fc-setup-title');
+            const badgeEl = document.getElementById('fc-setup-mode-badge');
+            const pendingLabelEl = document.getElementById('fc-pending-label');
+            const contentBadgeEl = document.getElementById('fc-content-badge');
+            if (fcContentMode === 'kanji') {
+                if (titleEl) titleEl.innerText = 'Sesi Flashcard Kanji';
+                if (badgeEl) {
+                    badgeEl.innerHTML = '㊙️ Mode: Kanji';
+                    badgeEl.classList.remove('bg-indigo-50', 'text-indigo-600', 'border-indigo-200');
+                    badgeEl.classList.add('bg-rose-50', 'text-rose-600', 'border-rose-200');
                 }
+                if (pendingLabelEl) pendingLabelEl.innerText = 'Sisa Kanji Perlu Dihafal:';
+            } else {
+                if (titleEl) titleEl.innerText = 'Sesi Flashcard Kosakata';
+                if (badgeEl) {
+                    badgeEl.innerHTML = '📖 Mode: Kosakata';
+                    badgeEl.classList.remove('bg-rose-50', 'text-rose-600', 'border-rose-200');
+                    badgeEl.classList.add('bg-indigo-50', 'text-indigo-600', 'border-indigo-200');
+                }
+                if (pendingLabelEl) pendingLabelEl.innerText = 'Sisa Kata Perlu Dihafal:';
             }
+            if (contentBadgeEl) contentBadgeEl.classList.toggle('hidden', fcContentMode !== 'kanji');
         }
 
         // Returns true if a word string contains at least one Kanji (CJK ideograph) character
@@ -1099,32 +1121,13 @@
             return appData.vocabulary || [];
         }
 
-        // Switches which set of cards (all vocabulary vs. kanji-only) is studied.
-        // Safe to call at any time — it only updates button styling + the fcContentMode flag,
-        // then refreshes the pending-count preview on the setup screen.
+        // Sets which set of cards (all vocabulary vs. kanji-only) is studied, then
+        // refreshes the setup screen. Kosakata and Kanji are separate Beranda entry
+        // points now (see switchTab), so this is called from there rather than from
+        // a toggle inside the flashcard view itself.
         function setFlashcardContentMode(mode) {
             if (mode !== 'all' && mode !== 'kanji') mode = 'all';
             fcContentMode = mode;
-
-            const allBtn = document.getElementById('fc-content-all');
-            const kanjiBtn = document.getElementById('fc-content-kanji');
-            if (!allBtn || !kanjiBtn) return;
-
-            const activeClasses = ['bg-white', 'text-indigo-600', 'shadow-sm'];
-            const inactiveClasses = ['text-slate-500'];
-
-            if (mode === 'kanji') {
-                kanjiBtn.classList.add(...activeClasses);
-                kanjiBtn.classList.remove(...inactiveClasses);
-                allBtn.classList.remove(...activeClasses);
-                allBtn.classList.add(...inactiveClasses);
-            } else {
-                allBtn.classList.add(...activeClasses);
-                allBtn.classList.remove(...inactiveClasses);
-                kanjiBtn.classList.remove(...activeClasses);
-                kanjiBtn.classList.add(...inactiveClasses);
-            }
-
             setupFlashcardPrep();
         }
 
@@ -1757,9 +1760,10 @@
             return { el: document.getElementById('speak-target-kana'), rawText: item.kana || item.word || '' };
         }
 
-        // Re-renders rawText inside el as individual <span>s, coloring the first
-        // matchedNormCount non-punctuation characters blue (correctly pronounced so far).
-        function renderTrackHighlight(el, rawText, matchedNormCount) {
+        // Re-renders rawText inside el as individual <span>s, coloring blue exactly the
+        // non-punctuation characters whose normalized index is in matchedIndices —
+        // i.e. the ones actually recognized as pronounced correctly, wherever they fall.
+        function renderTrackHighlight(el, rawText, matchedIndices) {
             if (!el) return;
             const punctRegex = /[\s、。,.!?！？「」『』]/;
             let normIdx = 0;
@@ -1768,7 +1772,7 @@
                 if (punctRegex.test(ch)) {
                     html += `<span class="text-slate-300">${ch}</span>`;
                 } else {
-                    const matched = normIdx < matchedNormCount;
+                    const matched = matchedIndices.has(normIdx);
                     html += `<span class="${matched ? 'text-blue-600' : ''}">${ch}</span>`;
                     normIdx++;
                 }
@@ -1776,15 +1780,44 @@
             el.innerHTML = html;
         }
 
-        // Greedy left-to-right sequential match: counts how many characters of
-        // targetNorm have been "heard" in order somewhere within transcriptNorm.
-        // Forgiving of extra noise/filler in the transcript, strict about order.
-        function computeSequentialMatch(targetNorm, transcriptNorm) {
-            let ti = 0;
-            for (let i = 0; i < transcriptNorm.length && ti < targetNorm.length; i++) {
-                if (transcriptNorm[i] === targetNorm[ti]) ti++;
+        // Longest Common Subsequence between targetNorm and transcriptNorm. Unlike a
+        // simple left-to-right prefix scan, this doesn't get permanently stuck the moment
+        // one word/character is mispronounced or skipped — a later word said correctly
+        // (e.g. "mobil" in "aku suka mobil" even if "suka" came out wrong) still gets
+        // found and marked, while the misheard part in between is simply left unmatched.
+        // Returns { matchedCount, matchedIndices } where matchedIndices holds the
+        // targetNorm character positions that are part of the best alignment — full
+        // correctness (all-blue) still requires matchedCount === targetNorm.length,
+        // i.e. every target character eventually heard, in order.
+        function computeLCSMatch(targetNorm, transcriptNorm) {
+            const m = targetNorm.length, n = transcriptNorm.length;
+            const matchedIndices = new Set();
+            if (m === 0 || n === 0) return { matchedCount: 0, matchedIndices };
+
+            const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+            for (let i = 1; i <= m; i++) {
+                for (let j = 1; j <= n; j++) {
+                    if (targetNorm[i - 1] === transcriptNorm[j - 1]) {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    } else {
+                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    }
+                }
             }
-            return ti;
+
+            let i = m, j = n;
+            while (i > 0 && j > 0) {
+                if (targetNorm[i - 1] === transcriptNorm[j - 1]) {
+                    matchedIndices.add(i - 1);
+                    i--; j--;
+                } else if (dp[i - 1][j] >= dp[i][j - 1]) {
+                    i--;
+                } else {
+                    j--;
+                }
+            }
+
+            return { matchedCount: dp[m][n], matchedIndices };
         }
 
         function resetSpeakingNextButton() {
@@ -1884,7 +1917,7 @@
 
             speakingFinalTranscript = '';
             speakingSuccessAchieved = false;
-            if (trackInfo) renderTrackHighlight(trackInfo.el, trackInfo.rawText, 0);
+            if (trackInfo) renderTrackHighlight(trackInfo.el, trackInfo.rawText, new Set());
 
             speechRecognizer.onstart = () => {
                 isSpeakingListening = true;
@@ -1909,15 +1942,15 @@
 
                 const combined = speakingFinalTranscript + interimTranscript;
                 const targetNorm = normalizeJapaneseText(trackInfo.rawText);
-                const matched = computeSequentialMatch(targetNorm, normalizeJapaneseText(combined));
+                const { matchedCount, matchedIndices } = computeLCSMatch(targetNorm, normalizeJapaneseText(combined));
 
-                renderTrackHighlight(trackInfo.el, trackInfo.rawText, matched);
+                renderTrackHighlight(trackInfo.el, trackInfo.rawText, matchedIndices);
 
                 document.getElementById('speak-result-box').classList.remove('hidden');
                 document.getElementById('speak-transcript-text').innerText = combined || '-';
 
-                // All characters turned blue in order — pronunciation matched fully.
-                if (targetNorm.length > 0 && matched >= targetNorm.length && !speakingSuccessAchieved) {
+                // Every character turned blue, in order — pronunciation matched fully.
+                if (targetNorm.length > 0 && matchedCount >= targetNorm.length && !speakingSuccessAchieved) {
                     finalizeSpeakingSuccess();
                 }
             };
