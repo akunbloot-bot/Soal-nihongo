@@ -65,6 +65,116 @@
         .flip-instant {
             transition: none !important;
         }
+
+        /* ===== Flashcard: Penilaian Otomatis & Tebak Cepat ===== */
+        .fcx-switch-row { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#f8fafc; border:1px solid rgba(226,232,240,.9); border-radius:16px; padding:12px; text-align:left; }
+        .fcx-switch-title { font-size:13px; font-weight:800; color:#1e293b; }
+        .fcx-switch-desc { font-size:10.5px; font-weight:500; color:#64748b; line-height:1.35; margin-top:2px; }
+        .fcx-switch { position:relative; width:52px; height:30px; border-radius:9999px; background:#cbd5e1; flex-shrink:0; border:0; transition:background .2s; }
+        .fcx-switch::after { content:''; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.25); transition:transform .2s; }
+        .fcx-switch.on { background:#e11d48; }
+        .fcx-switch.on::after { transform:translateX(22px); }
+        .fcx-switch.locked { opacity:.55; pointer-events:none; }
+
+        .fcx-topbar { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px; }
+        .fcx-topbar > :first-child { justify-self:start; }
+        .fcx-topbar > :last-child { justify-self:end; white-space:nowrap; }
+        .fcx-timer { min-width:112px; text-align:center; border-radius:16px; padding:6px 12px 7px; border:2px solid #e2e8f0; background:#fff; color:#475569; transition:background .15s, border-color .15s, color .15s; box-shadow:0 2px 8px rgba(15,23,42,.08); }
+        .fcx-timer.fcx-invisible { visibility:hidden; }
+        .fcx-timer-time { font-size:24px; font-weight:900; line-height:1.1; font-variant-numeric:tabular-nums; }
+        .fcx-timer-cat { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; margin-top:1px; }
+        .fcx-timer-bar { height:4px; border-radius:9999px; background:rgba(100,116,139,.2); margin-top:5px; overflow:hidden; }
+        .fcx-timer-bar > span { display:block; height:100%; width:0; background:currentColor; }
+        .fcx-t-easy   { border-color:#34d399; background:#ecfdf5; color:#047857; }
+        .fcx-t-medium { border-color:#fbbf24; background:#fffbeb; color:#b45309; }
+        .fcx-t-hard, .fcx-t-fail { border-color:#fb7185; background:#fff1f2; color:#be123c; }
+
+        .fcx-auto-panel { background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:12px; text-align:center; }
+        .fcx-auto-msg { font-size:13px; font-weight:700; color:#475569; margin-bottom:8px; line-height:1.4; }
+        .fcx-next-btn { width:100%; min-height:54px; border-radius:16px; background:#1e293b; color:#fff; font-weight:800; font-size:15px; }
+        .fcx-next-btn:active { transform:scale(.98); }
+
+        .fcx-score { font-size:56px; font-weight:900; color:#e11d48; line-height:1; }
+        .fcx-score span { font-size:22px; color:#94a3b8; margin-left:6px; }
+        .fcx-score-sub { font-size:12px; font-weight:700; color:#64748b; margin-top:4px; }
+        .fcx-stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+        .fcx-stat { border-radius:12px; padding:8px 4px; border:1px solid; font-size:11px; font-weight:800; }
+        .fcx-stat b { display:block; font-size:22px; font-weight:900; }
+        .fcx-fail-list { text-align:left; background:#fff1f2; border:1px solid #fecdd3; border-radius:12px; padding:10px 12px; margin-top:12px; font-size:12px; color:#9f1239; max-height:180px; overflow-y:auto; }
+        .fcx-fail-list div { padding:2px 0; }
+        .fcx-daily { background:#fff7ed; border:1px solid #fed7aa; border-radius:16px; padding:10px 12px; color:#e11d48; }
+        .fcx-daily-top { display:flex; justify-content:space-between; font-size:12px; font-weight:800; color:#9a3412; margin-bottom:6px; }
+        .fcx-adv { background:#f8fafc; border:1px solid rgba(226,232,240,.9); border-radius:16px; padding:10px 12px; text-align:left; }
+        .fcx-adv summary { font-size:13px; font-weight:800; color:#1e293b; cursor:pointer; }
+        .fcx-field { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:10px; font-size:12px; font-weight:700; color:#475569; }
+        .fcx-field input[type=number] { width:72px; padding:8px; text-align:center; border:1px solid #cbd5e1; border-radius:10px; font-weight:800; background:#fff; }
+        .fcx-check { display:flex; align-items:center; gap:10px; margin-top:12px; font-size:12px; font-weight:700; color:#475569; min-height:36px; }
+        .fcx-check input { width:20px; height:20px; accent-color:#e11d48; }
+        .fcx-adv-note { margin-top:10px; font-size:10.5px; color:#94a3b8; line-height:1.4; }
+        .fcx-grid4 { grid-template-columns:repeat(4,1fr); }
+        .fcx-panel { background:#fff; border:1px solid #e2e8f0; border-radius:16px; padding:12px; }
+        .fcx-week { display:flex; gap:6px; align-items:flex-end; margin-top:12px; }
+        .fcx-week div { flex:1; display:flex; flex-direction:column; justify-content:flex-end; align-items:center; font-size:9.5px; font-weight:700; color:#64748b; gap:2px; }
+        .fcx-week i { display:block; width:100%; background:#fb7185; border-radius:5px 5px 0 0; min-height:2px; }
+        .fcx-daily-btn { width:100%; min-height:62px; border-radius:18px; background:linear-gradient(135deg,#e11d48,#7c3aed); color:#fff; font-weight:900; font-size:16px; box-shadow:0 8px 20px rgba(124,58,237,.3); }
+        .fcx-daily-btn small { display:block; font-size:11px; font-weight:600; opacity:.9; margin-top:2px; }
+        .fcx-daily-btn:active { transform:scale(.98); }
+        .mt-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .mt-col { display:flex; flex-direction:column; gap:10px; }
+        .mt-box { min-height:64px; border-radius:16px; border:2px solid #e2e8f0; background:#fff; padding:8px; font-weight:800; color:#1e293b; display:flex; align-items:center; justify-content:center; text-align:center; word-break:break-word; line-height:1.25; box-shadow:0 1px 3px rgba(15,23,42,.06); transition:background .15s,border-color .15s,opacity .2s; }
+        .mt-box.jp { font-size:22px; font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,'Noto Sans JP',sans-serif; }
+        .mt-box.id { font-size:13px; }
+        .mt-box:active { transform:scale(.97); }
+        .mt-box.sel { border-color:#6366f1; background:#eef2ff; }
+        .mt-box.wrong { border-color:#fb7185; background:#fff1f2; animation:mtShake .35s; }
+        .mt-box.ok-easy { border-color:#34d399; background:#ecfdf5; color:#047857; opacity:.7; pointer-events:none; }
+        .mt-box.ok-medium { border-color:#fbbf24; background:#fffbeb; color:#b45309; opacity:.7; pointer-events:none; }
+        .mt-box.ok-hard { border-color:#fb7185; background:#fff1f2; color:#be123c; opacity:.7; pointer-events:none; }
+        @keyframes mtShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+        .mt-select { padding:8px; border:1px solid #cbd5e1; border-radius:10px; font-weight:800; background:#fff; font-size:12px; max-width:55%; }
+        .mt-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:stretch; }
+        .mt-input { width:100%; min-height:64px; border-radius:16px; border:2px solid #e2e8f0; padding:8px; font-size:20px; font-weight:800; text-align:center; background:#f1f5f9; color:#1e293b; font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,'Noto Sans JP',sans-serif; outline:none; }
+        .mt-input::placeholder { font-size:12px; font-weight:600; color:#94a3b8; }
+        .mt-input:disabled { opacity:.6; }
+        .mt-row.active .mt-input { background:#fff; border-color:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,.2); opacity:1; }
+        .mt-input.r-easy { border-color:#34d399; background:#ecfdf5; color:#047857; opacity:1; }
+        .mt-input.r-medium { border-color:#fbbf24; background:#fffbeb; color:#b45309; opacity:1; }
+        .mt-input.r-hard { border-color:#fb7185; background:#fff1f2; color:#be123c; opacity:1; }
+        .mt-actions { display:grid; grid-template-columns:2fr 1fr; gap:10px; }
+        .mt-btn { min-height:54px; border-radius:16px; background:#e2e8f0; font-weight:800; color:#334155; font-size:14px; }
+        .mt-btn.primary { background:#4f46e5; color:#fff; }
+        .mt-btn:active { transform:scale(.97); }
+        .mt-diff { margin-top:6px; font-size:16px; font-weight:700; color:#334155; text-align:left; font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,'Noto Sans JP',sans-serif; }
+        .mt-d-bad { color:#be123c; background:#ffe4e6; border-radius:4px; padding:0 2px; }
+        .mt-d-miss { color:#047857; background:#d1fae5; border-radius:4px; padding:0 2px; text-decoration:underline; }
+        .mt-row form { display:flex; margin:0; }
+        .mt-input[readonly]:not([class*="r-"]) { opacity:.6; }
+        .mt-card { background:#fff; border:1px solid #e2e8f0; border-radius:20px; padding:14px 16px; text-align:center; box-shadow:0 2px 8px rgba(15,23,42,.06); }
+        .mt-counter { font-size:11px; font-weight:800; color:#6366f1; text-transform:uppercase; letter-spacing:.05em; }
+        .mt-meaning { font-size:28px; font-weight:900; color:#1e293b; line-height:1.2; margin:6px 0 2px; word-break:break-word; }
+        .mt-hintline { font-size:11px; font-weight:600; color:#94a3b8; }
+        #mt-form { margin:0; }
+        #mt-form .mt-input { font-size:24px; min-height:68px; }
+        #mt-form .mt-input:not([readonly]) { background:#fff; border-color:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,.2); opacity:1; }
+        .sp-chip { display:inline-flex; flex-direction:column; align-items:center; justify-content:center; min-width:46px; padding:6px 8px; margin:3px; border-radius:12px; border:2px solid #e2e8f0; background:#fff; color:#475569; font-family:inherit; }
+        .sp-chip b { font-size:22px; line-height:1.15; font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic',Meiryo,'Noto Sans JP',sans-serif; }
+        .sp-chip small { font-size:10px; font-weight:700; color:#94a3b8; line-height:1.2; }
+        .sp-chip:active { transform:scale(.95); }
+        .sp-ok { border-color:#34d399; background:#ecfdf5; color:#047857; } .sp-ok small { color:#059669; }
+        .sp-near { border-color:#fbbf24; background:#fffbeb; color:#b45309; } .sp-near small { color:#b45309; }
+        .sp-bad { border-color:#fb7185; background:#fff1f2; color:#be123c; } .sp-bad small { color:#be123c; }
+        .sp-miss { border:2px dashed #fb7185; background:#fff; color:#be123c; opacity:.8; } .sp-miss small { color:#be123c; }
+        .sp-mic { width:84px; height:84px; border-radius:9999px; background:#0d9488; color:#fff; font-size:34px; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(13,148,136,.35); margin:0 auto; }
+        .sp-mic.on { background:#e11d48; }
+        .sp-score { font-size:48px; font-weight:900; line-height:1; }
+        .sp-tip { text-align:left; background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:8px 10px; font-size:12px; font-weight:600; color:#334155; line-height:1.45; margin-top:6px; }
+        .sp-why { text-align:left; font-size:11px; color:#64748b; line-height:1.5; font-weight:500; }
+        .sp-why b { color:#334155; }
+        .dict-in { width:62%; padding:8px 10px; border:1px solid #cbd5e1; border-radius:10px; font-weight:700; background:#fff; font-size:13px; }
+        .today-card { background:#fff; border:1px solid #e2e8f0; border-radius:20px; padding:14px; box-shadow:0 2px 8px rgba(15,23,42,.06); }
+        .today-row { display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:800; color:#334155; }
+        .today-nudge { margin-top:10px; padding:8px 10px; background:#fffbeb; border:1px solid #fde68a; border-radius:12px; font-size:11px; font-weight:700; color:#92400e; display:flex; gap:8px; align-items:center; justify-content:space-between; }
+        .today-nudge button { padding:6px 10px; border-radius:10px; background:#f59e0b; color:#fff; font-weight:800; font-size:11px; white-space:nowrap; }
     </style>
 </head>
 <body class="h-full text-slate-800 flex flex-col justify-between selection:bg-rose-100 selection:text-rose-700">
@@ -100,6 +210,7 @@
 
         <!-- ==================== VIEW 1: BERANDA ==================== -->
         <section id="view-home" class="space-y-4">
+            <div id="today-card"></div>
             <!-- Hero Dashboard Banner -->
             <div class="bg-gradient-to-br from-rose-600 via-rose-500 to-pink-600 rounded-3xl p-5 text-white shadow-lg shadow-rose-200 relative overflow-hidden glow-active">
                 <div class="absolute -right-4 -bottom-4 text-8xl opacity-10 font-black jp-font">日本語</div>
@@ -165,6 +276,17 @@
                         <div class="text-left">
                             <div class="font-extrabold text-slate-800 text-base">Flashcard Kanji</div>
                             <div class="text-xs text-slate-500 font-medium">Fokus latihan khusus huruf Kanji</div>
+                        </div>
+                    </div>
+                    <span class="text-slate-300 group-hover:text-indigo-500 font-bold transition-colors">➔</span>
+                </button>
+
+                <button onclick="switchTab('match')" class="w-full bg-white p-4 rounded-2xl shadow-sm border border-slate-200/80 hover:border-indigo-300 hover:shadow-md transition-all flex items-center justify-between group active:scale-[0.99]">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl group-hover:bg-indigo-500 group-hover:text-white transition-colors">🧩</div>
+                        <div class="text-left">
+                            <div class="font-extrabold text-slate-800 text-base">Latihan Pencocokan</div>
+                            <div class="text-xs text-slate-500 font-medium">Ketik tulisan Jepangnya dari arti, dinilai dari kecepatan &amp; ketepatan</div>
                         </div>
                     </div>
                     <span class="text-slate-300 group-hover:text-indigo-500 font-bold transition-colors">➔</span>
@@ -253,7 +375,51 @@
                     </div>
                 </div>
 
+                <div class="fcx-panel">
+                    <div class="fcx-stat-grid fcx-grid4" id="fc-levels"></div>
+                    <div class="fcx-week" id="fc-week"></div>
+                    <div class="fcx-adv-note" style="text-align:center">Kartu dikerjakan 7 hari terakhir</div>
+                </div>
+
+                <div class="fcx-daily">
+                    <div class="fcx-daily-top"><span id="fc-streak">🔥 0 hari beruntun</span><span id="fc-daily-text">0/20 kartu hari ini</span></div>
+                    <div class="fcx-timer-bar"><span id="fc-daily-bar"></span></div>
+                </div>
+
+                <details class="fcx-adv">
+                    <summary>⚙️ Pengaturan Lanjutan</summary>
+                    <div class="fcx-field"><label for="fc-cfg-easy">Lancar jika balik ≤ (dtk)</label><input id="fc-cfg-easy" type="number" min="0.5" max="5" step="0.5" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-medium">Sedang jika balik ≤ (dtk)</label><input id="fc-cfg-medium" type="number" min="1" max="15" step="0.5" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-timeout">Balik otomatis setelah (dtk)</label><input id="fc-cfg-timeout" type="number" min="3" max="60" step="1" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-target">Target harian (kartu)</label><input id="fc-cfg-target" type="number" min="5" max="500" step="5" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-sp">Skor lolos Berbicara (50-95)</label><input id="fc-cfg-sp" type="number" min="50" max="95" step="5" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-new">Kata baru per Sesi Harian</label><input id="fc-cfg-new" type="number" min="0" max="100" step="1" onchange="fcSaveCfgFromUI()"></div>
+                    <div class="fcx-field"><label for="fc-cfg-size">Maks. kartu per sesi (0 = semua)</label><input id="fc-cfg-size" type="number" min="0" max="500" step="5" onchange="fcSaveCfgFromUI()"></div>
+                    <label class="fcx-check"><input id="fc-cfg-audio" type="checkbox" onchange="fcSaveCfgFromUI()"> Putar suara otomatis saat kartu dibalik</label>
+                    <label class="fcx-check"><input id="fc-cfg-wrong" type="checkbox" onchange="fcSaveCfgFromUI()"> Latihan hanya kata yang sering salah</label>
+                    <div class="fcx-adv-note">Pintasan keyboard: Spasi/Enter = balik &amp; lanjut. Mode manual: 1 = Susah, 2 = Lumayan, 3 = Hafal.</div>
+                </details>
+
+                <!-- Penilaian Otomatis & Tebak Cepat -->
+                <div class="space-y-2">
+                    <div class="fcx-switch-row">
+                        <div>
+                            <div class="fcx-switch-title">⏱ Penilaian Otomatis</div>
+                            <div id="fc-auto-desc" class="fcx-switch-desc"></div>
+                        </div>
+                        <button id="fc-toggle-auto" type="button" class="fcx-switch" aria-pressed="false" onclick="toggleFcAuto()"></button>
+                    </div>
+                    <div class="fcx-switch-row">
+                        <div>
+                            <div class="fcx-switch-title">⚡ Tebak Cepat (1 detik)</div>
+                            <div class="fcx-switch-desc">Tiap kartu hanya 1 detik. Tidak dibalik dalam 1 detik = Gagal. Poin tampil di akhir. Satu putaran, tidak mengubah status hafal.</div>
+                        </div>
+                        <button id="fc-toggle-quick" type="button" class="fcx-switch" aria-pressed="false" onclick="toggleFcQuick()"></button>
+                    </div>
+                </div>
+
                 <div class="pt-2 space-y-2">
+                    <button type="button" class="fcx-daily-btn" onclick="startDailySession()">🚀 Sesi Harian Cerdas<small id="fc-daily-sub"></small></button>
                     <button onclick="startFlashcards()" class="w-full bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl hover:bg-rose-700 shadow-lg shadow-rose-200 transition-all active:scale-[0.98]">
                         Mulai Sesi Hafalan
                     </button>
@@ -266,12 +432,17 @@
             <!-- Active Deck Section -->
             <div id="fc-active-panel" class="hidden space-y-4">
                 <!-- Top Status Header -->
-                <div class="flex justify-between items-center">
+                <div class="fcx-topbar">
                     <button onclick="exitFlashcards()" class="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-300">
                         ✕ Selesai
                     </button>
+                    <div id="fc-timer-box" class="fcx-timer fcx-invisible">
+                        <div id="fc-timer-time" class="fcx-timer-time">0.0 dtk</div>
+                        <div id="fc-timer-cat" class="fcx-timer-cat">Lancar</div>
+                        <div class="fcx-timer-bar"><span id="fc-timer-bar"></span></div>
+                    </div>
                     <div class="text-xs font-extrabold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">
-                        Sisa Queue: <span id="fc-queue-count" class="text-rose-600">0</span>
+                        Sisa: <span id="fc-queue-count" class="text-rose-600">0</span>
                     </div>
                 </div>
                 <div id="fc-content-badge" class="hidden text-center">
@@ -323,12 +494,18 @@
                                 </div>
                             </div>
 
-                            <div class="text-slate-400 text-[10px] font-medium">
+                            <div id="fc-back-hint" class="text-slate-400 text-[10px] font-medium">
                                 Pilih evaluasi di bawah ini 👇
                             </div>
                         </div>
 
                     </div>
+                </div>
+
+                <!-- Panel hasil penilaian otomatis (menggantikan tombol evaluasi) -->
+                <div id="fc-auto-panel" class="fcx-auto-panel hidden">
+                    <div id="fc-auto-msg" class="fcx-auto-msg"></div>
+                    <button id="fc-next-btn" type="button" class="fcx-next-btn hidden" onclick="fcNextCard()">Lanjut ➜</button>
                 </div>
 
                 <!-- Self Evaluation Assessment Buttons -->
@@ -353,12 +530,64 @@
 
             <!-- Complete Section -->
             <div id="fc-done-panel" class="hidden bg-white rounded-3xl p-8 border border-slate-200 text-center shadow-sm space-y-4">
-                <div class="text-6xl animate-bounce">🎉</div>
-                <h2 class="text-2xl font-black text-slate-800">Sesi Selesai!</h2>
-                <p class="text-sm text-slate-500 font-medium">Hebat! Anda telah meninjau semua kartu dalam sesi ini.</p>
+                <div id="fc-done-emoji" class="text-6xl animate-bounce">🎉</div>
+                <h2 id="fc-done-title" class="text-2xl font-black text-slate-800">Sesi Selesai!</h2>
+                <p id="fc-done-desc" class="text-sm text-slate-500 font-medium">Hebat! Anda telah meninjau semua kartu dalam sesi ini.</p>
+                <div id="fc-done-summary" class="hidden"></div>
+                <button id="fc-done-again" onclick="setupFlashcardPrep()" class="hidden w-full bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl hover:bg-rose-700 transition-all">
+                    Kembali ke Pengaturan Flashcard
+                </button>
                 <button onclick="switchTab('home')" class="w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 transition-all">
                     Kembali ke Beranda
                 </button>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW: PENCOCOKAN ==================== -->
+        <section id="view-match" class="hidden space-y-4">
+            <div id="mt-setup" class="bg-white rounded-3xl p-6 border border-slate-200 text-center shadow-sm space-y-4">
+                <div class="w-16 h-16 bg-indigo-100 rounded-2xl flex items-center justify-center text-3xl mx-auto">🧩</div>
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-800">Latihan Pencocokan</h2>
+                    <p class="text-xs text-slate-500 mt-1 font-medium">Layar menampilkan satu arti (ditentukan sistem), kamu mengetik tulisan Jepangnya (kanji / hiragana / katakana, bukan Latin — aktifkan keyboard Jepang). Satu soal per layar, tanpa perlu menggeser.</p>
+                </div>
+                <div class="fcx-field"><label for="mt-src">Sumber kata</label>
+                    <select id="mt-src" class="mt-select"><option value="all">Semua kosakata</option><option value="kanji">Hanya Kanji</option><option value="wrong">Kata yang sering salah</option></select></div>
+                <div class="fcx-field"><label for="mt-size">Jumlah kata per sesi</label>
+                    <select id="mt-size" class="mt-select"><option value="10">10 kata</option><option value="20" selected>20 kata</option><option value="30">30 kata</option><option value="50">50 kata</option></select></div>
+                <div class="fcx-adv-note" style="text-align:left">Penilaian seperti flashcard: benar ≤5 dtk = 🟢 Lancar (+3 poin), ≤10 dtk = 🟡 Sedang (+2), lebih lambat = 🔴 Sulit (+1). Jawaban boleh kanji atau kana. Kalau ada huruf kurang atau salah sedikit, tidak dianggap salah: poin dikurangi sesuai ketepatan dan kesalahanmu ditandai. Terlalu jauh (ketepatan &lt;50%) = Sulit, 0 poin. Lewat 25 dtk jawaban dibuka otomatis. Konfirmasi cukup dengan tombol ↵ / Go di pojok kanan bawah keyboard HP (tanpa mencari tombol Cek); tekan sekali lagi untuk lanjut. Sulit muncul lagi cepat, Sedang lebih jarang. Tidak mengubah status hafal.</div>
+                <button type="button" class="fcx-daily-btn" onclick="mtStart()">🧩 Mulai Pencocokan</button>
+            </div>
+
+            <div id="mt-active" class="hidden space-y-4">
+                <div class="fcx-topbar">
+                    <button onclick="mtExit()" class="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-300">✕ Selesai</button>
+                    <div id="mt-timer-box" class="fcx-timer">
+                        <div id="mt-timer-time" class="fcx-timer-time">0.0 dtk</div>
+                        <div id="mt-timer-cat" class="fcx-timer-cat">Lancar</div>
+                        <div class="fcx-timer-bar"><span id="mt-timer-bar"></span></div>
+                    </div>
+                    <div class="text-xs font-extrabold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">Sisa: <span id="mt-remain" class="text-rose-600">0</span></div>
+                </div>
+                <div class="mt-card">
+                    <div id="mt-counter" class="mt-counter">Soal 1</div>
+                    <div id="mt-meaning" class="mt-meaning"></div>
+                    <div class="mt-hintline">Tulis dalam bahasa Jepang ✍️</div>
+                </div>
+                <form id="mt-form" autocomplete="off">
+                    <input id="mt-input" class="mt-input" type="text" readonly placeholder="Ketik lalu tekan ↵" enterkeyhint="go" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" lang="ja">
+                </form>
+                <div id="mt-actions" class="mt-actions"><button type="button" class="mt-btn primary" onpointerdown="event.preventDefault()" onclick="mtCheck()">Cek ✔</button><button type="button" class="mt-btn" onpointerdown="event.preventDefault()" onclick="mtSkip()">Tidak tahu</button></div>
+                <button id="mt-next" type="button" class="fcx-next-btn hidden" onpointerdown="event.preventDefault()" onclick="mtNext()">Lanjut ➜ (atau tekan ↵)</button>
+                <div class="fcx-auto-panel"><div id="mt-msg" class="fcx-auto-msg" style="margin:0"></div></div>
+            </div>
+
+            <div id="mt-done" class="hidden bg-white rounded-3xl p-8 border border-slate-200 text-center shadow-sm space-y-4">
+                <div class="text-6xl animate-bounce">🧩</div>
+                <h2 class="text-2xl font-black text-slate-800">Pencocokan Selesai!</h2>
+                <div id="mt-summary"></div>
+                <button onclick="mtShowSetup()" class="w-full bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl hover:bg-rose-700 transition-all">Main Lagi</button>
+                <button onclick="switchTab('home')" class="w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 transition-all">Kembali ke Beranda</button>
             </div>
         </section>
 
@@ -372,6 +601,7 @@
                     <p class="text-xs text-slate-500 font-medium">Uji kemampuan daya ingat dan kejelian mendengarkan Anda.</p>
                 </div>
 
+                <div class="fcx-field"><label for="quiz-len">Jumlah soal</label><select id="quiz-len" class="mt-select"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div>
                 <div class="space-y-2 pt-2">
                     <button onclick="initQuiz('jp-to-id')" class="w-full p-3.5 bg-slate-50 hover:bg-rose-50 hover:border-rose-300 border border-slate-200 rounded-2xl text-left font-bold flex justify-between items-center transition-all group">
                         <div>
@@ -520,76 +750,72 @@
 
         <!-- ==================== VIEW: LATIHAN BERBICARA (SPEAKING) ==================== -->
         <section id="view-speaking" class="hidden space-y-4">
-            <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4 shadow-sm">
+            <div id="sp-setup" class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4 shadow-sm">
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl">
-                        🎤
-                    </div>
+                    <div class="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center text-2xl">🎤</div>
                     <div>
                         <h2 class="text-lg font-extrabold text-slate-800">Latihan Berbicara</h2>
-                        <p class="text-xs text-slate-500 font-medium">Ucapkan kata/kalimat, sistem menilai pelafalanmu.</p>
+                        <p class="text-xs text-slate-500 font-medium">Dengar, tiru, lalu lihat tepat bagian mana yang salah ucap.</p>
                     </div>
                 </div>
-
-                <!-- Unsupported browser warning -->
-                <div id="speak-unsupported-box" class="hidden p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold leading-relaxed">
-                    ⚠️ Browser ini tidak mendukung pengenalan suara (Speech Recognition). Coba gunakan Google Chrome di Android/Desktop untuk fitur ini.
-                </div>
-
-                <!-- Mode Toggle -->
-                <div class="flex gap-2 text-xs font-bold">
-                    <button onclick="setSpeakingMode('vocab')" id="speak-mode-vocab" class="flex-1 px-3 py-2 rounded-xl bg-teal-600 text-white transition-colors">
-                        Kosakata
-                    </button>
-                    <button onclick="setSpeakingMode('sentence')" id="speak-mode-sentence" class="flex-1 px-3 py-2 rounded-xl bg-slate-100 text-slate-600 transition-colors">
-                        Kalimat
-                    </button>
-                </div>
-
-                <!-- Progress -->
-                <div class="text-[11px] text-slate-400 font-semibold text-center" id="speak-progress-text">Item 1 dari 0</div>
-
-                <!-- Target Card -->
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 text-center space-y-1.5">
-                    <div id="speak-target-word" class="text-3xl font-black text-slate-800 jp-font break-words">...</div>
-                    <div id="speak-target-kana" class="text-xl font-bold jp-font break-words">...</div>
-                    <div id="speak-target-romaji" class="text-xs text-slate-400 italic">...</div>
-                    <div id="speak-target-meaning" class="text-xs font-bold text-teal-600 pt-1">...</div>
-                    <p id="speak-track-hint" class="hidden text-[10px] text-blue-500 font-bold pt-1">🔵 Bagian yang sudah terucap benar akan berubah biru</p>
-                </div>
-
-                <button onclick="playSpeakingReference()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs flex items-center justify-center gap-1.5 transition-colors">
-                    🔊 Dengar Pelafalan
-                </button>
-
-                <!-- Mic Button -->
-                <div class="flex flex-col items-center gap-2 pt-1">
-                    <button id="speak-mic-btn" onclick="toggleSpeakingRecognition()" class="w-20 h-20 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-3xl flex items-center justify-center shadow-lg shadow-teal-200 transition-all active:scale-95">
-                        🎙️
-                    </button>
-                    <span id="speak-mic-label" class="text-[11px] font-bold text-slate-500">Tekan lalu ucapkan</span>
-                </div>
-
-                <!-- Result -->
-                <div id="speak-result-box" class="hidden space-y-2">
-                    <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-center">
-                        <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wide">Kamu Mengucapkan</div>
-                        <div id="speak-transcript-text" class="text-sm font-bold text-slate-700 jp-font mt-0.5">-</div>
+                <div id="speak-unsupported-box" class="hidden p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold leading-relaxed"></div>
+                <div class="fcx-field"><label for="sp-src">Materi</label>
+                    <select id="sp-src" class="mt-select"><option value="vocab">Kosakata</option><option value="sentence">Kalimat</option><option value="weak">Fokus suara lemah</option></select></div>
+                <div class="fcx-field"><label for="sp-size">Jumlah soal</label>
+                    <select id="sp-size" class="mt-select"><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div>
+                <div id="sp-weak" class="fcx-panel"></div>
+                <details class="fcx-adv"><summary>💡 Cara kerja &amp; alasannya</summary>
+                    <div class="sp-why" style="margin-top:8px">
+                        <p><b>Per suku kata (ketukan).</b> Bahasa Jepang diucapkan per ketukan, jadi tiap ketukan dinilai sendiri. Kamu tahu persis bagian mana yang salah, bukan hanya "salah".</p>
+                        <p style="margin-top:6px"><b>5 kemungkinan hasil dibaca.</b> Pengenal suara sering mengubah ucapan jadi kanji atau kata lain. Sistem memilih kemungkinan yang paling dekat dengan targetmu, supaya ucapan benar tidak dianggap salah secara tiba-tiba.</p>
+                        <p style="margin-top:6px"><b>Skor 0-100 + tips.</b> Salah bunyi bergetar (か/が), jeda っ, atau vokal panjang dinilai setengah, bukan nol, karena itu salah kecil yang umum. Tiap jenis kesalahan diberi tips yang sesuai.</p>
+                        <p style="margin-top:6px"><b>Dengar dulu, pelan, lalu tiru.</b> Versi pelan membantu telingamu memisahkan ketukan. Ketuk kotak suku kata untuk mendengar bagian itu saja.</p>
+                        <p style="margin-top:6px"><b>Maksimal 3 percobaan per kata.</b> Supaya tidak buntu. Kata di bawah skor lolos (default 80, bisa diatur di Pengaturan Lanjutan Flashcard) muncul lagi sekali di akhir sesi. Satu suku kata hilang di kata pendek belum dianggap lolos.</p>
+                        <p style="margin-top:6px"><b>Suara lemah dicatat.</b> Bunyi yang sering salah dikumpulkan, dan mode "Fokus suara lemah" melatih kata yang memuat bunyi itu.</p>
                     </div>
-                    <div id="speak-feedback-box" class="p-3 rounded-2xl text-center text-xs font-extrabold">-</div>
-                </div>
+                </details>
+                <button id="sp-start" type="button" class="fcx-daily-btn" onclick="spStart()">🎤 Mulai Latihan</button>
+                <button type="button" class="mt-btn" style="width:100%" onclick="spMicTest()">🔧 Tes Mikrofon (cek perangkatmu dulu)</button>
+                <div id="sp-test" class="fcx-adv-note" style="text-align:center;margin:0"></div>
             </div>
 
-            <!-- Actions: sticky so Next is always reachable without scrolling -->
-            <div id="speak-action-bar" class="sticky bottom-20 z-20 pt-1">
-                <div class="flex gap-2 bg-white/95 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-lg">
-                    <button onclick="renderSpeakingItem()" class="px-4 py-3 bg-slate-200 text-slate-700 font-bold rounded-2xl text-xs hover:bg-slate-300">
-                        🔁 Ulangi
-                    </button>
-                    <button id="speak-next-btn" onclick="nextSpeakingItem()" class="flex-1 bg-slate-800 text-white font-extrabold py-3 rounded-2xl text-xs hover:bg-slate-900 transition-all">
-                        Berikutnya ➔
-                    </button>
+            <div id="sp-active" class="hidden space-y-3">
+                <div class="fcx-topbar">
+                    <button onclick="spExit()" class="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-300">✕ Selesai</button>
+                    <div class="fcx-timer fcx-t-easy" style="min-width:104px">
+                        <div id="sp-prog" class="fcx-timer-time" style="font-size:18px">1/10</div>
+                        <div id="sp-attempt" class="fcx-timer-cat">Percobaan 1/3</div>
+                    </div>
+                    <div class="text-xs font-extrabold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-sm">Sisa: <span id="sp-remain" class="text-rose-600">0</span></div>
                 </div>
+                <div class="mt-card">
+                    <div id="sp-meaning" class="mt-counter" style="text-transform:none;font-size:13px"></div>
+                    <div id="sp-word" class="mt-meaning" style="font-size:26px"></div>
+                    <div id="sp-chips" style="display:flex;flex-wrap:wrap;justify-content:center"></div>
+                    <div id="sp-hint" class="mt-hintline">Ketuk kotak suku kata untuk mendengar bagian itu</div>
+                </div>
+                <div class="mt-actions" style="grid-template-columns:1fr 1fr">
+                    <button type="button" class="mt-btn" onclick="spPlay(0.95)">🔊 Normal</button>
+                    <button type="button" class="mt-btn" onclick="spPlay(0.55)">🐢 Pelan</button>
+                </div>
+                <div style="text-align:center">
+                    <button id="sp-mic" type="button" class="sp-mic" onclick="spToggleMic()">🎙️</button>
+                    <div id="sp-status" class="fcx-auto-msg" style="margin:8px 0 0">Tekan mic lalu ucapkan</div>
+                    <div id="sp-live" class="mt-diff" style="text-align:center;min-height:22px;color:#0d9488"></div>
+                </div>
+                <div class="mt-actions" style="grid-template-columns:1fr 2fr">
+                    <button type="button" class="mt-btn" onclick="spRetry()">🔁 Ulangi</button>
+                    <button id="sp-next" type="button" class="mt-btn primary" onclick="spNext()">Lewati ➜</button>
+                </div>
+                <div id="sp-result" class="hidden fcx-panel" style="text-align:center"></div>
+            </div>
+
+            <div id="sp-done" class="hidden bg-white rounded-3xl p-6 border border-slate-200 text-center shadow-sm space-y-4">
+                <div class="text-6xl">🎤</div>
+                <h2 class="text-2xl font-black text-slate-800">Latihan Selesai!</h2>
+                <div id="sp-summary"></div>
+                <button onclick="initSpeakingModule()" class="w-full bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl hover:bg-rose-700 transition-all">Latihan Lagi</button>
+                <button onclick="switchTab('home')" class="w-full bg-slate-800 text-white font-extrabold py-3.5 rounded-2xl hover:bg-slate-900 transition-all">Kembali ke Beranda</button>
             </div>
         </section>
 
@@ -616,6 +842,21 @@
             </div>
 
             <!-- Vocabulary Cards List -->
+            <details id="dict-form-box" class="fcx-adv" style="margin-bottom:10px">
+                <summary id="dict-form-title">➕ Tambah Kata Baru</summary>
+                <div class="fcx-field"><label for="dict-f-word">Tulisan (kanji, opsional)</label><input id="dict-f-word" class="dict-in" type="text" lang="ja" autocomplete="off"></div>
+                <div class="fcx-field"><label for="dict-f-kana">Bacaan kana *</label><input id="dict-f-kana" class="dict-in" type="text" lang="ja" autocomplete="off"></div>
+                <div class="fcx-field"><label for="dict-f-meaning">Arti *</label><input id="dict-f-meaning" class="dict-in" type="text" autocomplete="off"></div>
+                <div class="fcx-field"><label for="dict-f-romaji">Romaji (kosong = otomatis)</label><input id="dict-f-romaji" class="dict-in" type="text" autocomplete="off" autocapitalize="off"></div>
+                <div class="fcx-field"><label for="dict-f-cat">Kategori</label><input id="dict-f-cat" class="dict-in" type="text" autocomplete="off" placeholder="Umum"></div>
+                <div class="mt-actions" style="margin-top:12px;grid-template-columns:2fr 1fr"><button type="button" class="mt-btn primary" onclick="dictSave()">💾 Simpan</button><button type="button" class="mt-btn" onclick="dictCancel()">Batal</button></div>
+            </details>
+            <details class="fcx-adv" style="margin-bottom:10px">
+                <summary>📥 Tambah Banyak Sekaligus</summary>
+                <div class="fcx-adv-note" style="text-align:left">Satu kata per baris: <b>kana;arti;kanji</b> (kanji opsional). Contoh: <b>でんげん;Sumber daya listrik;電源</b></div>
+                <textarea id="dict-bulk" class="dict-in" style="width:100%;min-height:96px;margin-top:8px" autocomplete="off" lang="ja"></textarea>
+                <button type="button" class="mt-btn primary" style="width:100%;margin-top:8px" onclick="dictBulk()">Tambahkan semua</button>
+            </details>
             <div id="dict-container" class="space-y-2.5">
                 <!-- Rendered Dynamically -->
             </div>
@@ -651,7 +892,8 @@
                 <!-- Export Data -->
                 <div class="space-y-2">
                     <label class="block text-xs font-extrabold text-slate-700">Simpan Progress Ke File Backup:</label>
-                    <button onclick="exportJSONFile()" class="w-full py-3.5 bg-emerald-600 text-white font-extrabold rounded-2xl hover:bg-emerald-700 shadow-md shadow-emerald-100 flex items-center justify-center gap-2 text-xs transition-all active:scale-[0.98]">
+                    <button type="button" class="mt-btn" style="width:100%;margin-bottom:10px" onclick="restoreSnapshot()">↩️ Urungkan impor / reset terakhir</button>
+                <button onclick="exportJSONFile()" class="w-full py-3.5 bg-emerald-600 text-white font-extrabold rounded-2xl hover:bg-emerald-700 shadow-md shadow-emerald-100 flex items-center justify-center gap-2 text-xs transition-all active:scale-[0.98]">
                         <span>📥 Download Backup Progres (.JSON)</span>
                     </button>
                 </div>
@@ -850,6 +1092,27 @@
         // 'all' = seluruh kosakata, 'kanji' = hanya kata yang mengandung huruf Kanji
         let fcContentMode = 'all';
 
+        /* Penilaian Otomatis & Tebak Cepat */
+        let fcAutoMode = false;     // pilihan di layar setup
+        let fcQuickMode = false;    // pilihan di layar setup (otomatis menyalakan penilaian otomatis)
+        let fcRunAuto = false;      // snapshot saat sesi dimulai
+        let fcRunQuick = false;
+        let FC_T_EASY = 1000;     // <= 1 dtk  -> Lancar
+        let FC_T_MEDIUM = 3000;   // <= 3 dtk  -> Sedang, di atasnya Sulit
+        let FC_T_TIMEOUT = 10000; // > 10 dtk  -> kartu terbalik sendiri (Sulit)
+        const FC_T_QUICK = 1000;    // Tebak Cepat: batas 1 dtk
+        const FC_TIMEOUT_REVEAL_MS = 2500; // lama jawaban tampil sebelum otomatis lanjut
+        // Jarak ulang (jumlah kartu lain yang muncul dulu sebelum kartu ini kembali)
+        const FC_REPEAT_GAP = { hard: [3, 5], medium: [8, 12] };
+        let fcCardStartTs = 0;
+        let fcTimerInterval = null;
+        let fcRevealTimeout = null;
+        let fcPending = null;       // hasil kartu yang sedang tampil (diterapkan saat Lanjut)
+        let fcAttempts = 0;
+        let fcStats = { easy: 0, medium: 0, hard: 0, fail: 0 };
+        let fcQuickPass = 0;
+        let fcQuickFailed = [];
+
         /* Quiz State */
         let quizQuestions = [];
         let quizCurrentIndex = 0;
@@ -916,7 +1179,8 @@
         }
 
         function saveStorageData() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); }
+            catch (e) { console.warn('Gagal menyimpan data:', e); }
             updateDashboardStats();
         }
 
@@ -981,7 +1245,11 @@
         }
 
         function switchTab(tabId, flashcardContent) {
-            const tabs = ['home', 'flashcard', 'quiz', 'sentence', 'speaking', 'list', 'data'];
+            const tabs = ['home', 'flashcard', 'match', 'quiz', 'sentence', 'speaking', 'list', 'data'];
+
+            // Hentikan timer flashcard (dan simpan hasil kartu terakhir) saat pindah tab
+            if (currentTab === 'flashcard' && tabId !== 'flashcard') fcAbortAuto();
+            if (currentTab === 'match' && tabId !== 'match') mtStop();
 
             // Stop any active mic recording when leaving the speaking tab
             if (currentTab === 'speaking' && tabId !== 'speaking' && isSpeakingListening) {
@@ -1026,11 +1294,49 @@
             if (tabId === 'home') updateDashboardStats();
             if (tabId === 'flashcard') setupFlashcardPrep();
             if (tabId === 'list') renderDictionary();
+            if (tabId === 'match') mtShowSetup();
+            if (tabId === 'home') renderTodayCard();
             if (tabId === 'sentence') initSentenceModule();
             if (tabId === 'speaking') initSpeakingModule();
         }
 
+        function srsMigrate() {
+            if (appData.srsMigrated) return;
+            appData.srsMigrated = true; appData.srs = appData.srs || {};
+            const now = Date.now();
+            [['v', appData.vocabulary], ['k', appData.kanji || []]].forEach(([pre, list]) => list.forEach(v => {
+                if (v.mastered && !appData.srs[pre + v.id])
+                    appData.srs[pre + v.id] = { box: 1, due: now + (1 + Math.floor(Math.random() * 14)) * 864e5, lapses: 0, seen: true };
+            }));
+            saveStorageData();
+        }
+        function renderTodayCard() {
+            const box = document.getElementById('today-card'); if (!box || !appData || !appData.vocabulary) return;
+            srsMigrate();
+            const now = Date.now(); let due = 0, learn = 0, fresh = 0, mastered = 0;
+            appData.vocabulary.forEach(v => {
+                const r = (appData.srs && appData.srs['v' + v.id]) || {};
+                if (v.mastered) { mastered++; if ((r.due || 0) <= now) due++; } else if (r.seen) learn++; else fresh++;
+            });
+            const d = fcDaily(), today = d.days[fcDayKey()] || 0;
+            const t = new Date(); if (!d.days[fcDayKey(t)]) t.setDate(t.getDate() - 1);
+            let streak = 0; while (d.days[fcDayKey(t)] > 0) { streak++; t.setDate(t.getDate() - 1); }
+            const todo = due + learn + Math.min(fresh, fcCfg.newPerDay);
+            const bk = parseInt(localStorage.getItem('nihongo_last_backup')) || 0;
+            const days = bk ? Math.floor((now - bk) / 864e5) : null;
+            const needBk = (mastered > 0 || today > 0) && (days === null || days >= 7);
+            const pct = Math.min(100, today / fcCfg.target * 100);
+            box.innerHTML = `<div class="today-card">
+                <div class="today-row"><span>🔥 ${streak} hari beruntun</span><span>${today}/${fcCfg.target} kartu hari ini${today >= fcCfg.target ? ' ✅' : ''}</span></div>
+                <div class="fcx-timer-bar" style="color:#e11d48;margin:6px 0 10px"><span style="width:${pct}%"></span></div>
+                <button type="button" class="fcx-daily-btn" onclick="switchTab('flashcard','all'); startDailySession();" ${todo ? '' : 'disabled style="opacity:.6"'}>
+                    ${todo ? '🚀 Mulai Sesi Harian' : '🎉 Semua beres hari ini'}<small>Review ${due} • Lanjut belajar ${learn} • Baru ${Math.min(fresh, fcCfg.newPerDay)}</small></button>
+                ${needBk ? `<div class="today-nudge"><span>💾 ${days === null ? 'Belum pernah backup.' : 'Backup terakhir ' + days + ' hari lalu.'} Data hanya tersimpan di browser ini.</span><button type="button" onclick="switchTab('data')">Backup</button></div>` : ''}
+            </div>`;
+        }
+        try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
         function updateDashboardStats() {
+            try { renderTodayCard(); } catch (e) {}
             const total = appData.vocabulary.length;
             const mastered = appData.vocabulary.filter(v => v.mastered).length;
             const learning = total - mastered;
@@ -1046,6 +1352,8 @@
         }
 
         function setupFlashcardPrep() {
+            fcAbortAuto();
+            syncFcToggles();
             const sourceList = getFlashcardSourceVocab();
             const pending = sourceList.filter(v => !v.mastered);
 
@@ -1160,7 +1468,13 @@
 
         function startFlashcards() {
             // Deck priority: unmastered items + items in wrong bank, from the selected content set
-            fcDeck = getFlashcardSourceVocab().filter(v => !v.mastered);
+            fcDeck = fcDailyMode ? fcBuildDailyDeck() : getFlashcardSourceVocab().filter(v => !v.mastered);
+            if (fcCfg.onlyWrong && !fcDailyMode) {
+                const wm = appData.stats.wrongAnswers || {};
+                const f = fcDeck.filter(v => wm[v.id] > 0);
+                if (!f.length) { showToast('Belum ada kata yang sering salah 👍', '💡'); return; }
+                fcDeck = f;
+            }
             if (fcDeck.length === 0) {
                 const msg = fcContentMode === 'kanji'
                     ? "Semua Kanji sudah Anda hafal! 🎉"
@@ -1171,7 +1485,9 @@
 
             // Smarter shuffle: words you've missed before surface earlier/more often
             fcDeck = weightedShuffleDeck(fcDeck);
+            if (fcCfg.sessionSize > 0) fcDeck = fcDeck.slice(0, fcCfg.sessionSize);
             fcCurrentIndex = 0;
+            fcInitSession();
 
             document.getElementById('fc-setup-panel').classList.add('hidden');
             document.getElementById('fc-active-panel').classList.remove('hidden');
@@ -1184,6 +1500,8 @@
 
         function renderFlashcardCard() {
             if (fcDeck.length === 0) {
+                fcStopTimers();
+                renderFcDoneSummary();
                 document.getElementById('fc-active-panel').classList.add('hidden');
                 document.getElementById('fc-done-panel').classList.remove('hidden');
                 updateDashboardStats();
@@ -1262,19 +1580,608 @@
 
             const evalBtns = document.getElementById('fc-eval-buttons');
             evalBtns.classList.add('opacity-50', 'pointer-events-none');
+
+            if (fcRunAuto) fcPrepareAutoCard();
+        }
+
+        function fcVisualFlip() {
+            const cardInner = document.getElementById('flashcard-inner');
+            cardInner.classList.add('rotate-y-180');
+            isFcCardFlipped = true;
+            // Play audio automatically when card is flipped to reinforce retention
+            if (fcCfg.autoAudio) playCurrentCardAudio();
         }
 
         function flipFlashcard() {
-            const cardInner = document.getElementById('flashcard-inner');
-            const evalBtns = document.getElementById('fc-eval-buttons');
+            if (isFcCardFlipped) return;
 
-            if (!isFcCardFlipped) {
-                cardInner.classList.add('rotate-y-180');
-                evalBtns.classList.remove('opacity-50', 'pointer-events-none');
-                isFcCardFlipped = true;
-                
-                // Play audio automatically when card is flipped to reinforce retention
-                playCurrentCardAudio();
+            if (!fcRunAuto) {
+                document.getElementById('fc-eval-buttons').classList.remove('opacity-50', 'pointer-events-none');
+                fcVisualFlip();
+                return;
+            }
+
+            // Mode penilaian otomatis: waktu sejak kartu muncul menentukan kategori
+            if (fcPending) return;
+            const elapsed = performance.now() - fcCardStartTs;
+            const limit = fcRunQuick ? FC_T_QUICK : FC_T_TIMEOUT;
+            if (elapsed > limit) { fcHandleTimeout(); return; }
+
+            clearInterval(fcTimerInterval);
+            fcTimerInterval = null;
+            const cat = fcCategoryFor(elapsed);
+            fcVisualFlip();
+            fcPending = { item: fcDeck[0], cat, ms: elapsed, timedOut: false };
+            fcPaintTimer(elapsed, cat, elapsed / limit);
+            fcShowAutoResult(fcPending);
+        }
+
+        /* ---------- Latihan Pencocokan (ketik jawaban Jepang) ---------- */
+        const MT_PAIRS = 5, MT_EASY = 5000, MT_MEDIUM = 10000, MT_TIMEOUT = 25000;
+        const MT_PTS = { easy: 3, medium: 2, hard: 1 };
+        const MT_JP = /^[\u3000-\u30ff\u4e00-\u9faf\uff01-\uff9f々ー・～〜！？。、]+$/;
+        let mtDeck = [], mtRound = [], mtIdx = 0, mtTs = 0, mtTimer = null, mtAwait = false;
+        let mtStats = { easy: 0, medium: 0, hard: 0 }, mtPoints = 0, mtAccSum = 0, mtCount = 0, mtExact = 0, mtAuto = null;
+        function mtJp(it) {
+            if (it.word && MT_JP.test(it.word)) return it.word;
+            if (it.kana && MT_JP.test(it.kana)) return it.kana;
+            return null;
+        }
+        function mtNorm(it) { return String(it.meaning || '').trim().toLowerCase(); }
+        function mtStop() { clearInterval(mtTimer); mtTimer = null; clearTimeout(mtAuto); mtAuto = null; }
+        function mtShowSetup() {
+            mtStop(); mtAwait = false;
+            fcEl('mt-setup').classList.remove('hidden');
+            fcEl('mt-active').classList.add('hidden');
+            fcEl('mt-done').classList.add('hidden');
+        }
+        // Katakana -> hiragana per karakter (1:1), agar perbandingan tidak peduli jenis huruf kana
+        function mtHira(c) { const k = c.charCodeAt(0); return (k >= 0x30a1 && k <= 0x30f6) ? String.fromCharCode(k - 0x60) : c; }
+        // Jarak edit (Levenshtein) + penelusuran: huruf benar / salah / kurang / berlebih
+        function mtDiff(ur, ar) {
+            const un = ur.map(mtHira), an = ar.map(mtHira), n = un.length, m = an.length;
+            const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0));
+            for (let i = 0; i <= n; i++) dp[i][0] = i;
+            for (let j = 0; j <= m; j++) dp[0][j] = j;
+            for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++)
+                dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + (un[i - 1] === an[j - 1] ? 0 : 1));
+            let i = n, j = m; const us = [], as = [];
+            while (i > 0 || j > 0) {
+                if (i > 0 && j > 0 && dp[i][j] === dp[i - 1][j - 1] + (un[i - 1] === an[j - 1] ? 0 : 1)) {
+                    const t = un[i - 1] === an[j - 1] ? 'ok' : 'bad';
+                    us.push([ur[i - 1], t]); as.push([ar[j - 1], t]); i--; j--;
+                } else if (i > 0 && dp[i][j] === dp[i - 1][j] + 1) { us.push([ur[i - 1], 'bad']); i--; }
+                else { as.push([ar[j - 1], 'miss']); j--; }
+            }
+            return { d: dp[n][m], len: Math.max(m, 1), us: us.reverse(), as: as.reverse() };
+        }
+        // Bandingkan dengan kanji maupun kana, ambil yang paling mirip
+        function mtGrade(item, raw) {
+            const ur = Array.from(raw.replace(/\s+/g, ''));
+            const variants = [item.word, item.kana].filter((v, i, a) => v && MT_JP.test(v) && a.indexOf(v) === i);
+            let best = null;
+            variants.forEach(v => {
+                const ar = Array.from(v), g = mtDiff(ur, ar);
+                g.acc = Math.max(0, 1 - g.d / g.len); g.variant = v; g.same = ur.join('') === ar.join('');
+                if (!best || g.acc > best.acc) best = g;
+            });
+            if (best && best.acc === 1 && !best.same) { best.acc = 0.9; best.scriptNote = true; } // benar, tapi jenis huruf beda
+            return best;
+        }
+        function mtStart() {
+            const src = fcEl('mt-src').value;
+            let list = src === 'kanji' ? (appData.kanji || []) : (appData.vocabulary || []);
+            const wm = appData.stats.wrongAnswers || {};
+            if (src === 'wrong') list = list.filter(v => wm[v.id] > 0);
+            const sj = new Set(), sm = new Set();
+            list = list.filter(v => {
+                const j = mtJp(v), m = mtNorm(v);
+                if (!j || !m || sj.has(j) || sm.has(m)) return false;
+                sj.add(j); sm.add(m); return true;
+            });
+            if (!list.length) { showToast('Belum ada kata untuk dilatih', '💡'); return; }
+            mtDeck = weightedShuffleDeck(list).slice(0, parseInt(fcEl('mt-size').value) || 20);
+            mtStats = { easy: 0, medium: 0, hard: 0 }; mtPoints = 0; mtAccSum = 0; mtCount = 0; mtExact = 0; mtCur = null;
+            fcEl('mt-setup').classList.add('hidden');
+            fcEl('mt-done').classList.add('hidden');
+            fcEl('mt-active').classList.remove('hidden');
+            mtNextRound();
+        }
+        let mtCur = null, mtLastEnter = 0, mtBound = false, fcHiddenAt = 0;
+        // Saat layar dikunci / pindah aplikasi, waktu berhenti dan dilanjutkan setelah kembali
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) { fcHiddenAt = performance.now(); return; }
+            if (!fcHiddenAt) return;
+            const d = performance.now() - fcHiddenAt; fcHiddenAt = 0;
+            if (fcTimerInterval && !fcPending && !isFcCardFlipped) fcCardStartTs += d;
+            if (mtTimer && !mtAwait) mtTs += d;
+        });
+        function mtBind() {
+            if (mtBound) return; mtBound = true;
+            const inp = fcEl('mt-input');
+            fcEl('mt-form').addEventListener('submit', e => { e.preventDefault(); mtEnter(); });
+            let pending = false;
+            // Tombol pojok kanan bawah keyboard: saat masih mengetik (IME) ia mengonfirmasi huruf,
+            // lalu langsung dicek begitu konfirmasi selesai.
+            inp.addEventListener('keydown', e => {
+                if (e.key !== 'Enter') return;
+                e.preventDefault();
+                if (e.isComposing || e.keyCode === 229) pending = true; else mtEnter();
+            });
+            inp.addEventListener('compositionend', () => { if (pending) { pending = false; setTimeout(mtEnter, 0); } });
+        }
+        // Satu tombol untuk semuanya: Enter = cek jawaban; Enter lagi = soal berikutnya
+        function mtEnter() {
+            const n = performance.now();
+            if (n - mtLastEnter < 400) return; // cegah terhitung dua kali
+            mtLastEnter = n;
+            if (mtAwait) mtNext(); else mtCheck();
+        }
+        // Tampilkan SATU soal: arti di atas, kotak jawaban tepat di bawahnya
+        function mtNextRound() {
+            mtBind();
+            if (!mtDeck.length) { mtFinish(); return; }
+            if (mtCur && mtDeck.length > 1 && mtDeck[0].id === mtCur.id) mtDeck.push(mtDeck.shift());
+            mtCur = mtDeck.shift(); mtAwait = false;
+            fcEl('mt-meaning').textContent = mtCur.meaning;
+            fcEl('mt-counter').innerText = `Soal ${mtCount + 1}`;
+            const inp = fcEl('mt-input');
+            inp.className = 'mt-input'; inp.readOnly = false; inp.value = ''; inp.focus();
+            fcEl('mt-msg').innerText = '✍️ Ketik tulisan Jepangnya, lalu tekan ↵ / Go di pojok kanan bawah keyboard';
+            fcEl('mt-actions').classList.remove('hidden');
+            fcEl('mt-next').classList.add('hidden');
+            fcEl('mt-remain').innerText = mtDeck.length + 1;
+            window.scrollTo(0, 0);
+            mtStop(); mtTs = performance.now();
+            mtTimer = setInterval(mtTick, 100); mtTick();
+        }
+        function mtTick() {
+            if (document.hidden || mtAwait) return;
+            const el = performance.now() - mtTs;
+            const cat = el <= MT_EASY ? 'easy' : el <= MT_MEDIUM ? 'medium' : 'hard';
+            fcEl('mt-timer-time').innerText = (Math.min(el, MT_TIMEOUT) / 1000).toFixed(1) + ' dtk';
+            fcEl('mt-timer-cat').innerText = { easy: '🟢 Lancar', medium: '🟡 Sedang', hard: '🔴 Sulit' }[cat];
+            fcEl('mt-timer-box').className = 'fcx-timer fcx-t-' + cat;
+            fcEl('mt-timer-bar').style.width = Math.min(100, el / MT_TIMEOUT * 100) + '%';
+            if (el > MT_TIMEOUT) mtResolve({ timeout: true });
+        }
+        function mtCheck() {
+            if (mtAwait) return;
+            const val = fcEl('mt-input').value.trim();
+            if (!val) { fcEl('mt-msg').innerText = 'Isi dulu jawabannya, atau tekan "Tidak tahu".'; return; }
+            if (/[A-Za-z]/.test(val)) { fcEl('mt-msg').innerText = '⚠️ Tulis dengan huruf Jepang (hiragana / katakana / kanji), bukan Latin.'; return; }
+            mtResolve({ user: val });
+        }
+        function mtSkip() { if (!mtAwait) mtResolve({ skip: true }); }
+
+        function mtResolve(o) {
+            if (mtAwait || !mtCur) return;
+            mtAwait = true; mtStop();
+            const ms = performance.now() - mtTs, item = mtCur;
+            const g = o.user ? mtGrade(item, o.user) : null;
+            const acc = g ? g.acc : 0;
+            const tc = ms <= MT_EASY ? 'easy' : ms <= MT_MEDIUM ? 'medium' : 'hard';
+            let cat, verdict, pts = 0;
+            if (acc >= 1) { cat = tc; verdict = '✅ Benar'; }
+            else if (acc >= 0.5) { cat = tc === 'hard' ? 'hard' : 'medium'; verdict = g.scriptNote ? '🟡 Benar, tapi jenis huruf beda' : '🟡 Hampir benar'; }
+            else { cat = 'hard'; verdict = o.timeout ? '⏰ Waktu habis' : o.skip ? '🤔 Jawaban dibuka' : '❌ Belum tepat'; }
+            if (acc >= 0.5) pts = Math.round(MT_PTS[tc] * acc * 10) / 10;
+
+            mtStats[cat]++; mtPoints += pts; mtAccSum += acc; mtCount++; if (acc >= 1) mtExact++;
+            fcBumpDaily();
+            if (cat !== 'easy') {
+                mtDeck.splice(Math.min(fcRand(FC_REPEAT_GAP[cat]), mtDeck.length), 0, item);
+                if (cat === 'hard') appData.stats.wrongAnswers[item.id] = (appData.stats.wrongAnswers[item.id] || 0) + 1;
+            }
+            saveStorageData();
+            fcEl('mt-remain').innerText = mtDeck.length;
+
+            const inp = fcEl('mt-input');
+            inp.readOnly = true; inp.classList.add('r-' + cat);
+            if (!o.user) inp.value = item.word || item.kana;
+
+            const span = arr => arr.map(([c, t]) => t === 'ok' ? fcEsc(c) : `<span class="mt-d-${t}">${fcEsc(c)}</span>`).join('');
+            let html = `<div style="font-weight:800;text-align:center">${verdict} • ${(ms / 1000).toFixed(1)} dtk • +${pts} poin` +
+                       `${acc > 0 && acc < 1 ? ` (ketepatan ${Math.round(acc * 100)}%)` : ''}</div>`;
+            if (acc < 1) {
+                if (g && !g.scriptNote) html += `<div class="mt-diff">Jawabanmu: ${span(g.us)}</div>`;
+                const ans = g ? g.as : Array.from(item.word || item.kana).map(c => [c, 'ok']);
+                html += `<div class="mt-diff">Seharusnya: ${span(ans)}</div>`;
+                if (g && !g.scriptNote) html += `<div class="fcx-adv-note" style="text-align:left">Hijau bergaris = huruf kurang • Merah = huruf salah/berlebih</div>`;
+            }
+            if (item.kana && item.kana !== item.word) html += `<div class="mt-diff" style="color:#64748b;font-size:13px">Bacaan: ${fcEsc(item.kana)}${item.romaji ? ' • ' + fcEsc(item.romaji) : ''}</div>`;
+            fcEl('mt-msg').innerHTML = html;
+            if (fcCfg.autoAudio) playTTS(item.kana || item.word);
+
+            fcEl('mt-actions').classList.add('hidden');
+            fcEl('mt-next').classList.remove('hidden'); // tombol Lanjut muncul di posisi yang sama dengan Cek
+            if (acc >= 1) mtAuto = setTimeout(mtNext, 1100);
+        }
+        function mtNext() {
+            if (!mtAwait || currentTab !== 'match') return;
+            clearTimeout(mtAuto); mtAuto = null;
+            mtNextRound();
+        }
+        function mtExit() {
+            mtStop();
+            if (mtCount > 0) mtFinish(); else mtShowSetup();
+        }
+        function mtFinish() {
+            mtStop();
+            const pts = Math.round(mtPoints * 10) / 10;
+            const avg = mtCount ? Math.round(mtAccSum / mtCount * 100) : 0;
+            let best = 0;
+            try { best = parseFloat(localStorage.getItem('nihongo_mt_best')) || 0; } catch (e) {}
+            let note = '';
+            if (mtCount >= 5) {
+                if (pts > best) { note = best ? '🏅 Rekor baru!' : '🏅 Rekor pertama!'; try { localStorage.setItem('nihongo_mt_best', pts); } catch (e) {} }
+                else note = `Rekor terbaik: ${best} poin`;
+            }
+            const box = (n, l, bg, bd, col) => `<div class="fcx-stat" style="background:${bg};border-color:${bd};color:${col}"><b>${n}</b>${l}</div>`;
+            fcEl('mt-summary').innerHTML = `<div class="fcx-score">${pts}<span>poin</span></div>` +
+                `<div class="fcx-score-sub">Ketepatan rata-rata ${avg}% • ${mtExact}/${mtCount} jawaban persis benar${note ? ' • ' + note : ''}</div>` +
+                `<div class="fcx-stat-grid" style="margin-top:12px">` +
+                box(mtStats.easy, '🟢 Lancar', '#ecfdf5', '#6ee7b7', '#047857') +
+                box(mtStats.medium, '🟡 Sedang', '#fffbeb', '#fcd34d', '#b45309') +
+                box(mtStats.hard, '🔴 Sulit', '#fff1f2', '#fda4af', '#be123c') + `</div>`;
+            fcEl('mt-active').classList.add('hidden');
+            fcEl('mt-done').classList.remove('hidden');
+        }
+
+        /* ---------- Pengulangan berjarak (SRS) & Sesi Harian ---------- */
+        // Kata yang Lancar kembali muncul 1, 3, 7, 14, 30, 60, 120 hari kemudian.
+        // Kalau saat review lupa (Sulit), kata kembali ke tahap awal.
+        const FC_SRS_DAYS = [1, 3, 7, 14, 30, 60, 120];
+        let fcDailyMode = false;
+        function fcSrsKey(i) { return (fcContentMode === 'kanji' ? 'k' : 'v') + i.id; }
+        function fcSrsGet(i) { return (appData.srs && appData.srs[fcSrsKey(i)]) || { box: 0, due: 0, lapses: 0, seen: false }; }
+        function fcSrsUpdate(i, cat) {
+            appData.srs = appData.srs || {};
+            const k = fcSrsKey(i);
+            const r = appData.srs[k] = appData.srs[k] || { box: 0, due: 0, lapses: 0, seen: false };
+            r.seen = true;
+            if (cat === 'easy') {
+                r.due = Date.now() + Math.max(1, Math.round(FC_SRS_DAYS[r.box] * (r.lapses >= 2 ? 0.6 : 1))) * 864e5;
+                r.box = Math.min(r.box + 1, FC_SRS_DAYS.length - 1);
+            } else if (cat === 'hard') {
+                r.box = 0; r.lapses++; r.due = 0; i.mastered = false;
+            } else {
+                r.due = 0;
+                if (i.mastered) { r.box = Math.max(0, r.box - 1); i.mastered = false; }
+            }
+        }
+        function fcLevelCounts() {
+            const now = Date.now(), c = { baru: 0, belajar: 0, dikuasai: 0, due: 0 };
+            getFlashcardSourceVocab().forEach(v => {
+                const r = fcSrsGet(v);
+                if (v.mastered) { c.dikuasai++; if (r.due <= now) c.due++; }
+                else if (r.seen) c.belajar++;
+                else c.baru++;
+            });
+            return c;
+        }
+        // Urutan prioritas: review jatuh tempo > kata sedang dipelajari > kata baru (dibatasi per hari)
+        function fcBuildDailyDeck() {
+            const now = Date.now(), src = getFlashcardSourceVocab();
+            const due = src.filter(v => v.mastered && fcSrsGet(v).due <= now)
+                .sort((a, b) => (fcSrsGet(a).due || 9e15) - (fcSrsGet(b).due || 9e15));
+            const learning = src.filter(v => !v.mastered && fcSrsGet(v).seen);
+            const fresh = shuffleArray(src.filter(v => !v.mastered && !fcSrsGet(v).seen)).slice(0, fcCfg.newPerDay);
+            const all = [...due, ...learning, ...fresh];
+            return fcCfg.sessionSize > 0 ? all.slice(0, fcCfg.sessionSize) : all;
+        }
+        function startDailySession() {
+            fcDailyMode = true;
+            try { startFlashcards(); } finally { fcDailyMode = false; }
+        }
+
+        /* ---------- Pengaturan, streak harian, rekor, pintasan ---------- */
+        const FC_CFG_KEY = 'nihongo_fc_cfg_v1';
+        const FC_DAILY_KEY = 'nihongo_fc_daily_v1';
+        let fcCfg = { easy: 1, medium: 3, timeout: 10, target: 20, spPass: 80, newPerDay: 10, sessionSize: 30, autoAudio: true, onlyWrong: false };
+        try { Object.assign(fcCfg, JSON.parse(localStorage.getItem(FC_CFG_KEY) || '{}')); } catch (e) {}
+
+        function fcApplyCfg() {
+            fcCfg.medium = Math.max(fcCfg.medium, fcCfg.easy);
+            fcCfg.timeout = Math.max(fcCfg.timeout, fcCfg.medium);
+            FC_T_EASY = fcCfg.easy * 1000;
+            FC_T_MEDIUM = fcCfg.medium * 1000;
+            FC_T_TIMEOUT = fcCfg.timeout * 1000;
+        }
+        fcApplyCfg();
+
+        function fcSaveCfgFromUI() {
+            const num = (id, d, lo, hi) => { const v = parseFloat(fcEl(id).value); return isNaN(v) ? d : Math.min(hi, Math.max(lo, v)); };
+            fcCfg.easy = num('fc-cfg-easy', fcCfg.easy, 0.5, 5);
+            fcCfg.medium = num('fc-cfg-medium', fcCfg.medium, 1, 15);
+            fcCfg.timeout = num('fc-cfg-timeout', fcCfg.timeout, 3, 60);
+            fcCfg.target = Math.round(num('fc-cfg-target', fcCfg.target, 5, 500));
+            fcCfg.newPerDay = Math.round(num('fc-cfg-new', fcCfg.newPerDay, 0, 100));
+            fcCfg.spPass = Math.round(num('fc-cfg-sp', fcCfg.spPass, 50, 95)); SP_PASS = fcCfg.spPass;
+            fcCfg.sessionSize = Math.round(num('fc-cfg-size', fcCfg.sessionSize, 0, 500));
+            fcCfg.autoAudio = fcEl('fc-cfg-audio').checked;
+            fcCfg.onlyWrong = fcEl('fc-cfg-wrong').checked;
+            fcApplyCfg();
+            try { localStorage.setItem(FC_CFG_KEY, JSON.stringify(fcCfg)); } catch (e) {}
+            syncFcToggles();
+        }
+
+        function fcSyncCfgUI() {
+            fcEl('fc-cfg-easy').value = fcCfg.easy;
+            fcEl('fc-cfg-medium').value = fcCfg.medium;
+            fcEl('fc-cfg-timeout').value = fcCfg.timeout;
+            fcEl('fc-cfg-target').value = fcCfg.target;
+            fcEl('fc-cfg-new').value = fcCfg.newPerDay;
+            fcEl('fc-cfg-sp').value = fcCfg.spPass;
+            fcEl('fc-cfg-size').value = fcCfg.sessionSize;
+            fcEl('fc-cfg-audio').checked = fcCfg.autoAudio;
+            fcEl('fc-cfg-wrong').checked = fcCfg.onlyWrong;
+            fcEl('fc-auto-desc').innerText = `Tombol Susah/Lumayan/Hafal diganti timer. Balik ≤${fcCfg.easy} dtk = Lancar, ≤${fcCfg.medium} dtk = Sedang, lebih dari itu = Sulit. Lewat ${fcCfg.timeout} dtk kartu terbalik sendiri (Sulit).`;
+        }
+
+        function fcDaily() {
+            try { return JSON.parse(localStorage.getItem(FC_DAILY_KEY)) || { days: {}, best: null }; }
+            catch (e) { return { days: {}, best: null }; }
+        }
+        function fcDayKey(d) { return (d || new Date()).toLocaleDateString('sv'); }
+        function fcBumpDaily() {
+            const d = fcDaily(), k = fcDayKey();
+            d.days[k] = (d.days[k] || 0) + 1;
+            try { localStorage.setItem(FC_DAILY_KEY, JSON.stringify(d)); } catch (e) {}
+        }
+        function fcRenderDaily() {
+            const d = fcDaily(), today = d.days[fcDayKey()] || 0;
+            const t = new Date();
+            if (!d.days[fcDayKey(t)]) t.setDate(t.getDate() - 1);
+            let streak = 0;
+            while (d.days[fcDayKey(t)] > 0) { streak++; t.setDate(t.getDate() - 1); }
+            fcEl('fc-streak').innerText = `🔥 ${streak} hari beruntun`;
+            fcEl('fc-daily-text').innerText = `${today}/${fcCfg.target} kartu hari ini${today >= fcCfg.target ? ' ✅' : ''}`;
+            fcEl('fc-daily-bar').style.width = Math.min(100, today / fcCfg.target * 100) + '%';
+            const c = fcLevelCounts();
+            const box = (n, l, bg, bd, col) => `<div class="fcx-stat" style="background:${bg};border-color:${bd};color:${col}"><b>${n}</b>${l}</div>`;
+            fcEl('fc-levels').innerHTML = box(c.baru, '🆕 Baru', '#f1f5f9', '#cbd5e1', '#475569') +
+                box(c.belajar, '📖 Belajar', '#fffbeb', '#fcd34d', '#b45309') +
+                box(c.due, '🔁 Review', '#fff1f2', '#fda4af', '#be123c') +
+                box(c.dikuasai, '✅ Hafal', '#ecfdf5', '#6ee7b7', '#047857');
+            const LBL = ['Mg', 'Sn', 'Sl', 'Rb', 'Km', 'Jm', 'Sb'], wk = [];
+            for (let k = 6; k >= 0; k--) { const t = new Date(); t.setDate(t.getDate() - k); wk.push([t, d.days[fcDayKey(t)] || 0]); }
+            const mx = Math.max(1, ...wk.map(x => x[1]));
+            fcEl('fc-week').innerHTML = wk.map(([t, n]) => `<div>${n || ''}<i style="height:${Math.round(n / mx * 40)}px"></i>${LBL[t.getDay()]}</div>`).join('');
+            const todo = c.due + c.belajar + Math.min(c.baru, fcCfg.newPerDay);
+            fcEl('fc-daily-sub').innerText = todo ? `Review ${c.due} • Lanjut belajar ${c.belajar} • Baru ${Math.min(c.baru, fcCfg.newPerDay)}` : 'Semua sudah dikuasai 🎉 Cek lagi nanti';
+        }
+        function fcRecordBest(pct, total) {
+            if (total < 5) return '';
+            const d = fcDaily();
+            let note;
+            if (!d.best || pct > d.best.pct) {
+                note = d.best ? '🏅 Rekor baru!' : '🏅 Rekor pertama!';
+                d.best = { pct, total };
+                try { localStorage.setItem(FC_DAILY_KEY, JSON.stringify(d)); } catch (e) {}
+            } else {
+                note = `Rekor terbaik: ${d.best.pct}%`;
+            }
+            return `<div class="fcx-score-sub">${note}</div>`;
+        }
+
+        document.addEventListener('keydown', e => {
+            if (currentTab !== 'flashcard' || e.ctrlKey || e.metaKey || e.altKey) return;
+            if (/INPUT|TEXTAREA|SELECT/.test((e.target || {}).tagName || '')) return;
+            if (fcEl('fc-active-panel').classList.contains('hidden') || fcDeck.length === 0) return;
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (!isFcCardFlipped) flipFlashcard();
+                else if (fcRunAuto) fcNextCard();
+            } else if (!fcRunAuto && isFcCardFlipped && '123'.includes(e.key) && e.key.length === 1) {
+                assessCard({ '1': 'hard', '2': 'medium', '3': 'easy' }[e.key]);
+            }
+        });
+
+        /* ---------- Penilaian Otomatis & Tebak Cepat ---------- */
+        function fcEl(id) { return document.getElementById(id); }
+        function fcEsc(t) { return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+        function fcRand(range) { return range[0] + Math.floor(Math.random() * (range[1] - range[0] + 1)); }
+
+        function toggleFcAuto() {
+            if (fcQuickMode) return; // Tebak Cepat selalu memakai timer
+            fcAutoMode = !fcAutoMode;
+            syncFcToggles();
+        }
+        function toggleFcQuick() {
+            fcQuickMode = !fcQuickMode;
+            syncFcToggles();
+        }
+        function syncFcToggles() {
+            const a = fcEl('fc-toggle-auto'), q = fcEl('fc-toggle-quick');
+            if (!a || !q) return;
+            fcSyncCfgUI(); fcRenderDaily();
+            a.classList.toggle('on', fcAutoMode || fcQuickMode);
+            a.classList.toggle('locked', fcQuickMode);
+            a.setAttribute('aria-pressed', String(fcAutoMode || fcQuickMode));
+            q.classList.toggle('on', fcQuickMode);
+            q.setAttribute('aria-pressed', String(fcQuickMode));
+        }
+
+        function fcCategoryFor(ms) {
+            if (fcRunQuick) return ms <= FC_T_QUICK ? 'easy' : 'fail';
+            if (ms <= FC_T_EASY) return 'easy';
+            if (ms <= FC_T_MEDIUM) return 'medium';
+            return 'hard';
+        }
+        function fcCategoryLabel(cat) {
+            if (fcRunQuick) return cat === 'easy' ? '⚡ Berhasil' : '❌ Gagal';
+            return { easy: '🟢 Lancar', medium: '🟡 Sedang', hard: '🔴 Sulit', fail: '❌ Gagal' }[cat];
+        }
+
+        function fcPaintTimer(ms, cat, ratio) {
+            const limit = fcRunQuick ? FC_T_QUICK : FC_T_TIMEOUT;
+            const shown = Math.min(ms, limit);
+            fcEl('fc-timer-time').innerText = (shown / 1000).toFixed(1) + ' dtk';
+            fcEl('fc-timer-cat').innerText = fcCategoryLabel(cat);
+            fcEl('fc-timer-box').className = 'fcx-timer fcx-t-' + cat;
+            fcEl('fc-timer-bar').style.width = Math.min(100, Math.max(0, ratio * 100)) + '%';
+        }
+
+        function fcStopTimers() {
+            clearInterval(fcTimerInterval); fcTimerInterval = null;
+            clearTimeout(fcRevealTimeout); fcRevealTimeout = null;
+        }
+
+        // Hentikan semua timer; hasil kartu yang sudah dinilai tetap disimpan.
+        function fcAbortAuto() {
+            fcStopTimers();
+            if (fcPending) fcCommitPending();
+        }
+
+        function fcInitSession() {
+            fcStopTimers();
+            fcPending = null;
+            fcRunQuick = fcQuickMode;
+            fcRunAuto = fcAutoMode || fcQuickMode;
+            fcAttempts = 0;
+            fcStats = { easy: 0, medium: 0, hard: 0, fail: 0 };
+            fcQuickPass = 0;
+            fcQuickFailed = [];
+            fcEl('fc-eval-buttons').classList.toggle('hidden', fcRunAuto);
+            fcEl('fc-auto-panel').classList.toggle('hidden', !fcRunAuto);
+            fcEl('fc-timer-box').classList.toggle('fcx-invisible', !fcRunAuto);
+            fcEl('fc-back-hint').innerText = fcRunAuto
+                ? 'Dinilai otomatis dari kecepatanmu ⏱'
+                : 'Pilih evaluasi di bawah ini 👇';
+        }
+
+        function fcPrepareAutoCard() {
+            fcPending = null;
+            clearTimeout(fcRevealTimeout); fcRevealTimeout = null;
+            fcEl('fc-auto-msg').innerText = fcRunQuick
+                ? '⚡ Balik kartu dalam 1 detik!'
+                : '⏱ Balik kartu secepat mungkin';
+            fcEl('fc-next-btn').classList.add('hidden');
+            fcStopTimers();
+            fcCardStartTs = performance.now();
+            fcTimerInterval = setInterval(fcTick, 50);
+            fcTick();
+        }
+
+        function fcTick() {
+            if (document.hidden || fcPending || isFcCardFlipped) return;
+            const elapsed = performance.now() - fcCardStartTs;
+            const limit = fcRunQuick ? FC_T_QUICK : FC_T_TIMEOUT;
+            if (elapsed > limit) { fcHandleTimeout(); return; }
+            fcPaintTimer(elapsed, fcCategoryFor(elapsed), elapsed / limit);
+        }
+
+        // Kartu tidak dibalik sampai batas waktu: balik sendiri, catat Sulit (Gagal di Tebak Cepat)
+        function fcHandleTimeout() {
+            if (fcPending || isFcCardFlipped || fcDeck.length === 0) return;
+            clearInterval(fcTimerInterval); fcTimerInterval = null;
+            const cat = fcRunQuick ? 'fail' : 'hard';
+            const limit = fcRunQuick ? FC_T_QUICK : FC_T_TIMEOUT;
+            fcVisualFlip();
+            fcPending = { item: fcDeck[0], cat, ms: limit, timedOut: true };
+            fcPaintTimer(limit, cat, 1);
+            fcShowAutoResult(fcPending);
+            fcRevealTimeout = setTimeout(fcNextCard, FC_TIMEOUT_REVEAL_MS);
+        }
+
+        function fcShowAutoResult(p) {
+            const sec = (p.ms / 1000).toFixed(1);
+            let msg;
+            if (fcRunQuick) {
+                msg = p.cat === 'easy'
+                    ? `⚡ Berhasil dalam ${sec} dtk! +1 poin`
+                    : '❌ Gagal — lewat 1 detik, kartu dibalik otomatis';
+            } else if (p.cat === 'easy') {
+                msg = `🟢 Lancar (${sec} dtk) — kartu ini tidak muncul lagi`;
+            } else if (p.cat === 'medium') {
+                msg = `🟡 Sedang (${sec} dtk) — akan muncul lagi, tidak terlalu sering`;
+            } else if (p.timedOut) {
+                msg = `⏰ Lewat ${fcCfg.timeout} dtk — dicatat Sulit, akan sering muncul lagi. Lanjut otomatis…`;
+            } else {
+                msg = `🔴 Sulit (${sec} dtk) — akan sering muncul lagi`;
+            }
+            if (fcRunQuick && p.timedOut) msg += ' Lanjut otomatis…';
+            fcEl('fc-auto-msg').innerText = msg;
+            fcEl('fc-next-btn').classList.remove('hidden');
+        }
+
+        function fcNextCard() {
+            clearTimeout(fcRevealTimeout); fcRevealTimeout = null;
+            if (!fcPending) return;
+            fcCommitPending();
+            renderFlashcardCard();
+        }
+
+        // Terapkan hasil kartu: Lancar = hafal & tidak muncul lagi,
+        // Sedang = muncul lagi dengan jarak jauh, Sulit = muncul lagi dengan jarak dekat.
+        function fcCommitPending() {
+            const p = fcPending;
+            if (!p) return;
+            fcPending = null;
+            const idx = fcDeck.indexOf(p.item);
+            if (idx > -1) fcDeck.splice(idx, 1);
+            const item = p.item;
+            fcAttempts++;
+            fcStats[p.cat]++;
+            fcBumpDaily();
+            if (!fcRunQuick) fcSrsUpdate(p.item, p.cat);
+
+            if (fcRunQuick) {
+                // Tebak Cepat: satu putaran, hanya mencatat poin
+                if (p.cat === 'easy') {
+                    fcQuickPass++;
+                } else {
+                    fcQuickFailed.push(item);
+                    appData.stats.wrongAnswers[item.id] = (appData.stats.wrongAnswers[item.id] || 0) + 1;
+                }
+            } else if (p.cat === 'easy') {
+                item.mastered = true;
+                const realItem = appData.vocabulary.find(v => v.id === item.id);
+                if (realItem) realItem.mastered = true;
+            } else {
+                if (p.cat === 'hard') {
+                    appData.stats.wrongAnswers[item.id] = (appData.stats.wrongAnswers[item.id] || 0) + 1;
+                }
+                const gap = fcRand(FC_REPEAT_GAP[p.cat]);
+                fcDeck.splice(Math.min(gap, fcDeck.length), 0, item);
+            }
+            saveStorageData();
+        }
+
+        function renderFcDoneSummary() {
+            const box = fcEl('fc-done-summary'), again = fcEl('fc-done-again');
+            const emoji = fcEl('fc-done-emoji'), title = fcEl('fc-done-title'), desc = fcEl('fc-done-desc');
+            if (!fcRunAuto) {
+                box.classList.add('hidden'); again.classList.add('hidden');
+                emoji.innerText = '🎉'; title.innerText = 'Sesi Selesai!';
+                desc.innerText = 'Hebat! Anda telah meninjau semua kartu dalam sesi ini.';
+                return;
+            }
+            box.classList.remove('hidden'); again.classList.remove('hidden');
+            if (fcRunQuick) {
+                const total = fcAttempts, pass = fcQuickPass;
+                const pct = total ? Math.round(pass / total * 100) : 0;
+                emoji.innerText = pct >= 80 ? '🏆' : pct >= 50 ? '👍' : '💪';
+                title.innerText = 'Tebak Cepat Selesai!';
+                desc.innerText = 'Poin kamu:';
+                let html = `<div class="fcx-score">${pass}<span>/ ${total}</span></div>` +
+                           `<div class="fcx-score-sub">${pct}% berhasil dibalik dalam 1 detik</div>` + fcRecordBest(pct, total);
+                if (fcQuickFailed.length) {
+                    const shown = fcQuickFailed.slice(0, 30).map(i =>
+                        `<div>❌ <span class="jp-font">${fcEsc(i.word || i.kana)}</span> — ${fcEsc(i.meaning)}</div>`).join('');
+                    const more = fcQuickFailed.length > 30 ? `<div>…dan ${fcQuickFailed.length - 30} lainnya</div>` : '';
+                    html += `<div class="fcx-fail-list"><b>Kartu yang gagal (${fcQuickFailed.length}):</b>${shown}${more}</div>`;
+                }
+                box.innerHTML = html;
+            } else {
+                emoji.innerText = '🎉'; title.innerText = 'Sesi Selesai!';
+                desc.innerText = `Semua kartu sudah Lancar. Total ${fcAttempts} kali balik kartu:`;
+                box.innerHTML = `<div class="fcx-stat-grid">` +
+                    `<div class="fcx-stat" style="background:#ecfdf5;border-color:#6ee7b7;color:#047857"><b>${fcStats.easy}</b>🟢 Lancar</div>` +
+                    `<div class="fcx-stat" style="background:#fffbeb;border-color:#fcd34d;color:#b45309"><b>${fcStats.medium}</b>🟡 Sedang</div>` +
+                    `<div class="fcx-stat" style="background:#fff1f2;border-color:#fda4af;color:#be123c"><b>${fcStats.hard}</b>🔴 Sulit</div>` +
+                    `</div>`;
             }
         }
 
@@ -1289,9 +2196,12 @@
             if (fcDeck.length === 0) return;
 
             const item = fcDeck.shift(); // Remove from top
+            fcBumpDaily();
+            fcSrsUpdate(item, difficulty);
             const realItem = appData.vocabulary.find(v => v.id === item.id);
 
             if (difficulty === 'easy') {
+                item.mastered = true;
                 if (realItem) realItem.mastered = true;
                 showToast("Diandalkan! Status diubah ke Hafal", "✅");
             } else if (difficulty === 'medium') {
@@ -1309,6 +2219,15 @@
         }
 
         function exitFlashcards() {
+            fcAbortAuto();
+            // Tebak Cepat: tampilkan poin dulu kalau sudah ada kartu yang dijawab
+            if (fcRunQuick && fcAttempts > 0) {
+                renderFcDoneSummary();
+                document.getElementById('fc-setup-panel').classList.add('hidden');
+                document.getElementById('fc-active-panel').classList.add('hidden');
+                document.getElementById('fc-done-panel').classList.remove('hidden');
+                return;
+            }
             setupFlashcardPrep();
         }
 
@@ -1316,12 +2235,15 @@
             const label = fcContentMode === 'kanji' ? 'Kanji' : 'kosakata';
             if (confirm(`Reset status hafalan semua ${label}? Anda akan menghafal kembali dari awal.`)) {
                 getFlashcardSourceVocab().forEach(v => v.mastered = false);
+                const pre = fcContentMode === 'kanji' ? 'k' : 'v';
+                Object.keys(appData.srs || {}).filter(k => k[0] === pre).forEach(k => delete appData.srs[k]);
                 saveStorageData();
                 setupFlashcardPrep();
                 showToast("Progres hafalan berhasil di-reset ke 0", "🔄");
             }
         }
 
+        let quizWrongList = [];
         function initQuiz(mode) {
             quizActiveMode = mode;
 
@@ -1344,11 +2266,12 @@
 
             // Shuffle and pick up to 10 questions
             sourcePool = shuffleArray(sourcePool);
-            const selected = sourcePool.slice(0, Math.min(10, sourcePool.length));
+            const selected = sourcePool.slice(0, Math.min(parseInt((document.getElementById('quiz-len') || {}).value) || 10, sourcePool.length));
 
             quizQuestions = selected.map(target => {
                 let options = [target];
-                let wrongPool = shuffleArray(appData.vocabulary.filter(v => v.id !== target.id));
+                let wrongPool = shuffleArray(appData.vocabulary.filter(v => v.id !== target.id && v.meaning !== target.meaning && (v.word || v.kana) !== (target.word || target.kana)));
+                if (wrongPool.length < 3) wrongPool = shuffleArray(appData.vocabulary.filter(v => v.id !== target.id));
                 options.push(...wrongPool.slice(0, 3));
                 options = shuffleArray(options);
 
@@ -1357,6 +2280,7 @@
 
             quizCurrentIndex = 0;
             quizScore = 0;
+            quizWrongList = [];
 
             document.getElementById('quiz-menu-panel').classList.add('hidden');
             document.getElementById('quiz-result-panel').classList.add('hidden');
@@ -1408,7 +2332,8 @@
                 btn.className = "w-full p-4 bg-white border-2 border-slate-200 hover:border-amber-400 rounded-2xl font-bold text-slate-800 text-left text-sm transition-all active:scale-[0.99] flex justify-between items-center";
                 
                 let optLabel = quizActiveMode === 'id-to-jp' ? (opt.word || opt.kana) : opt.meaning;
-                btn.innerHTML = `<span>${optLabel}</span> <span class="jp-font text-xs text-slate-400 font-normal">${quizActiveMode === 'id-to-jp' ? opt.kana : ''}</span>`;
+                btn.dataset.id = opt.id;
+                btn.innerHTML = `<span>${escapeHtmlText(optLabel)}</span> <span class="jp-font text-xs text-slate-400 font-normal">${quizActiveMode === 'id-to-jp' ? opt.kana : ''}</span>`;
                 
                 btn.onclick = () => selectQuizAnswer(btn, opt, target);
                 container.appendChild(btn);
@@ -1431,9 +2356,13 @@
 
             const feedback = document.getElementById('quiz-feedback-box');
             feedback.classList.remove('hidden');
+            fcBumpDaily();
 
             if (chosenOpt.id === correctTarget.id) {
                 quizScore++;
+                // Jawaban benar mengurangi catatan "sering salah" agar bank kata salah bisa kosong
+                const wa = appData.stats.wrongAnswers;
+                if (wa[correctTarget.id]) { wa[correctTarget.id]--; if (wa[correctTarget.id] <= 0) delete wa[correctTarget.id]; saveStorageData(); }
                 selectedBtn.classList.remove('border-slate-200');
                 selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-800');
 
@@ -1445,11 +2374,12 @@
 
                 // Record mistake stat
                 appData.stats.wrongAnswers[correctTarget.id] = (appData.stats.wrongAnswers[correctTarget.id] || 0) + 1;
+                quizWrongList.push(correctTarget);
                 saveStorageData();
 
                 // Highlight correct one
                 for (let btn of buttons) {
-                    if (btn.innerText.includes(correctTarget.meaning) || btn.innerText.includes(correctTarget.word) || btn.innerText.includes(correctTarget.kana)) {
+                    if (String(btn.dataset.id) === String(correctTarget.id)) {
                         btn.classList.add('border-emerald-500', 'bg-emerald-50');
                     }
                 }
@@ -1478,6 +2408,11 @@
             const percent = Math.round((quizScore / quizQuestions.length) * 100);
             document.getElementById('quiz-score-percent').innerText = `${percent}%`;
             document.getElementById('quiz-score-detail').innerText = `Jawaban Benar: ${quizScore} dari ${quizQuestions.length}`;
+            const det = document.getElementById('quiz-score-detail');
+            let rv = document.getElementById('quiz-review-list');
+            if (!rv) { rv = document.createElement('div'); rv.id = 'quiz-review-list'; det.insertAdjacentElement('afterend', rv); }
+            rv.className = quizWrongList.length ? 'fcx-fail-list' : '';
+            rv.innerHTML = quizWrongList.length ? '<b>Kata yang salah (tinjau):</b>' + quizWrongList.map(v => `<div>• ${escapeHtmlText(v.word || v.kana)}${v.kana && v.kana !== v.word ? '（' + escapeHtmlText(v.kana) + '）' : ''} — ${escapeHtmlText(v.meaning)}</div>`).join('') : '';
         }
 
         function quitQuiz() {
@@ -1486,18 +2421,36 @@
             document.getElementById('quiz-menu-panel').classList.remove('hidden');
         }
 
+        let sentOrder = [], sentCorrect = [], sentList = [];
+        // Kalimat tambahan dibuat otomatis dari kosakata: "Nです" (benda/sifat) dan "Nをください" (benda yang bisa diminta)
+        function genSentences(n) {
+            const OBJ = /makanan|minuman|perlengkapan|pakaian|aksesoris|elektronik|dokumen|permohonan benda/i;
+            const kanaOk = v => v.kana && SP_KANA.test(spClean(v.kana));
+            const out = [];
+            shuffleArray((appData.vocabulary || []).filter(v => kanaOk(v) && v.meaning && /^(noun|adjective)$/.test(v.type))).some(v => {
+                const m = v.meaning.trim(), lower = /negara|panggilan|identitas|tempat/i.test(v.category || '') ? m : m.charAt(0).toLowerCase() + m.slice(1);
+                if (v.type === 'adjective' && /い$/.test(v.kana)) out.push({ sentence: v.kana + 'です', meaning: `(Itu) ${lower}`, keyword: v.kana, id: 'g' + v.id, generated: true });
+                else if (v.type === 'noun' && OBJ.test(v.category || '')) out.push({ sentence: v.kana + 'をください', meaning: `Tolong berikan saya ${lower}`, keyword: v.kana, id: 'g' + v.id, generated: true });
+                else if (v.type === 'noun') out.push({ sentence: v.kana + 'です', meaning: `Ini ${lower}`, keyword: v.kana, id: 'g' + v.id, generated: true });
+                return out.length >= n;
+            });
+            return out;
+        }
         function initSentenceModule() {
-            if (!appData.sentences || appData.sentences.length === 0) {
+            sentList = [...(appData.sentences || []), ...genSentences(12)];
+            if (!sentList || sentList.length === 0) {
                 showToast("Belum ada data kalimat.", "⚠️");
                 return;
             }
 
             sentCurrentIndex = 0;
+            sentOrder = shuffleArray(sentList.map((_, i) => i));
             renderSentenceProblem();
         }
 
         function renderSentenceProblem() {
-            sentTargetItem = appData.sentences[sentCurrentIndex % appData.sentences.length];
+            if (sentOrder.length !== sentList.length) sentOrder = shuffleArray(sentList.map((_, i) => i));
+            sentTargetItem = sentList[sentOrder[sentCurrentIndex % sentOrder.length]];
             sentUserSelection = [];
 
             document.getElementById('sent-target-id').innerText = sentTargetItem.meaning;
@@ -1505,6 +2458,7 @@
             // Clean punctuation/spacing, then tokenize using known vocabulary (auto-adapts to any sentence)
             const cleanedJp = sentTargetItem.sentence.replace(/[\s,、。]/g, '');
             const correctChunks = tokenizeJapaneseSentence(cleanedJp);
+            sentCorrect = correctChunks;
 
             // Add a few decoy chips (words not part of the answer) to make it a real challenge
             const decoyCount = Math.min(3, Math.max(1, Math.ceil(correctChunks.length / 2)));
@@ -1627,11 +2581,17 @@
             if (userString === targetString) {
                 feedback.className = "p-3.5 rounded-2xl bg-emerald-100 text-emerald-800 font-extrabold text-center text-sm leading-snug";
                 feedback.innerText = "🎉 Luar Biasa! Susunan Kalimat Benar!";
+                fcBumpDaily();
                 playTTS(sentTargetItem.sentence);
                 document.getElementById('sent-next-btn').classList.remove('hidden');
             } else {
                 feedback.className = "p-3.5 rounded-2xl bg-rose-100 text-rose-800 font-extrabold text-center text-sm leading-snug jp-font";
                 feedback.innerText = `❌ Belum Pas. Kalimat Benar: "${sentTargetItem.sentence}"`;
+                // Tandai posisi yang salah (merah) dan beri jalan lanjut agar tidak buntu
+                Array.from(document.getElementById('sent-drop-zone').children).forEach((c, i) => {
+                    if (c.tagName === 'BUTTON') c.style.background = sentPoolChunks[sentUserSelection[i]] === sentCorrect[i] ? '#059669' : '#e11d48';
+                });
+                document.getElementById('sent-next-btn').classList.remove('hidden');
             }
             document.getElementById('sent-action-bar').scrollIntoView({ behavior: 'smooth', block: 'end' });
         }
@@ -1641,420 +2601,350 @@
             renderSentenceProblem();
         }
 
-        /* ==================== SPEAKING PRACTICE MODULE ==================== */
+        /* ==================== SPEAKING PRACTICE MODULE (v2) ==================== */
+        let SP_PASS = (fcCfg && fcCfg.spPass) || 80;
+        const SP_MAX_ATTEMPTS = 3, SP_WEAK_KEY = 'nihongo_sp_weak_v1', SP_LISTEN_MS = 8000;
+        const SP_KANA = /^[\u3040-\u309f\u30a0-\u30ffー]+$/;
+        const SP_ROWS = [['', 'あいうえお'], ['k', 'かきくけこ'], ['g', 'がぎぐげご'], ['s', 'さしすせそ'], ['z', 'ざじずぜぞ'], ['t', 'たちつてと'],
+            ['d', 'だぢづでど'], ['n', 'なにぬねの'], ['h', 'はひふへほ'], ['b', 'ばびぶべぼ'], ['p', 'ぱぴぷぺぽ'], ['m', 'まみむめも'], ['r', 'らりるれろ']];
+        const SP_ROMA = {};
+        SP_ROWS.forEach(([c, k]) => Array.from(k).forEach((ch, i) => SP_ROMA[ch] = c + 'aiueo'[i]));
+        Object.assign(SP_ROMA, { 'し': 'shi', 'ち': 'chi', 'つ': 'tsu', 'ふ': 'fu', 'じ': 'ji', 'ぢ': 'ji', 'づ': 'zu', 'や': 'ya', 'ゆ': 'yu', 'よ': 'yo', 'わ': 'wa', 'を': 'o', 'ん': 'n', 'っ': 'jeda', 'ー': '—' });
+        const SP_SMALL = { 'ゃ': 'a', 'ゅ': 'u', 'ょ': 'o', 'ぁ': 'a', 'ぃ': 'i', 'ぅ': 'u', 'ぇ': 'e', 'ぉ': 'o' };
+        let spQueue = [], spCur = null, spAttempt = 0, spBest = 0, spBusy = false, spTimer = null, spTotal = 0;
+        let spResults = [], spSessionWeak = {}, spRequeued = new Set(), spHadAttempt = false;
 
-        function isSpeechRecognitionSupported() {
-            return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+        function spHira(t) { return Array.from(t).map(c => { const k = c.charCodeAt(0); return (k >= 0x30a1 && k <= 0x30f6) ? String.fromCharCode(k - 0x60) : c; }).join(''); }
+        function spClean(t) { return String(t || '').replace(/[\s、。，．,.!?！？「」『』・〜～…\-"'()（）]/g, '').toLowerCase(); }
+        function spRomaji(m) {
+            if (SP_ROMA[m]) return SP_ROMA[m];
+            const b = SP_ROMA[m[0]], v = SP_SMALL[m[1]];
+            if (!b || !v) return '';
+            if (/^(sh|ch|j)i$/.test(b)) return b.slice(0, -1) + (m[1] === 'ぃ' ? 'i' : v);
+            return b.slice(0, -1) + ('ゃゅょ'.includes(m[1]) ? 'y' : '') + v;
         }
+        function spMorae(k) {
+            const out = [];
+            Array.from(k).forEach(ch => {
+                const last = out[out.length - 1];
+                if (SP_SMALL[ch] && last && !['っ', 'ん', 'ー'].includes(last)) out[out.length - 1] += ch; else out.push(ch);
+            });
+            return out;
+        }
+        // ー (vokal panjang) disamakan dengan vokal sebelumnya, agar おーきい = おおきい
+        function spCanon(u) {
+            return u.map((x, i) => {
+                if (x !== 'ー' || i === 0) return x;
+                const r = spRomaji(u[i - 1]), v = 'aiueo'.indexOf(r[r.length - 1]);
+                return v >= 0 ? 'あいうえお'[v] : x;
+            });
+        }
+        const spPhon = c => Array.from(c).map(x => ({ 'を': 'お', 'ぢ': 'じ', 'づ': 'ず', 'ゐ': 'い', 'ゑ': 'え' }[x] || x)).join('');
+        const spBase = c => c.normalize('NFD').replace(/[\u3099\u309a]/g, '');
+        function spNear(a, b) {
+            if (a === b || spPhon(a) === spPhon(b)) return null;
+            if ((a === 'つ' && b === 'っ') || (a === 'っ' && b === 'つ')) return 'sokuon';
+            if (spBase(a) === spBase(b)) return 'voicing';
+            if (a[0] === b[0] && a.length !== b.length) return 'small';
+            return null;
+        }
+        // Susunan target: kana -> suku kata; tulisan campur kanji -> per huruf
+        function spTargets(item, mode) {
+            const out = [], add = (text, kind) => {
+                const c = spHira(spClean(text)); if (!c) return;
+                const units = kind === 'kana' ? spCanon(spMorae(c)) : Array.from(c);
+                if (!out.some(o => o.kind === kind && o.units.join('') === units.join(''))) out.push({ kind, text, units });
+            };
+            if (mode === 'sentence') { const sc = spHira(spClean(item.sentence)); add(item.sentence, SP_KANA.test(sc) ? 'kana' : 'orth'); }
+            else { add(item.kana, 'kana'); add(item.word, SP_KANA.test(spHira(spClean(item.word))) ? 'kana' : 'orth'); }
+            return out;
+        }
+        function spDiag(T, H) {
+            const n = T.length, m = H.length, same = (a, b) => a === b || spPhon(a) === spPhon(b), cost = (a, b) => same(a, b) ? 0 : spNear(a, b) ? 0.5 : 1;
+            const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0));
+            for (let i = 0; i <= n; i++) dp[i][0] = i;
+            for (let j = 0; j <= m; j++) dp[0][j] = j;
+            for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++)
+                dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + cost(T[i - 1], H[j - 1]));
+            let i = n, j = m; const st = new Array(n), extras = [];
+            const eq = (x, y) => Math.abs(x - y) < 1e-9;
+            while (i > 0 || j > 0) {
+                if (i > 0 && j > 0 && eq(dp[i][j], dp[i - 1][j - 1] + cost(T[i - 1], H[j - 1]))) {
+                    const a = T[i - 1], b = H[j - 1], nt = spNear(a, b);
+                    st[i - 1] = same(a, b) ? { st: 'ok' } : nt ? { st: 'near', heard: b, type: nt } : { st: 'bad', heard: b };
+                    i--; j--;
+                } else if (i > 0 && eq(dp[i][j], dp[i - 1][j] + 1)) { st[i - 1] = { st: 'miss' }; i--; }
+                else { extras.unshift(H[j - 1]); j--; }
+            }
+            const credit = st.reduce((c, x) => c + (x.st === 'ok' ? 1 : x.st === 'near' ? 0.5 : 0), 0);
+            const score = n ? Math.max(0, Math.round((credit - 0.25 * extras.length) / n * 100)) : 0;
+            return { T, st, extras, score };
+        }
+        function spEvaluate(item, mode, alts) {
+            const targets = spTargets(item, mode); let best = null;
+            alts.forEach(alt => {
+                const c = spHira(spClean(alt)); if (!c) return;
+                const isKana = SP_KANA.test(c);
+                targets.forEach(t => {
+                    if (t.kind === 'kana' && !isKana) return;
+                    const H = t.kind === 'kana' ? spCanon(spMorae(c)) : Array.from(c);
+                    const d = spDiag(t.units, H); d.target = t; d.alt = alt;
+                    if (!best || d.score > best.score || (d.score === best.score && t.kind === 'kana' && best.target.kind !== 'kana')) best = d;
+                });
+            });
+            if (best && best.score >= 100 && best.target.kind === 'orth') { // kanji persis benar -> tampilkan suku kata hijau semua
+                const k = targets.find(t => t.kind === 'kana');
+                if (k) best = { T: k.units, st: k.units.map(() => ({ st: 'ok' })), extras: [], score: 100, target: k, alt: best.alt };
+            }
+            return best;
+        }
+        function spTips(d) {
+            const tips = [], seen = new Set(), push = (k, t) => { if (!seen.has(k) && tips.length < 3) { seen.add(k); tips.push(t); } };
+            let tail = 0;
+            for (let i = d.st.length - 1; i >= 0 && d.st[i].st === 'miss'; i--) tail++;
+            if (tail >= 2) push('t', `Bagian akhir (${tail} suku kata) tidak terbaca. Mungkin mic berhenti saat kamu berjeda. Ucapkan tanpa jeda, atau ulangi lebih pendek.`);
+            d.st.forEach((x, i) => {
+                const t = d.T[i];
+                if (x.st === 'ok') return;
+                if (tail >= 2 && i >= d.st.length - tail) return;
+                if (x.st === 'near' && x.type === 'voicing') push('v', `<b>${fcEsc(t)}</b> terdengar seperti <b>${fcEsc(x.heard)}</b>. Bedanya ada di getaran: letakkan jari di leher, が/ざ/だ/ば terasa bergetar, か/さ/た/は tidak.`);
+                else if (x.st === 'near' && x.type === 'small') push('s', `<b>${fcEsc(t)}</b> vs <b>${fcEsc(x.heard)}</b>: bunyi kecil (ゃ ゅ ょ) menyatu dalam satu ketukan, bukan dua suku kata terpisah.`);
+                else if (t === 'っ' || (x.st === 'near' && x.type === 'sokuon')) push('q', 'っ adalah jeda singkat (tahan napas sesaat) sebelum konsonan berikutnya, bukan huruf yang dibunyikan.');
+                else if (t === 'ん') push('n', 'ん memakai satu ketukan penuh sendiri. Tahan sebentar, jangan terburu-buru.');
+                else if (x.st === 'miss' && (d.T[i - 1] === t || d.T[i + 1] === t)) push('l', `Vokal panjang (<b>${fcEsc(t + t)}</b>) = 2 ketukan. Tahan bunyinya sekitar dua kali lebih lama dari vokal pendek.`);
+                else if (x.st === 'miss') push('m' + t, `<b>${fcEsc(t)}</b> tidak terdengar. Ucapkan semua suku kata dengan jelas dan sama panjang.`);
+                else push('b' + t, `<b>${fcEsc(t)}</b> terdengar seperti <b>${fcEsc(x.heard || '?')}</b>. Dengarkan versi pelan, lalu tiru bentuk mulutnya, jangan membaca dengan ejaan Indonesia.`);
+            });
+            if (d.extras.length) push('x', `Ada bunyi tambahan: <b>${fcEsc(d.extras.join(''))}</b>. Ucapkan tepat sesuai suku kata target, tidak lebih.`);
+            return tips;
+        }
+        const SP_HIST_KEY = 'nihongo_sp_hist_v1';
+        function spHistLoad() { try { return JSON.parse(localStorage.getItem(SP_HIST_KEY)) || []; } catch (e) { return []; } }
+        function spWeakLoad() { try { return JSON.parse(localStorage.getItem(SP_WEAK_KEY)) || {}; } catch (e) { return {}; } }
+        function spWeakSave(w) { try { localStorage.setItem(SP_WEAK_KEY, JSON.stringify(w)); } catch (e) {} }
+        function spWeakUpdate(d) {
+            if (d.target.kind !== 'kana') return;
+            const w = spWeakLoad();
+            d.st.forEach((x, i) => {
+                const u = d.T[i];
+                if (x.st === 'bad' || x.st === 'miss' || x.st === 'near') { w[u] = (w[u] || 0) + (x.st === 'near' ? 0.5 : 1); spSessionWeak[u] = (spSessionWeak[u] || 0) + 1; }
+                else if (w[u]) w[u] = Math.max(0, w[u] - 0.5);
+            });
+            Object.keys(w).forEach(k => { if (w[k] <= 0) delete w[k]; });
+            spWeakSave(w);
+        }
+        function spTopWeak(n) { const w = spWeakLoad(); return Object.keys(w).filter(k => w[k] >= 1).sort((a, b) => w[b] - w[a]).slice(0, n); }
 
-        // getUserMedia/SpeechRecognition are blocked by the browser itself on an
-        // insecure origin (opening the file directly via file://, or plain http://
-        // that isn't localhost). No amount of app code can override this — the
-        // page must be served over https:// or from a local server.
-        function isMicCapableContext() {
-            return window.isSecureContext === true;
-        }
+        function isSpeechRecognitionSupported() { return !!(window.SpeechRecognition || window.webkitSpeechRecognition); }
+        // Mikrofon hanya jalan di https:// atau localhost, bukan saat file dibuka langsung
+        function isMicCapableContext() { return window.isSecureContext === true; }
 
         function initSpeakingModule() {
-            const secureContext = isMicCapableContext();
-            const recognitionSupported = isSpeechRecognitionSupported();
-            const warningBox = document.getElementById('speak-unsupported-box');
-            const micBtn = document.getElementById('speak-mic-btn');
-
-            if (!secureContext) {
-                warningBox.classList.remove('hidden');
-                warningBox.innerHTML = '⚠️ Mikrofon diblokir browser karena halaman ini dibuka langsung dari file, bukan lewat <b>https://</b> atau server lokal. Upload file ini ke hosting gratis (mis. Netlify Drop / GitHub Pages) atau buka lewat server lokal supaya fitur mikrofon bisa dipakai. Fitur lain di aplikasi ini tetap berjalan normal.';
-                micBtn.disabled = true;
-                micBtn.classList.add('opacity-40');
-            } else if (!recognitionSupported) {
-                warningBox.classList.remove('hidden');
-                warningBox.innerHTML = '⚠️ Browser ini tidak mendukung pengenalan suara (Speech Recognition). Coba gunakan Google Chrome terbaru di Android/Desktop untuk fitur ini.';
-                micBtn.disabled = true;
-                micBtn.classList.add('opacity-40');
-            } else {
-                warningBox.classList.add('hidden');
-                micBtn.disabled = false;
-                micBtn.classList.remove('opacity-40');
-            }
-
-            buildSpeakingPool();
-            speakingIndex = 0;
-            renderSpeakingItem();
-        }
-
-        function setSpeakingMode(mode) {
-            speakingMode = mode;
-            const activeCls = "flex-1 px-3 py-2 rounded-xl bg-teal-600 text-white transition-colors";
-            const inactiveCls = "flex-1 px-3 py-2 rounded-xl bg-slate-100 text-slate-600 transition-colors";
-            document.getElementById('speak-mode-vocab').className = mode === 'vocab' ? activeCls : inactiveCls;
-            document.getElementById('speak-mode-sentence').className = mode === 'sentence' ? activeCls : inactiveCls;
-
-            buildSpeakingPool();
-            speakingIndex = 0;
-            renderSpeakingItem();
-        }
-
-        function buildSpeakingPool() {
-            if (speakingMode === 'sentence') {
-                speakingPool = shuffleArray(appData.sentences || []);
-            } else {
-                speakingPool = shuffleArray(appData.vocabulary || []);
-            }
-        }
-
-        function renderSpeakingItem() {
-            if (isSpeakingListening) stopSpeakingRecognition();
-
-            document.getElementById('speak-result-box').classList.add('hidden');
-            document.getElementById('speak-transcript-text').innerText = '-';
-            speakingSuccessAchieved = false;
-            speakingFinalTranscript = '';
-            resetSpeakingNextButton();
-
-            const wordEl = document.getElementById('speak-target-word');
-            const kanaEl = document.getElementById('speak-target-kana');
-            const hint = document.getElementById('speak-track-hint');
-
-            if (speakingPool.length === 0) {
-                wordEl.innerText = '—';
-                kanaEl.innerText = '';
-                document.getElementById('speak-target-romaji').innerText = '';
-                document.getElementById('speak-target-meaning').innerText = speakingMode === 'sentence' ? 'Belum ada data kalimat.' : 'Belum ada data kosakata.';
-                document.getElementById('speak-progress-text').innerText = 'Item 0 dari 0';
-                hint.classList.add('hidden');
-                return;
-            }
-
-            const item = speakingPool[speakingIndex % speakingPool.length];
-
-            // The "trackable" reading (always Kana, since that's what speech recognition
-            // actually returns) is what gets colored blue as the user speaks correctly.
-            if (speakingMode === 'sentence') {
-                wordEl.className = "text-3xl font-black text-slate-800 jp-font break-words";
-                wordEl.innerText = item.sentence;
-                kanaEl.innerText = '';
-                document.getElementById('speak-target-romaji').innerText = '';
-                document.getElementById('speak-target-meaning').innerText = item.meaning;
-            } else {
-                wordEl.className = "text-3xl font-black text-slate-800 jp-font break-words";
-                wordEl.innerText = item.word || item.kana;
-                kanaEl.className = "text-xl font-bold jp-font break-words text-teal-700";
-                kanaEl.innerText = item.kana || item.word || '';
-                document.getElementById('speak-target-romaji').innerText = item.romaji || '';
-                document.getElementById('speak-target-meaning').innerText = item.meaning;
-            }
-
-            hint.classList.toggle('hidden', !(isMicCapableContext() && isSpeechRecognitionSupported()));
-            document.getElementById('speak-progress-text').innerText = `Item ${(speakingIndex % speakingPool.length) + 1} dari ${speakingPool.length}`;
-        }
-
-        // Returns which DOM element currently displays the phonetic target text, and
-        // its raw (uncolored) string — this is the element that gets live-highlighted
-        // blue as the user's speech matches it, character by character.
-        function getSpeakingTrackInfo() {
-            if (speakingPool.length === 0) return null;
-            const item = speakingPool[speakingIndex % speakingPool.length];
-            if (speakingMode === 'sentence') {
-                return { el: document.getElementById('speak-target-word'), rawText: item.sentence || '' };
-            }
-            return { el: document.getElementById('speak-target-kana'), rawText: item.kana || item.word || '' };
-        }
-
-        // Re-renders rawText inside el as individual <span>s, coloring blue exactly the
-        // non-punctuation characters whose normalized index is in matchedIndices —
-        // i.e. the ones actually recognized as pronounced correctly, wherever they fall.
-        function renderTrackHighlight(el, rawText, matchedIndices) {
-            if (!el) return;
-            const punctRegex = /[\s、。,.!?！？「」『』]/;
-            let normIdx = 0;
-            let html = '';
-            for (const ch of rawText) {
-                if (punctRegex.test(ch)) {
-                    html += `<span class="text-slate-300">${ch}</span>`;
-                } else {
-                    const matched = matchedIndices.has(normIdx);
-                    html += `<span class="${matched ? 'text-blue-600' : ''}">${ch}</span>`;
-                    normIdx++;
-                }
-            }
-            el.innerHTML = html;
-        }
-
-        // Longest Common Subsequence between targetNorm and transcriptNorm. Unlike a
-        // simple left-to-right prefix scan, this doesn't get permanently stuck the moment
-        // one word/character is mispronounced or skipped — a later word said correctly
-        // (e.g. "mobil" in "aku suka mobil" even if "suka" came out wrong) still gets
-        // found and marked, while the misheard part in between is simply left unmatched.
-        // Returns { matchedCount, matchedIndices } where matchedIndices holds the
-        // targetNorm character positions that are part of the best alignment — full
-        // correctness (all-blue) still requires matchedCount === targetNorm.length,
-        // i.e. every target character eventually heard, in order.
-        function computeLCSMatch(targetNorm, transcriptNorm) {
-            const m = targetNorm.length, n = transcriptNorm.length;
-            const matchedIndices = new Set();
-            if (m === 0 || n === 0) return { matchedCount: 0, matchedIndices };
-
-            const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
-            for (let i = 1; i <= m; i++) {
-                for (let j = 1; j <= n; j++) {
-                    if (targetNorm[i - 1] === transcriptNorm[j - 1]) {
-                        dp[i][j] = dp[i - 1][j - 1] + 1;
-                    } else {
-                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-                    }
-                }
-            }
-
-            let i = m, j = n;
-            while (i > 0 && j > 0) {
-                if (targetNorm[i - 1] === transcriptNorm[j - 1]) {
-                    matchedIndices.add(i - 1);
-                    i--; j--;
-                } else if (dp[i - 1][j] >= dp[i][j - 1]) {
-                    i--;
-                } else {
-                    j--;
-                }
-            }
-
-            return { matchedCount: dp[m][n], matchedIndices };
-        }
-
-        function resetSpeakingNextButton() {
-            const btn = document.getElementById('speak-next-btn');
-            if (!btn) return;
-            btn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700', 'glow-active');
-            btn.classList.add('bg-slate-800', 'hover:bg-slate-900');
-        }
-
-        function emphasizeSpeakingNextButton() {
-            const btn = document.getElementById('speak-next-btn');
-            if (!btn) return;
-            btn.classList.remove('bg-slate-800', 'hover:bg-slate-900');
-            btn.classList.add('bg-emerald-600', 'hover:bg-emerald-700', 'glow-active');
-            btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-
-        function playSpeakingReference() {
-            if (speakingPool.length === 0) return;
-            const item = speakingPool[speakingIndex % speakingPool.length];
-            playTTS(speakingMode === 'sentence' ? item.sentence : (item.word || item.kana));
-        }
-
-        function nextSpeakingItem() {
-            speakingIndex++;
-            renderSpeakingItem();
-        }
-
-        function toggleSpeakingRecognition() {
-            if (isSpeakingListening) {
-                stopSpeakingRecognition();
-            } else {
-                startSpeakingRecognition();
-            }
-        }
-
-        function startSpeakingRecognition() {
-            if (!isMicCapableContext()) {
-                showToast("Mikrofon butuh https:// atau server lokal, tidak bisa dari file langsung", "⚠️");
-                return;
-            }
-            if (!isSpeechRecognitionSupported()) {
-                showToast("Browser tidak mendukung pengenalan suara", "⚠️");
-                return;
-            }
-            if (speakingPool.length === 0) return;
-
-            const micLabel = document.getElementById('speak-mic-label');
-
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                showToast("Perangkat/browser ini tidak mendukung akses mikrofon", "⚠️");
-                return;
-            }
-
-            micLabel.innerText = 'Meminta izin mikrofon...';
-
-            // Explicitly ask for microphone permission first. This reliably
-            // triggers the browser's permission dialog — relying only on
-            // SpeechRecognition to ask for it implicitly is inconsistent on
-            // some Android/webview browsers.
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    // We only needed the permission grant — SpeechRecognition
-                    // captures its own audio internally, so release this stream.
-                    stream.getTracks().forEach(track => track.stop());
-                    beginSpeechRecognition();
-                })
-                .catch(err => {
-                    let msg = 'Tidak bisa mengakses mikrofon.';
-                    if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-                        msg = 'Izin mikrofon ditolak. Aktifkan izin mikrofon untuk browser ini lewat pengaturan HP, lalu coba lagi.';
-                    } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-                        msg = 'Mikrofon tidak ditemukan di perangkat ini.';
-                    } else if (err.name === 'NotReadableError') {
-                        msg = 'Mikrofon sedang dipakai aplikasi lain.';
-                    } else if (err.name === 'SecurityError') {
-                        msg = 'Akses mikrofon diblokir karena halaman tidak dibuka lewat https://.';
-                    }
-                    showToast(msg, "⚠️");
-                    micLabel.innerText = 'Tekan lalu ucapkan';
-                });
-        }
-
-        function beginSpeechRecognition() {
-            const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
-            speechRecognizer = new SpeechRecognitionAPI();
-            speechRecognizer.lang = 'ja-JP';
-            // continuous + interimResults on so we get live updates while the user is
-            // still talking, which is what powers the real-time blue highlighting.
-            speechRecognizer.continuous = true;
-            speechRecognizer.interimResults = true;
-            speechRecognizer.maxAlternatives = 1;
-
-            const micBtn = document.getElementById('speak-mic-btn');
-            const micLabel = document.getElementById('speak-mic-label');
-            const trackInfo = getSpeakingTrackInfo();
-
-            speakingFinalTranscript = '';
-            speakingSuccessAchieved = false;
-            if (trackInfo) renderTrackHighlight(trackInfo.el, trackInfo.rawText, new Set());
-
-            speechRecognizer.onstart = () => {
-                isSpeakingListening = true;
-                micBtn.classList.add('glow-active', 'bg-rose-600');
-                micBtn.classList.remove('bg-teal-600', 'hover:bg-teal-700');
-                micBtn.innerText = '⏺️';
-                micLabel.innerText = 'Mendengarkan... ucapkan sekarang';
-            };
-
-            speechRecognizer.onresult = (event) => {
-                if (!trackInfo) return;
-
-                let interimTranscript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const piece = event.results[i][0].transcript;
-                    if (event.results[i].isFinal) {
-                        speakingFinalTranscript += piece;
-                    } else {
-                        interimTranscript += piece;
-                    }
-                }
-
-                const combined = speakingFinalTranscript + interimTranscript;
-                const targetNorm = normalizeJapaneseText(trackInfo.rawText);
-                const { matchedCount, matchedIndices } = computeLCSMatch(targetNorm, normalizeJapaneseText(combined));
-
-                renderTrackHighlight(trackInfo.el, trackInfo.rawText, matchedIndices);
-
-                document.getElementById('speak-result-box').classList.remove('hidden');
-                document.getElementById('speak-transcript-text').innerText = combined || '-';
-
-                // Every character turned blue, in order — pronunciation matched fully.
-                if (targetNorm.length > 0 && matchedCount >= targetNorm.length && !speakingSuccessAchieved) {
-                    finalizeSpeakingSuccess();
-                }
-            };
-
-            speechRecognizer.onerror = (event) => {
-                let msg = 'Terjadi kesalahan saat merekam suara.';
-                if (event.error === 'no-speech') msg = 'Tidak ada suara terdeteksi. Coba lagi.';
-                else if (event.error === 'not-allowed' || event.error === 'service-not-allowed') msg = 'Izin mikrofon ditolak. Aktifkan izin mikrofon di pengaturan browser.';
-                else if (event.error === 'audio-capture') msg = 'Mikrofon tidak ditemukan di perangkat ini.';
-                else if (event.error === 'network') msg = 'Masalah jaringan saat mengenali suara.';
-                if (event.error !== 'no-speech' && event.error !== 'aborted') showToast(msg, "⚠️");
-            };
-
-            speechRecognizer.onend = () => {
-                isSpeakingListening = false;
-                micBtn.classList.remove('glow-active', 'bg-rose-600');
-                micBtn.classList.add('bg-teal-600', 'hover:bg-teal-700');
-                micBtn.innerText = '🎙️';
-                micLabel.innerText = 'Tekan lalu ucapkan';
-
-                if (!speakingSuccessAchieved) evaluateFallbackAttempt();
-            };
-
-            try {
-                speechRecognizer.start();
-            } catch (e) {
-                isSpeakingListening = false;
-                micLabel.innerText = 'Tekan lalu ucapkan';
-            }
-        }
-
-        function stopSpeakingRecognition() {
-            if (speechRecognizer) {
-                try { speechRecognizer.stop(); } catch (e) {}
-            }
-        }
-
-        // Called the moment the live tracker turns fully blue — pronunciation matched.
-        function finalizeSpeakingSuccess() {
-            speakingSuccessAchieved = true;
-            const feedbackBox = document.getElementById('speak-feedback-box');
-            feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-emerald-100 text-emerald-800";
-            feedbackBox.innerText = "🎉 Sempurna! Semua bagian sudah biru — pelafalanmu tepat.";
-            emphasizeSpeakingNextButton();
             stopSpeakingRecognition();
+            const box = fcEl('speak-unsupported-box'), btn = fcEl('sp-start');
+            let warn = '';
+            if (!isMicCapableContext()) warn = '⚠️ Mikrofon diblokir browser karena halaman dibuka langsung dari file. Buka lewat <b>https://</b> (mis. Netlify Drop / GitHub Pages) atau server lokal. Kamu tetap bisa mendengar target, tapi tidak bisa dinilai.';
+            else if (!isSpeechRecognitionSupported()) warn = '⚠️ Browser ini tidak mendukung pengenalan suara. Gunakan Google Chrome terbaru di Android atau desktop.';
+            box.classList.toggle('hidden', !warn); box.innerHTML = warn;
+            btn.disabled = !!warn; btn.style.opacity = warn ? '.45' : '1';
+            const wk = spTopWeak(6);
+            const hist = spHistLoad().slice(-5);
+            const histHtml = hist.length ? `<div class="fcx-adv-note" style="text-align:left;margin:0 0 8px">📊 Skor sesi terakhir: <b>${hist.map(x => x.avg).join(' → ')}</b></div>` : '';
+            fcEl('sp-weak').innerHTML = histHtml + (wk.length
+                ? `<div class="fcx-adv-note" style="text-align:left;margin:0 0 6px;font-weight:700">🎯 Suara yang paling sering salah</div><div style="display:flex;flex-wrap:wrap">` +
+                  wk.map(u => `<span class="sp-chip sp-bad"><b>${fcEsc(u)}</b><small>${fcEsc(spRomaji(u))}</small></span>`).join('') + `</div>`
+                : `<div class="fcx-adv-note" style="margin:0;text-align:center">Belum ada suara lemah tercatat. Mulai latihan dan sistem akan mencatatnya otomatis.</div>`);
+            fcEl('sp-setup').classList.remove('hidden');
+            fcEl('sp-active').classList.add('hidden');
+            fcEl('sp-done').classList.add('hidden');
         }
 
-        // Fallback scoring shown when the mic stops (silence timeout / manual stop)
-        // without the tracker having gone fully blue — gives a rough % so the user
-        // still knows how close they got, without blocking progress.
-        function evaluateFallbackAttempt() {
-            if (speakingSuccessAchieved || !speakingFinalTranscript) return;
-
-            const item = speakingPool[speakingIndex % speakingPool.length];
-            if (!item) return;
-            const candidates = speakingMode === 'sentence'
-                ? [item.sentence]
-                : [item.word, item.kana].filter(Boolean);
-
-            let bestScore = 0;
-            candidates.forEach(target => {
-                const score = textSimilarity(normalizeJapaneseText(speakingFinalTranscript), normalizeJapaneseText(target));
-                if (score > bestScore) bestScore = score;
-            });
-
-            const feedbackBox = document.getElementById('speak-feedback-box');
-            const percent = Math.round(bestScore * 100);
-            if (bestScore >= 0.5) {
-                feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-amber-100 text-amber-800";
-                feedbackBox.innerText = `👍 Lumayan (${percent}%). Perhatikan bagian yang belum biru, lalu tekan mic dan coba lagi.`;
-            } else {
-                feedbackBox.className = "p-3 rounded-2xl text-center text-xs font-extrabold bg-rose-100 text-rose-800";
-                feedbackBox.innerText = `❌ Belum tepat (${percent}%). Dengar lagi lalu ulangi.`;
-            }
+        function spMicTest() {
+            const out = fcEl('sp-test'), API = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!isMicCapableContext() || !API) { out.innerText = '❌ Perangkat/browser ini belum bisa: buka lewat https:// dengan Chrome terbaru.'; return; }
+            stopSpeakingRecognition();
+            const rec = new API(); speechRecognizer = rec; rec.lang = 'ja-JP'; rec.interimResults = true; rec.maxAlternatives = 1;
+            let t = '', err = '';
+            out.innerText = '🎙️ Mendengarkan… ucapkan apa saja dalam bahasa Jepang, misalnya "こんにちは"';
+            rec.onresult = e => { t = e.results[e.results.length - 1][0].transcript; out.innerText = 'Terdengar: ' + t; };
+            rec.onerror = e => { err = e.error; };
+            rec.onend = () => {
+                out.innerText = t ? `✅ Mikrofon dan pengenal suara berfungsi. Terdengar: "${t}". Kalau latihan terasa salah, penyebabnya ada di pelafalan/bunyi tertentu, bukan perangkatmu.`
+                    : err === 'not-allowed' || err === 'service-not-allowed' ? '❌ Izin mikrofon ditolak. Aktifkan di pengaturan situs browser.'
+                    : err === 'network' ? '❌ Pengenal suara butuh internet. Periksa koneksi.'
+                    : '❌ Tidak ada suara terdeteksi. Dekatkan HP ke mulut dan bicara sesaat setelah mic menyala.';
+            };
+            try { rec.start(); setTimeout(() => { try { rec.stop(); } catch (e) {} }, 6000); } catch (e) { out.innerText = '❌ Mic belum siap, coba lagi.'; }
         }
-
-        function normalizeJapaneseText(text) {
-            if (!text) return '';
-            return text.replace(/[\s、。,.!?！？「」『』]/g, '').toLowerCase();
-        }
-
-        function textSimilarity(a, b) {
-            if (!a || !b) return 0;
-            if (a === b) return 1;
-            const distance = levenshteinDistance(a, b);
-            const maxLen = Math.max(a.length, b.length);
-            return maxLen === 0 ? 1 : 1 - (distance / maxLen);
-        }
-
-        function levenshteinDistance(a, b) {
-            const m = a.length, n = b.length;
-            const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
-            for (let i = 0; i <= m; i++) dp[i][0] = i;
-            for (let j = 0; j <= n; j++) dp[0][j] = j;
-            for (let i = 1; i <= m; i++) {
-                for (let j = 1; j <= n; j++) {
-                    if (a[i - 1] === b[j - 1]) {
-                        dp[i][j] = dp[i - 1][j - 1];
-                    } else {
-                        dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
-                    }
+        function spStart() {
+            const src = fcEl('sp-src').value, n = parseInt(fcEl('sp-size').value) || 10;
+            let pool;
+            if (src === 'sentence') pool = (appData.sentences || []).filter(x => x.sentence);
+            else {
+                pool = (appData.vocabulary || []).filter(v => v.kana);
+                if (src === 'weak') {
+                    const wk = new Set(spTopWeak(12));
+                    pool = pool.map(v => ({ v, h: spMorae(spCanon(spMorae(spHira(spClean(v.kana))))).filter(u => wk.has(u)).length })).filter(x => x.h > 0).sort((a, b) => b.h - a.h).map(x => x.v);
+                    if (!pool.length) { showToast('Belum ada suara lemah tercatat. Latih Kosakata dulu.', '💡'); return; }
+                    pool = pool.slice(0, Math.max(n * 2, 10));
                 }
             }
-            return dp[m][n];
+            if (!pool.length) { showToast('Belum ada materi untuk dilatih', '💡'); return; }
+            spMode = src === 'sentence' ? 'sentence' : 'vocab';
+            spQueue = (src === 'sentence' ? shuffleArray(pool) : weightedShuffleDeck(pool)).slice(0, n);
+            spTotal = spQueue.length; spResults = []; spSessionWeak = {}; spRequeued = new Set();
+            fcEl('sp-setup').classList.add('hidden'); fcEl('sp-done').classList.add('hidden'); fcEl('sp-active').classList.remove('hidden');
+            spLoadNext();
+        }
+        let spMode = 'vocab';
+        function spLoadNext() {
+            if (!spQueue.length) { spFinish(); return; }
+            spCur = spQueue.shift(); spAttempt = 0; spBest = 0; spBusy = false; spHadAttempt = false;
+            const item = spCur, isSent = spMode === 'sentence';
+            fcEl('sp-meaning').innerText = item.meaning || '';
+            fcEl('sp-word').innerText = isSent ? item.sentence : (item.word + (item.kana && item.kana !== item.word ? `（${item.kana}）` : ''));
+            fcEl('sp-prog').innerText = `${Math.min(spResults.length + 1, spTotal)}/${spTotal}`;
+            fcEl('sp-remain').innerText = spQueue.length;
+            fcEl('sp-result').classList.add('hidden');
+            fcEl('sp-next').innerText = 'Lewati ➜';
+            spRenderChips(null);
+            spSetStatus('Dengarkan dulu, lalu tekan mic dan ucapkan', false);
+            fcEl('sp-live').innerText = '';
+            spUpdateAttempt();
+            window.scrollTo(0, 0);
+            if (fcCfg.autoAudio) spPlay(0.9);
+        }
+        function spUpdateAttempt() { fcEl('sp-attempt').innerText = `Percobaan ${Math.min(spAttempt + 1, SP_MAX_ATTEMPTS)}/${SP_MAX_ATTEMPTS}`; }
+        function spSetStatus(t, on) { fcEl('sp-status').innerText = t; fcEl('sp-mic').classList.toggle('on', !!on); fcEl('sp-mic').classList.toggle('glow-active', !!on); fcEl('sp-mic').innerText = on ? '⏺️' : '🎙️'; }
+
+        // Kotak suku kata: abu-abu sebelum bicara; setelah dinilai hijau/kuning/merah
+        function spRenderChips(d) {
+            const T = d ? d.T : (spTargets(spCur, spMode).find(t => t.kind === 'kana') || spTargets(spCur, spMode)[0]).units;
+            fcEl('sp-chips').innerHTML = T.map((u, i) => {
+                const x = d ? d.st[i] : null, cls = x ? (x.st === 'ok' ? 'sp-ok' : x.st === 'near' ? 'sp-near' : x.st === 'bad' ? 'sp-bad' : 'sp-miss') : '';
+                const sub = x && x.st === 'miss' ? 'hilang' : x && x.heard ? '→ ' + fcEsc(x.heard) : fcEsc(spRomaji(u));
+                return `<button type="button" class="sp-chip ${cls}" onclick="spSpeakUnit(${i})" data-u="${fcEsc(u)}"><b>${fcEsc(u)}</b><small>${sub}</small></button>`;
+            }).join('');
+        }
+        function spSpeakUnit(i) {
+            const el = fcEl('sp-chips').children[i]; if (!el) return;
+            const u = el.getAttribute('data-u');
+            if (u === 'っ') { showToast('っ = jeda singkat sebelum konsonan berikutnya', '⏸️'); return; }
+            if (u === 'ー') return;
+            spSpeak(u, 0.6);
+        }
+        function spSpeak(text, rate) {
+            if (!('speechSynthesis' in window)) { showToast('Perangkat tidak mendukung suara', '⚠️'); return; }
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(text); u.lang = 'ja-JP'; u.rate = rate;
+            const v = (window.speechSynthesis.getVoices() || []).find(x => /ja/i.test(x.lang)); if (v) u.voice = v;
+            window.speechSynthesis.speak(u);
+        }
+        function spPlay(rate) { if (spCur) spSpeak(spMode === 'sentence' ? spCur.sentence : (spCur.kana || spCur.word), rate); }
+
+        function spToggleMic() { if (isSpeakingListening) stopSpeakingRecognition(); else spListen(); }
+        function stopSpeakingRecognition() {
+            clearTimeout(spTimer); spTimer = null;
+            try { if (speechRecognizer) speechRecognizer.stop(); } catch (e) {}
+        }
+        function spListen() {
+            if (!spCur || spBusy) return;
+            if (spAttempt >= SP_MAX_ATTEMPTS) { spSetStatus('Batas 3 percobaan tercapai. Tekan Lanjut ➜', false); return; }
+            if (window.speechSynthesis) window.speechSynthesis.cancel();
+            const API = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!API) return;
+            const rec = new API(); speechRecognizer = rec;
+            rec.lang = 'ja-JP'; rec.continuous = false; rec.interimResults = true; rec.maxAlternatives = 5;
+            let alts = null, interim = '', err = '', conf = 0;
+            rec.onstart = () => { isSpeakingListening = true; spSetStatus('Mendengarkan… ucapkan sekarang', true); fcEl('sp-live').innerText = ''; };
+            rec.onresult = e => {
+                const r = e.results[e.results.length - 1];
+                interim = r[0].transcript; fcEl('sp-live').innerText = interim;
+                if (r.isFinal) { alts = Array.from(r).map(a => a.transcript); conf = r[0].confidence || 0; }
+            };
+            rec.onerror = e => { err = e.error; };
+            rec.onend = () => {
+                isSpeakingListening = false; clearTimeout(spTimer); spTimer = null;
+                spSetStatus('Tekan mic untuk mencoba lagi', false);
+                if (alts || interim) spShowResult(alts || [interim], conf);
+                else if (err === 'not-allowed' || err === 'service-not-allowed') spSetStatus('Izin mikrofon ditolak. Aktifkan di pengaturan browser.', false);
+                else if (err === 'audio-capture') spSetStatus('Mikrofon tidak ditemukan di perangkat ini.', false);
+                else if (err === 'network') spSetStatus('Masalah jaringan saat mengenali suara. Coba lagi.', false);
+                else spSetStatus('Suara tidak terdeteksi. Dekatkan HP ke mulut, bicara sesaat setelah mic menyala.', false);
+            };
+            try { rec.start(); spTimer = setTimeout(stopSpeakingRecognition, SP_LISTEN_MS); }
+            catch (e) { isSpeakingListening = false; spSetStatus('Mic belum siap, tekan lagi', false); }
+        }
+
+        function spShowResult(alts, conf) {
+            if (spBusy || !spCur) return;
+            const d = spEvaluate(spCur, spMode, alts);
+            const res = fcEl('sp-result'); res.classList.remove('hidden');
+            if (!d) { res.innerHTML = '<div class="fcx-auto-msg">Ucapanmu tidak bisa dibaca. Coba lagi.</div>'; return; }
+            spBusy = true; spAttempt++; spHadAttempt = true; spBest = Math.max(spBest, d.score);
+            spRenderChips(d); spWeakUpdate(d);
+            const sc = d.score, col = sc >= 90 ? '#047857' : sc >= SP_PASS ? '#0d9488' : sc >= 60 ? '#b45309' : '#be123c';
+            const verdict = sc >= 90 ? '🎉 Sempurna' : sc >= SP_PASS ? '👍 Bagus' : sc >= 60 ? '🟡 Hampir' : '🔴 Perlu diulang';
+            const tips = spTips(d), done = sc >= SP_PASS || spAttempt >= SP_MAX_ATTEMPTS;
+            let h = `<div class="sp-score" style="color:${col}">${sc}</div><div style="font-weight:800;color:${col};margin-top:2px">${verdict}</div>`;
+            h += `<div class="mt-diff" style="text-align:center;font-size:14px">Terdengar: <b>${fcEsc(d.alt)}</b></div>`;
+            if (d.target.kind === 'orth' && sc < 100) h += `<div class="fcx-adv-note" style="margin:2px 0">Hasil berupa kanji/teks campur, jadi dibandingkan per huruf, bukan per suku kata.</div>`;
+            h += `<div class="fcx-adv-note" style="margin:6px 0 0">Hijau = benar • Kuning = hampir (mis. bergetar/tidak) • Merah = salah • Putus-putus = hilang</div>`;
+            if (conf > 0 && conf < 0.6 && sc < SP_PASS) h += `<div class="sp-tip" style="background:#eff6ff;border-color:#bfdbfe">🎧 Pengenal suara kurang yakin (${Math.round(conf * 100)}%). Bisa karena bising atau mic terlalu jauh. Coba lagi di tempat tenang sebelum menyimpulkan pelafalanmu salah.</div>`;
+            tips.forEach(t => h += `<div class="sp-tip">💡 ${t}</div>`);
+            if (sc < SP_PASS && !done) h += `<div class="sp-tip" style="background:#fffbeb;border-color:#fde68a">Langkah berikutnya: tekan 🐢 Pelan, ketuk kotak merah untuk mendengar bunyinya, lalu coba lagi.</div>`;
+            if (sc < SP_PASS && done) h += `<div class="sp-tip" style="background:#fffbeb;border-color:#fde68a">Sudah ${SP_MAX_ATTEMPTS} percobaan. Lanjut dulu, kata ini akan muncul lagi sekali di akhir sesi.</div>`;
+            res.innerHTML = h;
+            fcEl('sp-next').innerText = 'Lanjut ➜';
+            spUpdateAttempt();
+            setTimeout(() => { if (res.scrollIntoView) res.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, 60);
+            spBusy = false;
+            if (spAttempt >= SP_MAX_ATTEMPTS) fcEl('sp-mic').style.opacity = '.5'; else fcEl('sp-mic').style.opacity = '1';
+        }
+        function spRetry() {
+            if (!spCur) return;
+            stopSpeakingRecognition();
+            fcEl('sp-result').classList.add('hidden'); spRenderChips(null); fcEl('sp-live').innerText = '';
+            spSetStatus('Tekan mic lalu ucapkan lagi', false);
+        }
+        function spNext() {
+            if (!spCur) return;
+            stopSpeakingRecognition();
+            if (spHadAttempt) {
+                spResults.push({ item: spCur, best: spBest, tries: spAttempt });
+                fcBumpDaily();
+                if (spMode === 'vocab' && spBest < SP_PASS) appData.stats.wrongAnswers[spCur.id] = (appData.stats.wrongAnswers[spCur.id] || 0) + 1;
+                if (spBest < SP_PASS && !spRequeued.has(spCur.id)) { // ulangi sekali di akhir sesi
+                    spRequeued.add(spCur.id); spQueue.push(spCur); spTotal++;
+                }
+                saveStorageData();
+            } else if (!spRequeued.has('skip' + spCur.id)) { spRequeued.add('skip' + spCur.id); spQueue.push(spCur); } // dilewati tanpa mencoba: muncul lagi
+            spLoadNext();
+        }
+        function spExit() {
+            stopSpeakingRecognition();
+            if (spCur && spHadAttempt) { spResults.push({ item: spCur, best: spBest, tries: spAttempt }); fcBumpDaily(); saveStorageData(); }
+            if (spResults.length) spFinish(); else initSpeakingModule();
+        }
+        function spFinish() {
+            stopSpeakingRecognition(); spCur = null;
+            const n = spResults.length, avg = n ? Math.round(spResults.reduce((a, r) => a + r.best, 0) / n) : 0;
+            const good = spResults.filter(r => r.best >= SP_PASS).length;
+            const weak = Object.keys(spSessionWeak).sort((a, b) => spSessionWeak[b] - spSessionWeak[a]).slice(0, 6);
+            const low = spResults.filter(r => r.best < SP_PASS).slice(0, 8);
+            let h = `<div class="fcx-score">${avg}<span>skor rata-rata</span></div><div class="fcx-score-sub">${good}/${n} kata lolos (≥${SP_PASS})</div>`;
+            if (weak.length) h += `<div class="sp-why" style="margin-top:12px"><b>🎯 Bunyi yang perlu dilatih:</b></div><div style="display:flex;flex-wrap:wrap;justify-content:center">` +
+                weak.map(u => `<span class="sp-chip sp-bad"><b>${fcEsc(u)}</b><small>${fcEsc(spRomaji(u))} • ${spSessionWeak[u]}x</small></span>`).join('') + `</div><div class="fcx-adv-note">Pilih "Fokus suara lemah" untuk melatih kata yang memuat bunyi ini.</div>`;
+            if (low.length) h += `<div class="fcx-fail-list"><b>Kata yang masih lemah:</b>` + low.map(r => `<div>• ${fcEsc(spMode === 'sentence' ? r.item.sentence : (r.item.word + (r.item.kana !== r.item.word ? '（' + r.item.kana + '）' : '')))} — ${r.best}</div>`).join('') + `</div>`;
+            if (n >= 3) {
+                const hist = spHistLoad(), prev = hist.length ? hist[hist.length - 1].avg : null;
+                if (prev !== null) h += `<div class="fcx-adv-note">Sesi sebelumnya: ${prev} ${avg > prev ? '📈 naik' : avg < prev ? '📉 turun' : '➖ sama'}</div>`;
+                hist.push({ d: fcDayKey(), avg, n });
+                try { localStorage.setItem(SP_HIST_KEY, JSON.stringify(hist.slice(-10))); } catch (e) {}
+            }
+            if (!n) h = '<div class="fcx-adv-note">Belum ada kata yang dicoba.</div>';
+            fcEl('sp-summary').innerHTML = h;
+            fcEl('sp-active').classList.add('hidden'); fcEl('sp-done').classList.remove('hidden');
         }
 
         function renderDictionary() {
@@ -2079,8 +2969,11 @@
                 return;
             }
 
+            const key = searchVal + '|' + dictionaryFilter;
+            if (key !== dictKey) { dictKey = key; dictLimit = 60; }
+            const total = items.length, shownAll = Math.min(total, dictLimit);
             container.innerHTML = '';
-            items.forEach(v => {
+            items.slice(0, dictLimit).forEach(v => {
                 const card = document.createElement('div');
                 card.className = "bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between gap-3";
 
@@ -2092,19 +2985,105 @@
                 card.innerHTML = `
                     <div class="space-y-0.5">
                         <div class="flex items-center gap-2">
-                            <h4 class="jp-font text-lg font-black text-slate-800">${v.word || v.kana}</h4>
-                            ${v.word && v.word !== v.kana ? `<span class="jp-font text-xs text-rose-500 font-bold">(${v.kana})</span>` : ''}
+                            <h4 class="jp-font text-lg font-black text-slate-800">${escapeHtmlText(v.word || v.kana)}</h4>
+                            ${v.word && v.word !== v.kana ? `<span class="jp-font text-xs text-rose-500 font-bold">(${escapeHtmlText(v.kana)})</span>` : ''}
                             ${statusBadge}
                         </div>
-                        <div class="text-xs font-bold text-slate-700">${v.meaning}</div>
-                        <div class="text-[11px] text-slate-400 italic">${v.romaji} • <span class="uppercase">${v.category || 'Kata'}</span></div>
+                        <div class="text-xs font-bold text-slate-700">${escapeHtmlText(v.meaning)}</div>
+                        <div class="text-[11px] text-slate-400 italic">${escapeHtmlText(v.romaji)} • <span class="uppercase">${escapeHtmlText(v.category || 'Kata')}</span></div>
                     </div>
-                    <button onclick="playTTS('${v.kana || v.word}')" title="Dengar Suara" class="w-9 h-9 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all active:scale-95">
+                    <button data-say="${escapeHtmlText(v.kana || v.word)}" title="Dengar Suara" class="w-9 h-9 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center text-sm font-bold flex-shrink-0 transition-all active:scale-95">
                         🔊
                     </button>
                 `;
+                const say = card.querySelector('[data-say]');
+                say.onclick = () => playTTS(say.getAttribute('data-say'));
+                const act = document.createElement('div');
+                act.style.cssText = 'display:flex;gap:6px;flex-shrink:0;align-items:center';
+                say.parentNode.insertBefore(act, say); act.appendChild(say);
+                const mk = (txt, title, fn) => { const b = document.createElement('button'); b.type = 'button'; b.title = title; b.innerText = txt; b.className = 'w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-xl flex items-center justify-center text-sm flex-shrink-0'; b.onclick = fn; act.appendChild(b); };
+                mk('✏️', 'Edit kata', () => dictEdit(v.id));
+                mk('🗑️', 'Hapus kata', () => dictDelete(v.id));
                 container.appendChild(card);
             });
+            if (shownAll < total) {
+                const more = document.createElement('button');
+                more.type = 'button'; more.className = 'mt-btn'; more.style.width = '100%';
+                more.innerText = `Tampilkan lebih banyak (${total - shownAll} lagi) ▼`;
+                more.onclick = () => { dictLimit += 60; renderDictionary(); };
+                container.appendChild(more);
+            }
+        }
+
+        let dictLimit = 60, dictKey = '', dictEditId = null;
+        function dictEdit(id) {
+            const v = appData.vocabulary.find(x => x.id === id); if (!v) return;
+            dictEditId = id;
+            fcEl('dict-f-word').value = v.word && v.word !== v.kana ? v.word : '';
+            fcEl('dict-f-kana').value = v.kana || ''; fcEl('dict-f-meaning').value = v.meaning || '';
+            fcEl('dict-f-romaji').value = v.romaji || ''; fcEl('dict-f-cat').value = v.category || '';
+            fcEl('dict-form-title').innerText = '✏️ Edit Kata';
+            const box = fcEl('dict-form-box'); box.open = true; box.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+        function dictCancel() {
+            dictEditId = null;
+            ['word', 'kana', 'meaning', 'romaji', 'cat'].forEach(k => fcEl('dict-f-' + k).value = '');
+            fcEl('dict-form-title').innerText = '➕ Tambah Kata Baru'; fcEl('dict-form-box').open = false;
+        }
+        function spKanaToRomaji(kana) {
+            const m = spMorae(spHira(spClean(kana))); let out = '';
+            m.forEach((u, i) => {
+                let r;
+                if (u === 'っ') { const nx = spRomaji(m[i + 1] || ''); r = nx ? (nx.startsWith('ch') ? 't' : nx[0]) : ''; }
+                else if (u === 'ー') { const pv = out.slice(-1); r = /[aiueo]/.test(pv) ? pv : ''; }
+                else r = spRomaji(u);
+                out += r;
+            });
+            return out.charAt(0).toUpperCase() + out.slice(1);
+        }
+        function dictSave() {
+            const kana = fcEl('dict-f-kana').value.trim(), meaning = fcEl('dict-f-meaning').value.trim();
+            let word = fcEl('dict-f-word').value.trim();
+            if (!SP_KANA.test(spClean(kana)) ) { showToast('Bacaan harus hiragana/katakana (tanpa huruf Latin)', '⚠️'); return; }
+            if (!meaning) { showToast('Arti wajib diisi', '⚠️'); return; }
+            if (!word) word = kana;
+            const romaji = fcEl('dict-f-romaji').value.trim() || spKanaToRomaji(kana);
+            const category = fcEl('dict-f-cat').value.trim() || 'Umum';
+            if (dictEditId) {
+                if (appData.vocabulary.some(x => x.id !== dictEditId && x.word === word && x.kana === kana)) { showToast('Kata yang sama sudah ada', '⚠️'); return; }
+                [appData.vocabulary, appData.kanji].forEach(list => { const t = list.find(x => x.id === dictEditId); if (t) Object.assign(t, { word, kana, romaji, meaning, category }); });
+                showToast('Kata diperbarui', '✏️');
+            } else {
+                if (appData.vocabulary.some(x => x.word === word && x.kana === kana)) { showToast('Kata ini sudah ada', '⚠️'); return; }
+                const item = { word, kana, romaji, meaning, type: 'noun', category, id: Date.now(), mastered: false };
+                appData.vocabulary.push(item);
+                if (containsKanji(word)) appData.kanji.push({ ...item });
+                showToast('Kata ditambahkan', '➕');
+            }
+            dictCancel(); saveStorageData(); renderDictionary();
+        }
+        function dictBulk() {
+            const lines = fcEl('dict-bulk').value.split('\n').map(l => l.trim()).filter(Boolean);
+            let added = 0, skipped = [];
+            lines.forEach((l, i) => {
+                const [kana, meaning, kanji] = l.split(/[;；|\t]/).map(x => (x || '').trim());
+                const word = kanji || kana;
+                if (!kana || !meaning || !SP_KANA.test(spClean(kana))) { skipped.push(i + 1); return; }
+                if (appData.vocabulary.some(x => x.word === word && x.kana === kana)) { skipped.push(i + 1); return; }
+                const item = { word, kana, romaji: spKanaToRomaji(kana), meaning, type: 'noun', category: 'Umum', id: Date.now() + i, mastered: false };
+                appData.vocabulary.push(item); if (containsKanji(word)) appData.kanji.push({ ...item }); added++;
+            });
+            if (added) { saveStorageData(); renderDictionary(); fcEl('dict-bulk').value = skipped.length ? lines.filter((_, i) => skipped.includes(i + 1)).join('\n') : ''; }
+            showToast(`${added} kata ditambahkan${skipped.length ? `, ${skipped.length} baris dilewati (baris ${skipped.join(', ')})` : ''}`, added ? '➕' : '⚠️');
+        }
+        function dictDelete(id) {
+            const v = appData.vocabulary.find(x => x.id === id); if (!v) return;
+            if (!confirm(`Hapus "${v.word || v.kana}"? Progres kata ini ikut terhapus.`)) return;
+            appData.vocabulary = appData.vocabulary.filter(x => x.id !== id);
+            appData.kanji = (appData.kanji || []).filter(x => x.id !== id);
+            delete appData.stats.wrongAnswers[id];
+            if (appData.srs) { delete appData.srs['v' + id]; delete appData.srs['k' + id]; }
+            saveStorageData(); renderDictionary(); showToast('Kata dihapus', '🗑️');
         }
 
         function setDictFilter(filter) {
@@ -2120,9 +3099,23 @@
             renderDictionary();
         }
 
+        const SNAP_KEY = 'nihongo_snapshot_v1';
+        function snapshotNow(reason) { try { localStorage.setItem(SNAP_KEY, JSON.stringify({ t: Date.now(), reason, data: appData, prefs: backupPrefs() })); } catch (e) {} }
+        function restoreSnapshot() {
+            let snap = null; try { snap = JSON.parse(localStorage.getItem(SNAP_KEY)); } catch (e) {}
+            if (!snap) { showToast('Belum ada data yang bisa diurungkan', '💡'); return; }
+            if (!confirm(`Kembalikan data seperti sebelum "${snap.reason}" (${new Date(snap.t).toLocaleString('id-ID')})?`)) return;
+            appData = snap.data;
+            Object.entries(snap.prefs || {}).forEach(([k, v]) => { try { localStorage.setItem(k, v); } catch (e) {} });
+            saveStorageData(); location.reload();
+        }
+        const BACKUP_PREF_KEYS = ['nihongo_fc_cfg_v1', 'nihongo_fc_daily_v1', 'nihongo_sp_weak_v1', 'nihongo_sp_hist_v1', 'nihongo_mt_best'];
+        function backupPrefs() { const o = {}; BACKUP_PREF_KEYS.forEach(k => { const v = localStorage.getItem(k); if (v !== null) o[k] = v; }); return o; }
         function importJSONFile(event) {
             const file = event.target.files[0];
             if (!file) return;
+            if (!confirm('Impor akan MENGGANTIKAN kosakata dan progres saat ini. Sebaiknya backup dulu. Lanjutkan?')) { event.target.value = ''; return; }
+            snapshotNow('impor file');
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -2158,8 +3151,14 @@
                                 : ', tidak ada data Kanji terverifikasi';
                         }
 
-                        if (imported.stats) {
-                            appData.stats = imported.stats;
+                        if (imported.stats) appData.stats = imported.stats;
+                        if (!appData.stats) appData.stats = {};
+                        if (!appData.stats.wrongAnswers) appData.stats.wrongAnswers = {};
+                        appData.srs = imported.srs || {};
+                        appData.srsMigrated = !!imported.srs;
+                        if (imported.prefs) {
+                            Object.entries(imported.prefs).forEach(([k, v]) => { if (BACKUP_PREF_KEYS.includes(k)) { try { localStorage.setItem(k, v); } catch (e) {} } });
+                            try { Object.assign(fcCfg, JSON.parse(imported.prefs['nihongo_fc_cfg_v1'] || '{}')); fcApplyCfg(); } catch (e) {}
                         }
 
                         saveStorageData();
@@ -2174,6 +3173,7 @@
                 }
             };
             reader.readAsText(file);
+            event.target.value = '';
         }
 
         function escapeHtmlText(str) {
@@ -2268,7 +3268,7 @@
         }
 
         function exportJSONFile() {
-            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData, null, 2));
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ ...appData, prefs: backupPrefs() }, null, 2));
             const downloadAnchor = document.createElement('a');
             downloadAnchor.setAttribute("href", dataStr);
             downloadAnchor.setAttribute("download", `kotoba-backup-progres-${new Date().toISOString().slice(0,10)}.json`);
@@ -2276,12 +3276,16 @@
             downloadAnchor.click();
             downloadAnchor.remove();
 
+            try { localStorage.setItem('nihongo_last_backup', String(Date.now())); } catch (e) {}
+            renderTodayCard();
             showToast("File backup berhasil diunduh!", "📥");
         }
 
         function factoryResetApp() {
             if (confirm("Apakah Anda yakin ingin mengembalikan data ke kondisi awal pabrik? Data custom & progres hafalan akan diset ulang.")) {
+                snapshotNow('reset total');
                 localStorage.removeItem(STORAGE_KEY);
+                BACKUP_PREF_KEYS.forEach(k => localStorage.removeItem(k));
                 initApp();
                 showToast("Aplikasi telah di-reset ke data awal.", "🔄");
             }
